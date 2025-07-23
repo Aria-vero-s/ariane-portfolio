@@ -235,6 +235,7 @@ body {
     transition: all 0.3s ease;
     white-space: nowrap;
     height: auto;
+    backdrop-filter: blur(12px);
 }
 
 /* Hero buttons with larger padding */
