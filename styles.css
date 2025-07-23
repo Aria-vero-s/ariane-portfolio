@@ -155,11 +155,18 @@ body {
     z-index: 10;
     width: 100%;
     margin: 0 auto;
+    background-color: #f5f1f0;
 }
 
 @media (min-width: 640px) {
     .hero-content {
         max-width: 50vw;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-content {
+        max-width: 75vw;
     }
 }
 
