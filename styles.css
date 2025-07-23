@@ -170,8 +170,14 @@ body {
     }
 }
 
+@media (max-width: 900px) {
+    .hero-content {
+        padding-top:40px;
+    }
+}
+
 .hero-title {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 500;
     line-height: 1;
     margin-bottom: 12px;
