@@ -1,0 +1,1172 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background-color: #f5f1f0;
+    color: #000;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.nav-container {
+    position: fixed;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+}
+
+.nav-card {
+    background: rgba(245, 241, 240, 0.8);
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    backdrop-filter: blur(12px);
+}
+
+.nav-content {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #091bd9;
+    font-size: 14px;
+    /* original : 18px */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-button:hover {
+    background: rgba(9, 27, 217, 0.1);
+}
+
+.nav-button.active {
+    background: #091bd9;
+    color: white;
+}
+
+.nav-button.active:hover {
+    background: #000;
+}
+
+.nav-button i {
+    width: 16px;
+    height: 16px;
+}
+
+.nav-text {
+    display: none;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(9, 27, 217, 0.3);
+    margin: 0 8px;
+}
+
+@media (min-width: 768px) {
+    .nav-text {
+        display: inline;
+    }
+}
+
+/* Layout */
+.main-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.section-preview {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.section-current {
+    position: relative;
+    z-index: 10;
+    /* Transition is applied dynamically in JavaScript to prevent conflicts */
+    clip-path: circle(150% at 50% 50%);
+}
+
+.section-content {
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 16px;
+    background-color: #f5f1f0;
+}
+
+.circuit-pattern {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    /* Ensure circuit pattern stays visible during transitions */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.circuit-svg {
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Prevent animation interruption during transitions */
+    animation-play-state: running !important;
+}
+
+/* Ensure circuit elements maintain their animation state */
+.circuit-trace-react,
+.circuit-pad-react,
+.circuit-hole-react,
+.circuit-via-react {
+    animation-play-state: running !important;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+    .hero-content {
+        max-width: 50vw;
+    }
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.025em;
+    color: #091bd9;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 24px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.hero-tagline {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 40px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .hero-title {
+        font-size: 5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: 7rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .hero-title {
+        font-size: 9rem;
+    }
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 32px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    height: auto;
+}
+
+/* Hero buttons with larger padding */
+.hero-buttons .btn {
+    padding: 12px 32px;
+    /* py-3 px-8 equivalent */
+}
+
+.btn-primary {
+    background: #091bd9;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #000;
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: #091bd9;
+    color: #091bd9;
+}
+
+.btn-outline:hover {
+    background: rgba(9, 27, 217, 0.05);
+}
+
+/* Other sections */
+.about-section,
+.portfolio-section,
+.services-section,
+.contact-section {
+    min-height: 100vh;
+    background-color: #f5f1f0;
+    padding: 96px 16px 0;
+}
+
+@media (min-width: 640px) {
+
+    .about-section,
+    .portfolio-section,
+    .services-section,
+    .contact-section {
+        padding: 112px 32px 0;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .about-section,
+    .portfolio-section,
+    .services-section,
+    .contact-section {
+        padding: 128px 32px 0;
+    }
+}
+
+.container {
+    max-width: 1152px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    /* text-4xl equivalent */
+    text-align: center;
+    margin-bottom: 48px;
+    color: #091bd9;
+    font-weight: 500;
+}
+
+/* About Section */
+.about-card {
+    background: #f5f1f0;
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (min-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.about-description {
+    color: #000;
+    margin-bottom: 24px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.about-section-item {
+    margin-bottom: 16px;
+}
+
+.about-section-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #091bd9;
+    font-weight: 500;
+}
+
+.about-list {
+    color: #000;
+    list-style: disc;
+    list-style-position: inside;
+}
+
+.about-list li {
+    margin-bottom: 4px;
+}
+
+.skills-title {
+    font-size: 1.5rem;
+    /* text-2xl equivalent */
+    margin-bottom: 24px;
+    color: #091bd9;
+    font-weight: 500;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.skill-item {
+    width: 100%;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: #091bd9;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1.5s ease-out;
+}
+
+/* Portfolio Section */
+
+/* Mobile: Single column - md:hidden */
+.portfolio-mobile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+/* Tablet: 2+2+1 layout - md:block lg:hidden */
+.portfolio-tablet {
+    display: none;
+}
+
+/* Desktop: 3+2 layout - lg:block */
+.portfolio-desktop {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .portfolio-mobile {
+        display: none;
+    }
+
+    .portfolio-tablet {
+        display: block;
+    }
+}
+
+@media (min-width: 1024px) {
+    .portfolio-tablet {
+        display: none;
+    }
+
+    .portfolio-desktop {
+        display: block;
+    }
+}
+
+/* Tablet specific rows */
+.portfolio-tablet-row-1,
+.portfolio-tablet-row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.portfolio-tablet-row-3 {
+    display: flex;
+    justify-content: center;
+}
+
+.portfolio-tablet-row-3 .portfolio-item {
+    width: 50%;
+}
+
+/* Desktop specific rows */
+.portfolio-desktop-row-1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.portfolio-desktop-row-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.portfolio-desktop-row-2-inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 672px;
+}
+
+.portfolio-item {
+    background: #f5f1f0;
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover {
+    border-color: rgba(9, 27, 217, 0.5);
+}
+
+.portfolio-thumbnail {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-icon-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #091bd9;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-icon {
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+
+.portfolio-preview {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-item:hover .portfolio-icon-container {
+    opacity: 0;
+}
+
+.portfolio-item:hover .portfolio-preview {
+    opacity: 1;
+}
+
+.portfolio-content {
+    padding: 24px;
+}
+
+.portfolio-title {
+    font-size: 18px;
+    color: #091bd9;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.portfolio-type {
+    font-size: 16px;
+    color: #091bd9;
+    opacity: 0.8;
+    margin-bottom: 16px;
+}
+
+.portfolio-description {
+    color: #000;
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+
+.portfolio-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.portfolio-buttons .btn {
+    flex: 1;
+    font-size: 14px;
+    padding: 8px 16px;
+}
+
+.portfolio-buttons .btn.single {
+    width: 100%;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.services-subtitle {
+    color: #000;
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 16px;
+}
+
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.service-item {
+    height: 100%;
+    background: #f5f1f0;
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.service-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    color: #091bd9;
+}
+
+.service-name {
+    font-size: 18px;
+    color: #091bd9;
+    font-weight: 500;
+}
+
+.service-description {
+    color: #000;
+    flex: 1;
+    font-size: 16px;
+}
+
+/* === Website Types Section === */
+.website-types {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+    .website-types {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.site-type-container {
+    background: transparent;
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.site-type-container.small-site {
+    border-left: 4px solid #091bd9;
+}
+
+.site-type-container.big-site {
+    border-left: 4px solid #091bd9;
+    /* green accent to differentiate, adjust as desired */
+}
+
+.site-type-title {
+    font-size: 1.5rem;
+    /* text-2xl */
+    color: #091bd9;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.site-type-description {
+    font-size: 1rem;
+    /* text-base */
+    line-height: 1.6;
+    color: #000;
+}
+
+/* Slight background tint on hover */
+.site-type-container:hover {
+    background: rgba(9, 27, 217, 0.05);
+}
+
+/* Ensure consistency with .service-item spacing */
+.services-section .container {
+    padding-top: 0;
+    /* collapse extra top padding now that website-types sits above */
+}
+
+
+/* Contact Section */
+.contact-container {
+    max-width: 1024px;
+}
+
+.contact-subtitle {
+    color: #000;
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+@media (min-width: 640px) {
+    .contact-buttons {
+        flex-direction: row;
+    }
+}
+
+.contact-btn {
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .contact-btn {
+        width: auto;
+    }
+}
+
+.contact-form-container {
+    background: #f5f1f0;
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 672px;
+    margin: 0 auto;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    /* text-2xl equivalent */
+    margin-bottom: 24px;
+    text-align: center;
+    color: #091bd9;
+    font-weight: 500;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .form-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    color: #091bd9;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea {
+    border: 1px solid rgba(9, 27, 217, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    background: #f5f1f0;
+    color: #000;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #091bd9;
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-submit {
+    text-align: center;
+}
+
+/* Circuit Animation - Framer Motion Behavior */
+
+/* Trace animation: combines pathLength + opacity like Framer Motion */
+.circuit-trace-react {
+    stroke: #091bd9;
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    /* Initial state: hidden and not drawn */
+    opacity: 0;
+}
+
+/* Universal circuit trace animation that combines fade-in + draw */
+@keyframes drawTraceWithFade {
+    0% {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0;
+    }
+
+    /* Immediate fade-in as drawing starts */
+    0.1% {
+        opacity: 1;
+    }
+
+    /* Drawing completes based on duration percentage */
+    var(--draw-percent) {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    /* Stay visible for remainder of cycle */
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+/* Fallback keyframes with proper fade-in and random replay behavior */
+@keyframes drawTrace40 {
+    0% {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0;
+    }
+
+    /* Immediate fade-in */
+    0.1% {
+        opacity: 1;
+    }
+
+    /* Complete drawing at 40% of cycle */
+    40% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    /* Stay visible for remainder creating random replay effect */
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes drawTrace38 {
+    0% {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0;
+    }
+
+    0.1% {
+        opacity: 1;
+    }
+
+    38% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes drawTrace42 {
+    0% {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0;
+    }
+
+    0.1% {
+        opacity: 1;
+    }
+
+    42% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes drawTrace36 {
+    0% {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0;
+    }
+
+    0.1% {
+        opacity: 1;
+    }
+
+    36% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes drawTrace14 {
+    0% {
+        stroke-dashoffset: var(--path-length, 1000);
+        opacity: 0;
+    }
+
+    0.1% {
+        opacity: 1;
+    }
+
+    14% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+/* Pad animation: scale from 0 to 1 with opacity */
+.circuit-pad-react {
+    fill: #091bd9;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0);
+    animation: padAppearReact ease-out infinite;
+}
+
+@keyframes padAppearReact {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    4.8% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Hole animation: scale with bounce effect */
+.circuit-hole-react {
+    fill: #f5f1f0;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0);
+    animation: holeAppearReact ease-out infinite;
+}
+
+@keyframes holeAppearReact {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    /* Animate: scale: [0, 1.2, 1] in 0.6s of 8.6s cycle */
+    3% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    7% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Animation: simple scale appearance */
+.circuit-via-react {
+    fill: none;
+    stroke: #091bd9;
+    stroke-width: 0.15;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0);
+    animation: viaAppearReact ease-out infinite;
+}
+
+@keyframes viaAppearReact {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    3.4% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Legacy animations - keep for backward compatibility but unused */
+.circuit-trace {
+    stroke: #091bd9;
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
+.circuit-trace.animate {
+    animation: drawTrace ease-out infinite;
+}
+
+@keyframes drawTrace {
+    0% {
+        stroke-dashoffset: 1000;
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    40% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+.circuit-pad {
+    fill: #091bd9;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.circuit-pad.animate {
+    animation: padAppear ease-out infinite;
+}
+
+@keyframes padAppear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    5% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.circuit-hole {
+    fill: #f5f1f0;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.circuit-hole.animate {
+    animation: holeAppear ease-out infinite;
+}
+
+@keyframes holeAppear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    2% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    4% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.circuit-via {
+    fill: none;
+    stroke: #091bd9;
+    stroke-width: 0.15;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.circuit-via.animate {
+    animation: viaAppear ease-out infinite;
+}
+
+@keyframes viaAppear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    1% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.thank-you {
+    line-height: 3;
+    color:#091bd9;
+}
+
+.thank-you hr {
+    border: none;
+    border-top: 1px solid #091bd9;
+    height: 0;
+    margin: 1rem 0;
+}
