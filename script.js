@@ -22,8 +22,8 @@ const portfolioItems = {
             type: 'Website Design',
             description: 'A website showcasing the work and services of a freelance engineer.',
             image: 'images/freelancer.png',
-            liveLink: 'https://aria-vero-s.github.io/camping/',
-            githubLink: 'https://github.com/aria-vero-s/camping',
+            liveLink: 'https://www.love-innovations.com/',
+            githubLink: 'https://github.com/aria-vero-s/love-innovations-portfolio',
             icon: 'user'
         },
         {
@@ -31,7 +31,7 @@ const portfolioItems = {
             type: 'Website Design',
             description: 'A simple, elegant website designed for a professional pianist.',
             image: 'images/musician-portfolio.png',
-            liveLink: 'https://paolorubinacci.com/',
+            liveLink: 'https://aria-vero-s.github.io/pianist/',
             githubLink: 'https://github.com/Aria-vero-s/pianist',
             icon: 'user'
         },
