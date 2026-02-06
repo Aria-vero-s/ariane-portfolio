@@ -11,7 +11,6 @@ const sections = [
     { id: 'hero', name: { en: 'Home', fr: 'Accueil' }, icon: 'home' },
     { id: 'about', name: { en: 'About', fr: 'À Propos' }, icon: 'user' },
     { id: 'portfolio', name: { en: 'Portfolio', fr: 'Portfolio' }, icon: 'briefcase' },
-    { id: 'services', name: { en: 'Services', fr: 'Services' }, icon: 'settings' },
     { id: 'contact', name: { en: 'Contact', fr: 'Contact' }, icon: 'message-circle' },
 ];
 
@@ -112,25 +111,6 @@ const portfolioItems = {
     ]
 };
 
-const services = {
-    en: [
-        { name: '1. Branding', description: 'Logo design, color palette, and fonts to create a cohesive brand identity.', icon: 'palette' },
-        { name: '2. Website', description: 'Custom-designed websites that help you attract clients and build trust online.', icon: 'globe' },
-        { name: '3. Hosting & Domain Setup', description: 'Set up your free or paid domains and hosting.', icon: 'server' },
-        { name: '4. Business Email', description: 'Set up free or domain-specific email for professional communication.', icon: 'at-sign' },
-        { name: '5. Marketing', description: 'Basic SEO strategies for your website.', icon: 'search' },
-        { name: '6. Social Media', description: 'Guidance on setting up and managing social media accounts.', icon: 'users' },
-    ],
-    fr: [
-        { name: '1. Image de Marque', description: 'Design de logo, palette de couleurs et polices pour créer une identité de marque cohérente.', icon: 'palette' },
-        { name: '2. Site Web', description: 'Sites web personnalisés qui reflètent votre entreprise et votre marque.', icon: 'globe' },
-        { name: '3. Hébergement & Domaine', description: 'Configuration de vos domaines gratuits ou payants et hébergement.', icon: 'server' },
-        { name: '4. Email Professionnel', description: 'Configuration d\'email gratuit ou spécifique au domaine pour une communication professionnelle.', icon: 'at-sign' },
-        { name: '5. Marketing', description: 'Stratégies SEO de base pour votre site web.', icon: 'search' },
-        { name: '6. Réseaux Sociaux', description: 'Conseils pour configurer et gérer les comptes de réseaux sociaux.', icon: 'users' },
-    ]
-};
-
 const skills = {
     en: [
         { name: 'HTML/CSS', percentage: 90 },
@@ -178,13 +158,9 @@ const content = {
             liveDemo: 'Live Demo',
             viewCode: 'GitHub'
         },
-        services: {
-            title: 'Services',
-            subtitle: 'Whether you\'re starting from scratch or revamping your online presence, I offer complete web services designed for freelancers, creatives, and small businesses.'
-        },
         contact: {
             title: 'Get In Touch',
-            subtitle: 'Ready to bring your website to life? Let\'s start a conversation about your project.',
+            subtitle: 'Whether it\'s a website, a tool, or a small project, I\'d love to help. I enjoy turning ideas into reality and solving problems with design, code, and creativity, both for individuals and for teams.',
             github: 'GitHub',
             linkedin: 'LinkedIn',
             formTitle: 'Send a Message',
@@ -222,13 +198,9 @@ const content = {
             liveDemo: 'Démo Live',
             viewCode: 'GitHub'
         },
-        services: {
-            title: 'Services',
-            subtitle: 'Que vous partiez de zéro ou que vous souhaitiez moderniser votre présence en ligne, je propose des services web complets adaptés aux freelances, créatifs et petites entreprises.'
-        },
         contact: {
             title: 'Contactez-Moi',
-            subtitle: 'Prêt à donner vie à votre site web ? Commençons une conversation sur votre projet.',
+            subtitle: 'Que ce soit un site web, un outil ou un petit projet, je serais ravie de vous aider. J\'aime transformer les idées en réalité et résoudre des problèmes grâce au design, au code et à la créativité, pour les particuliers comme pour les équipes.',
             github: 'GitHub',
             linkedin: 'LinkedIn',
             formTitle: 'Envoyer un Message',
@@ -246,6 +218,110 @@ let circuitAnimationInitialized = false;
 let circuitAnimationTimer = null;
 
 // Circuit Pattern Animation
+// Builds the circuit paths using real pixel coordinates so the pattern
+// stretches to fill any viewport aspect-ratio without cropping or
+// distorting stroke widths.
+
+function buildCircuitData(w, h) {
+    // Bump size in pixels – the small zigzag offsets on the traces
+    const b = Math.min(w, h) * 0.03; // ~3 % of the smallest dimension
+
+    // Percentage-based anchor positions (same visual layout as before)
+    const x = {
+        outer1: w * 0.05,
+        inner1: w * 0.17,
+        mid1:   w * 0.30,
+        mid2:   w * 0.70,
+        inner2: w * 0.83,
+        outer2: w * 0.95,
+        off:    w * 0.05,   // overflow beyond edges
+    };
+    const y = {
+        outer1: h * 0.055,
+        inner1: h * 0.19,
+        mid1:   h * 0.333,
+        mid2:   h * 0.667,
+        inner2: h * 0.81,
+        outer2: h * 0.944,
+        off:    h * 0.055,
+    };
+
+    // Helper – round to 1 decimal
+    const r = v => Math.round(v * 10) / 10;
+
+    const circuitTraces = [
+        // ── Top frame ───────────────────────────────────────────
+        {
+            path: `M${r(-x.off)},${r(y.outer1)} L${r(x.inner1)},${r(y.outer1)} L${r(x.inner1)},${r(y.outer1+b)} L${r(x.mid1)},${r(y.outer1+b)} L${r(x.mid1)},${r(y.outer1)} L${r(x.mid2)},${r(y.outer1)} L${r(x.mid2)},${r(y.outer1+b)} L${r(x.inner2)},${r(y.outer1+b)} L${r(x.inner2)},${r(y.outer1)} L${r(w+x.off)},${r(y.outer1)}`,
+            delay: 0, duration: 4.0, strokeWidth: 2
+        },
+        {
+            path: `M${r(-x.off)},${r(y.inner1)} L${r(x.inner1-b)},${r(y.inner1)} L${r(x.inner1-b)},${r(y.inner1-b)} L${r(x.inner1+b)},${r(y.inner1-b)} L${r(x.inner1+b)},${r(y.inner1)} L${r(x.inner2-b)},${r(y.inner1)} L${r(x.inner2-b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1)} L${r(w+x.off)},${r(y.inner1)}`,
+            delay: 0.5, duration: 3.8, strokeWidth: 1.8
+        },
+
+        // ── Bottom frame ────────────────────────────────────────
+        {
+            path: `M${r(-x.off)},${r(y.outer2)} L${r(x.inner1+b)},${r(y.outer2)} L${r(x.inner1+b)},${r(y.outer2-b)} L${r(x.mid1+b)},${r(y.outer2-b)} L${r(x.mid1+b)},${r(y.outer2)} L${r(x.mid2-b)},${r(y.outer2)} L${r(x.mid2-b)},${r(y.outer2-b)} L${r(x.inner2-b)},${r(y.outer2-b)} L${r(x.inner2-b)},${r(y.outer2)} L${r(w+x.off)},${r(y.outer2)}`,
+            delay: 1.2, duration: 4.2, strokeWidth: 2
+        },
+        {
+            path: `M${r(-x.off)},${r(y.inner2)} L${r(x.inner1)},${r(y.inner2)} L${r(x.inner1)},${r(y.inner2+b)} L${r(x.mid1)},${r(y.inner2+b)} L${r(x.mid1)},${r(y.inner2)} L${r(x.mid2)},${r(y.inner2)} L${r(x.mid2)},${r(y.inner2+b)} L${r(x.inner2)},${r(y.inner2+b)} L${r(x.inner2)},${r(y.inner2)} L${r(w+x.off)},${r(y.inner2)}`,
+            delay: 1.8, duration: 3.6, strokeWidth: 1.8
+        },
+
+        // ── Left frame ──────────────────────────────────────────
+        {
+            path: `M${r(x.outer1)},${r(-y.off)} L${r(x.outer1)},${r(y.inner1)} L${r(x.outer1+b)},${r(y.inner1)} L${r(x.outer1+b)},${r(y.mid1)} L${r(x.outer1)},${r(y.mid1)} L${r(x.outer1)},${r(y.mid2)} L${r(x.outer1+b)},${r(y.mid2)} L${r(x.outer1+b)},${r(y.inner2)} L${r(x.outer1)},${r(y.inner2)} L${r(x.outer1)},${r(h+y.off)}`,
+            delay: 2.0, duration: 3.5, strokeWidth: 1.9
+        },
+        {
+            path: `M${r(x.inner1)},${r(-y.off)} L${r(x.inner1)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1+b)} L${r(x.inner1)},${r(y.inner1+b)} L${r(x.inner1)},${r(y.inner2-b)} L${r(x.inner1-b)},${r(y.inner2-b)} L${r(x.inner1-b)},${r(y.inner2+b)} L${r(x.inner1)},${r(y.inner2+b)} L${r(x.inner1)},${r(h+y.off)}`,
+            delay: 2.5, duration: 3.8, strokeWidth: 1.6
+        },
+
+        // ── Right frame ─────────────────────────────────────────
+        {
+            path: `M${r(x.outer2)},${r(-y.off)} L${r(x.outer2)},${r(y.inner1)} L${r(x.outer2-b)},${r(y.inner1)} L${r(x.outer2-b)},${r(y.mid1)} L${r(x.outer2)},${r(y.mid1)} L${r(x.outer2)},${r(y.mid2)} L${r(x.outer2-b)},${r(y.mid2)} L${r(x.outer2-b)},${r(y.inner2)} L${r(x.outer2)},${r(y.inner2)} L${r(x.outer2)},${r(h+y.off)}`,
+            delay: 3.0, duration: 3.5, strokeWidth: 1.9
+        },
+        {
+            path: `M${r(x.inner2)},${r(-y.off)} L${r(x.inner2)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1+b)} L${r(x.inner2)},${r(y.inner1+b)} L${r(x.inner2)},${r(y.inner2-b)} L${r(x.inner2+b)},${r(y.inner2-b)} L${r(x.inner2+b)},${r(y.inner2+b)} L${r(x.inner2)},${r(y.inner2+b)} L${r(x.inner2)},${r(h+y.off)}`,
+            delay: 3.5, duration: 3.8, strokeWidth: 1.6
+        },
+
+        // ── Corner connectors ───────────────────────────────────
+        { path: `M${r(x.inner1)},${r(y.outer1)} L${r(x.inner1)},${r(y.inner1)}`, delay: 4.0, duration: 1.0, strokeWidth: 1.4 },
+        { path: `M${r(x.inner2)},${r(y.outer1)} L${r(x.inner2)},${r(y.inner1)}`, delay: 4.2, duration: 1.0, strokeWidth: 1.4 },
+        { path: `M${r(x.inner1)},${r(y.inner2)} L${r(x.inner1)},${r(y.outer2)}`, delay: 4.4, duration: 1.0, strokeWidth: 1.4 },
+        { path: `M${r(x.inner2)},${r(y.inner2)} L${r(x.inner2)},${r(y.outer2)}`, delay: 4.6, duration: 1.0, strokeWidth: 1.4 },
+    ];
+
+    // Delays are timed to match when the first trace line reaches each pad
+    const componentPads = [
+        { x: x.outer1, y: y.outer1, delay: 0.4 },   // top-left:     top trace arrives early
+        { x: x.inner1, y: y.outer1, delay: 0.8 },   // top-inner-L:  top trace passes 20%
+        { x: x.outer1, y: y.outer2, delay: 1.6 },   // bot-left:     bottom trace arrives
+        { x: x.outer2, y: y.outer1, delay: 3.0 },   // top-right:    right trace starts
+        { x: x.inner2, y: y.outer1, delay: 3.2 },   // top-inner-R:  top trace passes 80%
+        { x: x.inner1, y: y.outer2, delay: 2.0 },   // bot-inner-L:  bottom trace passes 20%
+        { x: x.inner2, y: y.outer2, delay: 4.5 },   // bot-inner-R:  bottom trace passes 80%
+        { x: x.outer2, y: y.outer2, delay: 5.4 },   // bot-right:    bottom trace end
+    ];
+
+    // Delays timed to when the first trace reaches each inner corner
+    const viaConnections = [
+        { x: x.inner1, y: y.inner1, delay: 1.3 },   // top-left inner
+        { x: x.inner2, y: y.inner1, delay: 3.5 },   // top-right inner
+        { x: x.inner1, y: y.inner2, delay: 2.5 },   // bot-left inner
+        { x: x.inner2, y: y.inner2, delay: 4.7 },   // bot-right inner
+    ];
+
+    return { circuitTraces, componentPads, viaConnections };
+}
+
+let circuitResizeHandler = null;
+
 function createCircuitPattern() {
     const svg = document.querySelector('.circuit-svg');
     if (!svg) return;
@@ -257,227 +333,148 @@ function createCircuitPattern() {
 
     circuitAnimationInitialized = true;
 
-    // Circuit traces timing and behavior
-    const circuitTraces = [
-        // Top frame
-        {
-            path: 'M-5,5 L20,5 L20,8 L30,8 L30,5 L70,5 L70,8 L80,8 L80,5 L105,5',
-            delay: 0,
-            duration: 4.0,
-            strokeWidth: 0.25
-        },
-        {
-            path: 'M-5,20 L15,20 L15,17 L25,17 L25,20 L75,20 L75,17 L85,17 L85,20 L105,20',
-            delay: 0.5,
-            duration: 3.8,
-            strokeWidth: 0.22
-        },
+    // Remove previous resize listener if any
+    if (circuitResizeHandler) {
+        window.removeEventListener('resize', circuitResizeHandler);
+        circuitResizeHandler = null;
+    }
 
-        // Bottom frame
-        {
-            path: 'M-5,85 L25,85 L25,82 L35,82 L35,85 L65,85 L65,82 L75,82 L75,85 L105,85',
-            delay: 1.2,
-            duration: 4.2,
-            strokeWidth: 0.25
-        },
-        {
-            path: 'M-5,70 L20,70 L20,73 L30,73 L30,70 L70,70 L70,73 L80,73 L80,70 L105,70',
-            delay: 1.8,
-            duration: 3.6,
-            strokeWidth: 0.22
-        },
+    function render() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
 
-        // Left frame
-        {
-            path: 'M5,-5 L5,20 L8,20 L8,30 L5,30 L5,60 L8,60 L8,70 L5,70 L5,95',
-            delay: 2.0,
-            duration: 3.5,
-            strokeWidth: 0.24
-        },
-        {
-            path: 'M20,-5 L20,15 L17,15 L17,25 L20,25 L20,65 L17,65 L17,75 L20,75 L20,95',
-            delay: 2.5,
-            duration: 3.8,
-            strokeWidth: 0.20
-        },
+        // Set viewBox to match exact viewport pixels → 1 SVG unit = 1 px
+        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
-        // Right frame
-        {
-            path: 'M95,-5 L95,20 L92,20 L92,30 L95,30 L95,60 L92,60 L92,70 L95,70 L95,95',
-            delay: 3.0,
-            duration: 3.5,
-            strokeWidth: 0.24
-        },
-        {
-            path: 'M80,-5 L80,15 L83,15 L83,25 L80,25 L80,65 L83,65 L83,75 L80,75 L80,95',
-            delay: 3.5,
-            duration: 3.8,
-            strokeWidth: 0.20
-        },
+        const { circuitTraces, componentPads, viaConnections } = buildCircuitData(w, h);
 
-        // Corner connectors
-        {
-            path: 'M20,5 L20,20',
-            delay: 4.0,
-            duration: 1.0,
-            strokeWidth: 0.18
-        },
-        {
-            path: 'M80,5 L80,20',
-            delay: 4.2,
-            duration: 1.0,
-            strokeWidth: 0.18
-        },
-        {
-            path: 'M20,70 L20,85',
-            delay: 4.4,
-            duration: 1.0,
-            strokeWidth: 0.18
-        },
-        {
-            path: 'M80,70 L80,85',
-            delay: 4.6,
-            duration: 1.0,
-            strokeWidth: 0.18
-        }
-    ];
+        // Pad / hole size in pixels — fixed to match line thickness
+        const padSize = 4;      // 4px half-width → 8px square, matching ~2px line weight
+        const holeSize = 1.8;   // small inner hole
 
-    // Component pads
-    const componentPads = [
-        { x: 5, y: 5, delay: 1.0 },
-        { x: 95, y: 5, delay: 1.2 },
-        { x: 5, y: 85, delay: 1.4 },
-        { x: 95, y: 85, delay: 1.6 },
-        { x: 20, y: 5, delay: 2.0 },
-        { x: 80, y: 5, delay: 2.2 },
-        { x: 20, y: 85, delay: 2.4 },
-        { x: 80, y: 85, delay: 2.6 },
-    ];
+        // Clear existing elements
+        svg.innerHTML = '';
 
-    const viaConnections = [
-        { x: 20, y: 20 }, { x: 80, y: 20 }, { x: 20, y: 70 }, { x: 80, y: 70 }
-    ];
+        // Create circuit traces
+        circuitTraces.forEach((trace) => {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', trace.path);
+            path.setAttribute('stroke', '#091bd9');
+            path.setAttribute('stroke-width', trace.strokeWidth.toString());
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke-linecap', 'square');
+            path.setAttribute('stroke-linejoin', 'miter');
 
-    // Clear existing elements
-    svg.innerHTML = '';
+            svg.appendChild(path);
 
-    // Create circuit traces with pathLength + opacity behavior
-    circuitTraces.forEach((trace, index) => {
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', trace.path);
-        path.setAttribute('stroke', '#091bd9');
-        path.setAttribute('stroke-width', trace.strokeWidth.toString());
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke-linecap', 'square');
-        path.setAttribute('stroke-linejoin', 'miter');
+            const pathLength = path.getTotalLength();
+            path.style.strokeDasharray = pathLength.toString();
+            path.style.strokeDashoffset = pathLength.toString();
+            path.style.opacity = '0';
+            path.style.setProperty('--path-length', pathLength.toString());
+            path.classList.add('circuit-trace-react');
 
-        // Add to DOM first so we can calculate path length
-        svg.appendChild(path);
+            const totalCycleDuration = trace.duration + 3;
+            const drawPercentage = (trace.duration / totalCycleDuration) * 100;
 
-        // Calculate path length for stroke-dasharray
-        const pathLength = path.getTotalLength();
-        path.style.strokeDasharray = pathLength.toString();
-        path.style.strokeDashoffset = pathLength.toString();
+            let animationName = 'drawTrace40';
+            if (Math.round(drawPercentage) <= 15) animationName = 'drawTrace14';
+            else if (Math.round(drawPercentage) <= 37) animationName = 'drawTrace36';
+            else if (Math.round(drawPercentage) <= 39) animationName = 'drawTrace38';
+            else if (Math.round(drawPercentage) <= 41) animationName = 'drawTrace40';
+            else animationName = 'drawTrace42';
 
-        // Set initial state: completely hidden and undrawn
-        path.style.opacity = '0';
-        path.style.setProperty('--path-length', pathLength.toString());
+            path.style.animationDuration = `${totalCycleDuration}s`;
+            path.style.animationDelay = `${trace.delay}s`;
+            path.style.animationTimingFunction = 'ease-out';
+            path.style.animationIterationCount = 'infinite';
+            path.style.animationFillMode = 'both';
+            path.style.animationName = animationName;
+        });
 
-        path.classList.add('circuit-trace-react');
+        // Create component pads
+        componentPads.forEach((pad) => {
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
-        // Apply animation with fade + draw combination
-        const totalCycleDuration = trace.duration + 3; // Original repeatDelay: 6
-        const drawPercentage = (trace.duration / totalCycleDuration) * 100;
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('x', (pad.x - padSize).toString());
+            rect.setAttribute('y', (pad.y - padSize).toString());
+            rect.setAttribute('width', (padSize * 2).toString());
+            rect.setAttribute('height', (padSize * 2).toString());
+            rect.setAttribute('fill', '#091bd9');
+            rect.setAttribute('rx', (padSize * 0.08).toString());
+            rect.classList.add('circuit-pad-react');
 
-        // Choose fallback animation based on approximate percentage since CSS custom props in keyframes aren't well supported
-        let animationName = 'drawTrace40'; // default for 4s duration
-        if (Math.round(drawPercentage) <= 15) animationName = 'drawTrace14';
-        else if (Math.round(drawPercentage) <= 37) animationName = 'drawTrace36';
-        else if (Math.round(drawPercentage) <= 39) animationName = 'drawTrace38';
-        else if (Math.round(drawPercentage) <= 41) animationName = 'drawTrace40';
-        else animationName = 'drawTrace42';
+            rect.style.animationDuration = '0.3s';
+            rect.style.animationDelay = `${pad.delay}s`;
+            rect.style.animationTimingFunction = 'ease-out';
+            rect.style.animationIterationCount = '1';
+            rect.style.animationFillMode = 'forwards';
 
-        path.style.animationDuration = `${totalCycleDuration}s`;
-        path.style.animationDelay = `${trace.delay}s`;
-        path.style.animationTimingFunction = 'ease-out';
-        path.style.animationIterationCount = 'infinite';
-        path.style.animationFillMode = 'both';
-        path.style.animationName = animationName;
-    });
+            const hole = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            hole.setAttribute('x', (pad.x - holeSize).toString());
+            hole.setAttribute('y', (pad.y - holeSize).toString());
+            hole.setAttribute('width', (holeSize * 2).toString());
+            hole.setAttribute('height', (holeSize * 2).toString());
+            hole.setAttribute('fill', '#f5f1f0');
+            hole.setAttribute('rx', (holeSize * 0.1).toString());
+            hole.classList.add('circuit-hole-react');
 
-    // Create component pads
-    componentPads.forEach((pad, index) => {
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            hole.style.animationDuration = '0.25s';
+            hole.style.animationDelay = `${pad.delay + 0.15}s`;
+            hole.style.animationTimingFunction = 'ease-out';
+            hole.style.animationIterationCount = '1';
+            hole.style.animationFillMode = 'forwards';
 
-        // Square pad base
-        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rect.setAttribute('x', (pad.x - 0.6).toString());
-        rect.setAttribute('y', (pad.y - 0.6).toString());
-        rect.setAttribute('width', '1.2');
-        rect.setAttribute('height', '1.2');
-        rect.setAttribute('fill', '#091bd9');
-        rect.setAttribute('rx', '0.1');
-        rect.classList.add('circuit-pad-react');
+            g.appendChild(rect);
+            g.appendChild(hole);
+            svg.appendChild(g);
+        });
 
-        // Timing: 0.4s duration + 8s repeatDelay
-        const padCycleDuration = 0.4 + 8;
-        rect.style.animationDuration = `${padCycleDuration}s`;
-        rect.style.animationDelay = `${pad.delay}s`;
-        rect.style.animationTimingFunction = 'ease-out';
-        rect.style.animationIterationCount = 'infinite';
-        rect.style.animationFillMode = 'both';
+        // Create via connections — fixed size to match line thickness
+        const viaSize = 3;        // 3px radius
+        const viaStroke = 1.8;    // ~2px stroke, same as lines
 
-        // Square pad center hole with scale animation
-        const hole = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        hole.setAttribute('x', (pad.x - 0.25).toString());
-        hole.setAttribute('y', (pad.y - 0.25).toString());
-        hole.setAttribute('width', '0.5');
-        hole.setAttribute('height', '0.5');
-        hole.setAttribute('fill', '#f5f1f0');
-        hole.setAttribute('rx', '0.05');
-        hole.classList.add('circuit-hole-react');
+        viaConnections.forEach((via, index) => {
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', via.x.toString());
+            circle.setAttribute('cy', via.y.toString());
+            circle.setAttribute('r', viaSize.toString());
+            circle.setAttribute('fill', 'none');
+            circle.setAttribute('stroke', '#091bd9');
+            circle.setAttribute('stroke-width', viaStroke.toString());
+            circle.classList.add('circuit-via-react');
 
-        // Timing: 0.6s duration + 8s repeatDelay, with scale effect
-        const holeCycleDuration = 0.6 + 8;
-        hole.style.animationDuration = `${holeCycleDuration}s`;
-        hole.style.animationDelay = `${pad.delay + 0.2}s`;
-        hole.style.animationTimingFunction = 'ease-out';
-        hole.style.animationIterationCount = 'infinite';
-        hole.style.animationFillMode = 'both';
+            circle.style.animationDuration = '0.3s';
+            circle.style.animationDelay = `${via.delay}s`;
+            circle.style.animationTimingFunction = 'ease-out';
+            circle.style.animationIterationCount = '1';
+            circle.style.animationFillMode = 'forwards';
 
-        g.appendChild(rect);
-        g.appendChild(hole);
-        svg.appendChild(g);
-    });
+            svg.appendChild(circle);
+        });
+    }
 
-    // Create via connections with timing
-    viaConnections.forEach((via, index) => {
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', via.x.toString());
-        circle.setAttribute('cy', via.y.toString());
-        circle.setAttribute('r', '0.25');
-        circle.setAttribute('fill', 'none');
-        circle.setAttribute('stroke', '#091bd9');
-        circle.setAttribute('stroke-width', '0.15');
-        circle.classList.add('circuit-via-react');
+    // Initial render
+    render();
 
-        // Timing: 0.3s duration + 8.5s repeatDelay
-        const viaCycleDuration = 0.3 + 8.5;
-        circle.style.animationDuration = `${viaCycleDuration}s`;
-        circle.style.animationDelay = `${3.0 + index * 0.2}s`;
-        circle.style.animationTimingFunction = 'ease-out';
-        circle.style.animationIterationCount = 'infinite';
-        circle.style.animationFillMode = 'both';
-
-        svg.appendChild(circle);
-    });
+    // Debounced resize handler – recalculates positions when viewport changes
+    let resizeTimeout;
+    circuitResizeHandler = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Reset so render() rebuilds fully
+            circuitAnimationInitialized = false;
+            createCircuitPattern();
+        }, 250);
+    };
+    window.addEventListener('resize', circuitResizeHandler);
 
     // Reset initialization flag when leaving hero section
     if (circuitAnimationTimer) {
         clearTimeout(circuitAnimationTimer);
     }
 
-    // Mark as no longer on hero after a small delay to allow transitions
     circuitAnimationTimer = setTimeout(() => {
         if (currentSection !== 'hero') {
             circuitAnimationInitialized = false;
@@ -509,54 +506,37 @@ function navigateToSection(sectionId, event) {
     const previewContainer = document.getElementById('sectionPreview');
     const currentContainer = document.getElementById('sectionCurrent');
 
-    // Render next section immediately in preview
-    renderSection(nextSection, previewContainer, true);
+    // Swap sections instantly (no circular reveal)
+    currentSection = sectionId;
+    nextSection = null;
+    isRevealing = false;
 
-    // Apply transition and clip-path immediately
-    requestAnimationFrame(() => {
-        currentContainer.style.transition = 'clip-path 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        currentContainer.style.clipPath = `circle(0% at ${revealCenter.x}% ${revealCenter.y}%)`;
-    });
+    renderSection(currentSection, currentContainer.querySelector('.section-content'), false);
+    previewContainer.innerHTML = '';
 
-    // Complete transition after 1.4s
-    setTimeout(() => {
-        currentSection = sectionId;
-        nextSection = null;
-        isRevealing = false;
+    // Update navigation
+    updateNavigation();
 
-        // Update current section
-        renderSection(currentSection, currentContainer.querySelector('.section-content'), false);
-        previewContainer.innerHTML = '';
-
-        // Reset clip path WITHOUT animation
-        currentContainer.style.transition = 'none';
-        currentContainer.style.clipPath = `circle(150% at ${revealCenter.x}% ${revealCenter.y}%)`;
-
-        // Re-enable transition for next time
+    // Handle section-specific animations
+    if (currentSection === 'about') {
         setTimeout(() => {
-            currentContainer.style.transition = '';
-        }, 50);
+            aboutAnimationReady = true;
+            animateSkillBars();
+        }, 100);
+    } else {
+        aboutAnimationReady = false;
+    }
 
-        // Update navigation
-        updateNavigation();
-
-        // Handle section-specific animations
-        if (currentSection === 'about') {
-            setTimeout(() => {
-                aboutAnimationReady = true;
-                animateSkillBars();
-            }, 100);
-        } else {
-            aboutAnimationReady = false;
+    // Reset circuit animation flag and remove resize listener when leaving hero
+    if (currentSection !== 'hero') {
+        if (circuitResizeHandler) {
+            window.removeEventListener('resize', circuitResizeHandler);
+            circuitResizeHandler = null;
         }
-
-        // Reset circuit animation flag when leaving hero
-        if (currentSection !== 'hero' && circuitAnimationInitialized) {
-            setTimeout(() => {
-                circuitAnimationInitialized = false;
-            }, 500);
+        if (circuitAnimationInitialized) {
+            circuitAnimationInitialized = false;
         }
-    }, 1400);
+    }
 }
 
 // Update navigation active state
@@ -602,9 +582,6 @@ function renderSection(sectionId, container, isPreview = false) {
         case 'portfolio':
             container.innerHTML = createPortfolioHTML();
             break;
-        case 'services':
-            container.innerHTML = createServicesHTML();
-            break;
         case 'contact':
             container.innerHTML = createContactHTML();
             break;
@@ -628,12 +605,11 @@ function createHeroHTML() {
     return `
         <div class="hero-section">
             <div class="circuit-pattern">
-                <svg class="circuit-svg" viewBox="0 0 100 90" preserveAspectRatio="xMidYMid slice"></svg>
+                <svg class="circuit-svg"></svg>
             </div>
             <div class="hero-content">
                 <h1 class="hero-title">Ariane Saulnier</h1>
                 <p class="hero-subtitle">${t.hero.subtitle}</p>
-                <p class="hero-tagline">${t.hero.tagline}</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" data-action="navigate" data-target="about">${t.hero.learnMore}</button>
                     <button class="btn btn-outline" data-action="navigate" data-target="portfolio">${t.hero.viewPortfolio}</button>
@@ -775,65 +751,6 @@ function createPortfolioHTML() {
     `;
 }
 
-function createServicesHTML() {
-    const t = content[language];
-    const servicesData = services[language];
-
-    // Explanation containers for small vs bigger websites
-    const smallSitesHTML = `
-        <div class="site-type-container small-site">
-            <h3 class="site-type-title">${language === 'en'
-            ? 'Small Websites (Static)'
-            : 'Petits sites web (statique)'}</h3>
-            <p class="site-type-description">
-                ${language === 'en'
-            ? "Perfect for portfolios, landing pages, or simple info sites. Fast, secure, and budget-friendly custom-coded solutions."
-            : "Parfait pour les portfolios, pages de présentation ou sites vitrines simples. Solutions codées sur mesure, rapides, sécurisées et économiques."}
-            </p>
-        </div>
-    `;
-
-    const bigSitesHTML = `
-        <div class="site-type-container big-site">
-            <h3 class="site-type-title">${language === 'en'
-            ? 'Regular Websites'
-            : 'Sites réguliers'}</h3>
-            <p class="site-type-description">
-                ${language === 'en'
-            ? "Need an online shop, blog, or regular updates? I set up platforms like Shopify, WordPress, Wix, or Webflow and customize them for your needs."
-            : "Besoin d’une boutique en ligne, d’un blog ou de mises à jour régulières ? Je configure et personnalise des plateformes comme Shopify, WordPress, Wix ou Webflow selon vos besoins."}
-            </p>
-        </div>
-    `;
-
-    return `
-        <div class="services-section">
-            <div class="container">
-                <h2 class="section-title">${t.services.title}</h2>
-                <p class="contact-subtitle">${t.services.subtitle}</p>
-                
-                                <!-- Website type explanations -->
-                <div class="website-types grid gap-6 md:grid-cols-2 mb-8">
-                    ${smallSitesHTML}
-                    ${bigSitesHTML}
-                </div>
-
-                <div class="services-grid">
-                    ${servicesData.map(service => `
-                        <div class="service-item">
-                            <div class="service-header">
-                                <i data-lucide="${service.icon}" class="service-icon"></i>
-                                <h4 class="service-name">${service.name}</h4>
-                            </div>
-                            <p class="service-description">${service.description}</p>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        </div>
-    `;
-}
-
 function createContactHTML() {
     const t = content[language];
 
@@ -864,20 +781,17 @@ function createContactHTML() {
                         <div class="form-row">
                             <div class="form-field">
                                 <label for="name">${t.contact.nameLabel}</label>
-                                <input type="text" id="name" name="name">
+                                <input type="text" id="name" name="name" required>
                             </div>
                             <div class="form-field">
                                 <label for="email">${t.contact.emailLabel}</label>
-                                <input type="email" id="email" name="email">
+                                <input type="email" id="email" name="email" required>
                             </div>
                         </div>
                         <div class="form-field">
                             <label for="message">${t.contact.messageLabel}</label>
-                            <textarea id="message" name="message" rows="5" placeholder="${t.contact.messagePlaceholder}"></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="${t.contact.messagePlaceholder}" required></textarea>
                         </div>
-
-                        <input type="hidden" name="_replyto" value="">
-                        <input type="hidden" name="_next" value="thank-you.html">
 
                         <div class="form-submit">
                             <button type="submit" class="btn btn-primary">${t.contact.sendButton}</button>
@@ -922,6 +836,14 @@ function toggleLanguage() {
 
     // Update navigation
     updateNavigation();
+
+    // Re-animate skill bars if on about page
+    if (currentSection === 'about') {
+        aboutAnimationReady = true;
+        setTimeout(() => {
+            animateSkillBars();
+        }, 100);
+    }
 }
 
 // Event listeners
