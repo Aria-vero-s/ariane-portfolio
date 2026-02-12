@@ -17,31 +17,13 @@ const sections = [
 const portfolioItems = {
     en: [
         {
-            title: 'Freelancer Portfolio',
-            type: 'Website Design',
-            description: 'A website showcasing the work and services of a freelance engineer.',
-            image: 'images/freelancer.png',
-            liveLink: 'https://www.love-innovations.com/',
-            githubLink: 'https://github.com/aria-vero-s/love-innovations-portfolio',
-            icon: 'user'
-        },
-        {
-            title: 'Musician Portfolio',
-            type: 'Website Design',
-            description: 'A simple, elegant website designed for a professional pianist.',
-            image: 'images/musician-portfolio.png',
-            liveLink: 'https://aria-vero-s.github.io/pianist/',
-            githubLink: 'https://github.com/Aria-vero-s/pianist',
-            icon: 'user'
-        },
-        {
-            title: 'E-commerce Website',
-            type: 'E-commerce',
-            description: 'An e-commerce website for a beauty shop with payments and product management.',
-            image: 'images/e-commerce.png',
-            liveLink: '',
-            githubLink: 'https://github.com/Aria-vero-s/glow',
-            icon: 'shopping-cart'
+            title: 'BigWatts',
+            type: 'Full-Stack Web App',
+            description: 'A green energy marketplace connecting certified providers with property owners. Built with Django, React, and PostgreSQL.',
+            image: 'images/bigwatts.png',
+            liveLink: 'https://bigwatts.vercel.app/',
+            githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
+            icon: 'zap'
         },
         {
             title: 'Python Quiz App',
@@ -64,31 +46,13 @@ const portfolioItems = {
     ],
     fr: [
         {
-            title: 'Portfolio de Freelance',
-            type: 'Conception de site web',
-            description: 'Un site web présentant le travail et les services d\'un ingénieur freelance.',
-            image: 'images/freelancer.png',
-            liveLink: 'https://aria-vero-s.github.io/camping/',
-            githubLink: 'https://github.com/aria-vero-s/camping',
-            icon: 'user'
-        },
-        {
-            title: 'Portfolio de Musicien',
-            type: 'Conception de site web',
-            description: 'Un site simple et élégant conçu pour un pianiste professionnel.',
-            image: 'images/musician-portfolio.png',
-            liveLink: 'https://paolorubinacci.com/',
-            githubLink: 'https://github.com/Aria-vero-s/pianist',
-            icon: 'user'
-        },
-        {
-            title: 'Site E-commerce',
-            type: 'E-commerce',
-            description: 'Un site e-commerce pour une boutique beauté avec paiements et gestion des produits.',
-            image: 'images/e-commerce.png',
-            liveLink: '',
-            githubLink: 'https://github.com/Aria-vero-s/glow',
-            icon: 'shopping-cart'
+            title: 'BigWatts',
+            type: 'Application Web Full-Stack',
+            description: 'Une marketplace d\'énergie verte connectant des prestataires certifiés avec des propriétaires. Développée avec Django, React et PostgreSQL.',
+            image: 'images/bigwatts.png',
+            liveLink: 'https://bigwatts.vercel.app/',
+            githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
+            icon: 'zap'
         },
         {
             title: 'Application Quiz Python',
@@ -678,7 +642,9 @@ function createPortfolioHTML() {
                     <i data-lucide="${item.icon}" class="portfolio-icon"></i>
                 </div>
                 <div class="portfolio-preview">
+                    ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
                     <img src="${item.image}" alt="${item.title}" loading="lazy">
+                    ${item.liveLink ? `</a>` : ''}
                 </div>
             </div>
             <div class="portfolio-content">
@@ -713,36 +679,24 @@ function createPortfolioHTML() {
                         ${items.map(item => portfolioItemHTML(item)).join('')}
                     </div>
 
-                    <!-- Tablet: 2+2+1 layout -->
+                    <!-- Tablet: 2+1 layout -->
                     <div class="portfolio-tablet">
                         <!-- First row - 2 projects -->
                         <div class="portfolio-tablet-row-1">
                             ${items.slice(0, 2).map(item => portfolioItemHTML(item)).join('')}
                         </div>
                         
-                        <!-- Second row - 2 projects -->
-                        <div class="portfolio-tablet-row-2">
-                            ${items.slice(2, 4).map(item => portfolioItemHTML(item)).join('')}
-                        </div>
-                        
-                        <!-- Third row - 1 project centered -->
+                        <!-- Second row - 1 project centered -->
                         <div class="portfolio-tablet-row-3">
-                            ${items.slice(4, 5).map(item => portfolioItemHTML(item)).join('')}
+                            ${items.slice(2, 3).map(item => portfolioItemHTML(item)).join('')}
                         </div>
                     </div>
 
-                    <!-- Desktop: 3+2 layout -->
+                    <!-- Desktop: 3 layout -->
                     <div class="portfolio-desktop">
-                        <!-- First row - 3 projects -->
+                        <!-- Single row - 3 projects -->
                         <div class="portfolio-desktop-row-1">
                             ${items.slice(0, 3).map(item => portfolioItemHTML(item)).join('')}
-                        </div>
-                        
-                        <!-- Second row - 2 projects centered -->
-                        <div class="portfolio-desktop-row-2">
-                            <div class="portfolio-desktop-row-2-inner">
-                                ${items.slice(3, 5).map(item => portfolioItemHTML(item)).join('')}
-                            </div>
                         </div>
                     </div>
                 </div>
