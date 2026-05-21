@@ -485,7 +485,8 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    max-width: 672px;
+    width: calc((100% - 48px) / 3 * 2 + 24px);
+    max-width: 100%;
 }
 
 .portfolio-item {
