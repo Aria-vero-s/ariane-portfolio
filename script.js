@@ -697,20 +697,16 @@ function createPortfolioHTML() {
                 </div>
 
                 <div class="portfolio-preview">
-                    ${
-                        item.image
-                            ? `
-                                ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
-                                    <img src="${item.image}" alt="${item.title}" loading="lazy">
-                                ${item.liveLink ? `</a>` : ''}
-                            `
-                            : `
-                                <div class="portfolio-placeholder">
-                                    <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                                    <span>Work in Progress</span>
-                                </div>
-                            `
-                    }
+                    ${item.image ? `
+                        ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
+                            <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        ${item.liveLink ? `</a>` : ''}
+                    ` : `
+                        <div class="portfolio-placeholder">
+                            <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                            <span>Work in Progress</span>
+                        </div>
+                    `}
                 </div>
             </div>
 
@@ -743,8 +739,35 @@ function createPortfolioHTML() {
             <div class="container">
                 <h2 class="section-title">${t.portfolio.title}</h2>
 
-                <div class="portfolio-grid">
+                <!-- Mobile: all projects stacked -->
+                <div class="portfolio-mobile">
                     ${items.map(item => portfolioItemHTML(item)).join('')}
+                </div>
+
+                <!-- Tablet: 2 + 2 + 2 -->
+                <div class="portfolio-tablet">
+                    <div class="portfolio-tablet-row-1">
+                        ${items.slice(0, 2).map(item => portfolioItemHTML(item)).join('')}
+                    </div>
+
+                    <div class="portfolio-tablet-row-2">
+                        ${items.slice(2, 4).map(item => portfolioItemHTML(item)).join('')}
+                    </div>
+
+                    <div class="portfolio-tablet-row-2">
+                        ${items.slice(4, 6).map(item => portfolioItemHTML(item)).join('')}
+                    </div>
+                </div>
+
+                <!-- Desktop: 3 + 3 -->
+                <div class="portfolio-desktop">
+                    <div class="portfolio-desktop-row-1">
+                        ${items.slice(0, 3).map(item => portfolioItemHTML(item)).join('')}
+                    </div>
+
+                    <div class="portfolio-desktop-row-1">
+                        ${items.slice(3, 6).map(item => portfolioItemHTML(item)).join('')}
+                    </div>
                 </div>
             </div>
         </div>
