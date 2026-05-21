@@ -1171,3 +1171,33 @@ body {
     font-size: 14px;
     font-weight: 500;
 }
+
+/* ========================= */
+/* Portfolio Grid - New Layout */
+/* ========================= */
+
+.portfolio-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    width: 100% !important;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+.portfolio-grid .portfolio-item {
+    width: 100% !important;
+    max-width: none !important;
+}
