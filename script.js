@@ -26,6 +26,24 @@ const portfolioItems = {
             icon: 'zap'
         },
         {
+            title: 'Freelancer Portfolio',
+            type: 'Portfolio Website',
+            description: 'Website for a freelance engineer.',
+            image: 'images/freelancer-portfolio.png',
+            liveLink: 'https://love-innovations.com/',
+            githubLink: '',
+            icon: 'briefcase'
+        },
+        {
+            title: 'Music Festival',
+            type: 'Event Website',
+            description: 'Elegant music festival website.',
+            image: 'images/music-festival.png',
+            liveLink: 'https://fmclacbaker.com',
+            githubLink: '',
+            icon: 'music'
+        },
+        {
             title: 'Python Quiz App',
             type: 'Programming',
             description: 'Terminal quiz with Google Sheets API integration.',
@@ -53,6 +71,24 @@ const portfolioItems = {
             liveLink: 'https://bigwatts.vercel.app/',
             githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
             icon: 'zap'
+        },
+        {
+            title: 'Portfolio Freelance',
+            type: 'Site Portfolio',
+            description: 'Site web pour une ingénieure freelance.',
+            image: 'images/freelancer-portfolio.png',
+            liveLink: 'https://love-innovations.com/',
+            githubLink: '',
+            icon: 'briefcase'
+        },
+        {
+            title: 'Festival de Musique',
+            type: 'Site Événementiel',
+            description: 'Site web élégant pour un festival de musique.',
+            image: 'images/music-festival.png',
+            liveLink: 'https://fmclacbaker.com',
+            githubLink: '',
+            icon: 'music'
         },
         {
             title: 'Application Quiz Python',
