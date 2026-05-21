@@ -28,7 +28,7 @@ const portfolioItems = {
         {
             title: 'Freelancer Portfolio',
             type: 'Portfolio Website',
-            description: 'Website for a freelance engineer.',
+            description: 'Website for a freelance engineer built with React.',
             image: 'images/freelancer-portfolio.png',
             liveLink: 'https://love-innovations.com/',
             githubLink: '',
@@ -37,7 +37,7 @@ const portfolioItems = {
         {
             title: 'Music Festival',
             type: 'Event Website',
-            description: 'Elegant music festival website.',
+            description: 'Elegant music festival website built with Wordpress.',
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
             githubLink: '',
@@ -60,6 +60,15 @@ const portfolioItems = {
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/so_long',
             icon: 'code'
+        },
+        {
+            title: 'Linear Regression AI Project',
+            type: 'AI / Machine Learning',
+            description: 'Work-in-progress AI project exploring linear regression and machine learning fundamentals.',
+            image: '',
+            liveLink: '',
+            githubLink: 'https://github.com/Aria-vero-s/linear-regression',
+            icon: 'brain'
         }
     ],
     fr: [
@@ -75,7 +84,7 @@ const portfolioItems = {
         {
             title: 'Portfolio Freelance',
             type: 'Site Portfolio',
-            description: 'Site web pour une ingénieure freelance.',
+            description: 'Site web pour une ingénieure freelance créé avec React.',
             image: 'images/freelancer-portfolio.png',
             liveLink: 'https://love-innovations.com/',
             githubLink: '',
@@ -84,7 +93,7 @@ const portfolioItems = {
         {
             title: 'Festival de Musique',
             type: 'Site Événementiel',
-            description: 'Site web élégant pour un festival de musique.',
+            description: 'Site web élégant pour un festival de musique créé avec Wordpress.',
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
             githubLink: '',
@@ -107,6 +116,15 @@ const portfolioItems = {
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/so_long',
             icon: 'code'
+        },
+        {
+            title: 'Projet IA Régression Linéaire',
+            type: 'IA / Machine Learning',
+            description: 'Projet en cours explorant la régression linéaire et les bases du machine learning.',
+            image: '',
+            liveLink: '',
+            githubLink: 'https://github.com/Aria-vero-s/linear-regression',
+            icon: 'brain'
         }
     ]
 };
