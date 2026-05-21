@@ -696,9 +696,16 @@ function createPortfolioHTML() {
                     <i data-lucide="${item.icon}" class="portfolio-icon"></i>
                 </div>
                 <div class="portfolio-preview">
-                    ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
-                        <img src="${item.image}" alt="${item.title}" loading="lazy">
-                    ${item.liveLink ? `</a>` : ''}
+                    ${item.image ? `
+                        ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
+                            <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        ${item.liveLink ? `</a>` : ''}
+                    ` : `
+                        <div class="portfolio-placeholder">
+                            <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                            <span>Work in Progress</span>
+                        </div>
+                    `}
                 </div>
             </div>
 
