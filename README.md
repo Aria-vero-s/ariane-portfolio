@@ -76,11 +76,11 @@ The site supports English and French. Toggle switches language dynamically witho
 
 | Project Name           | Description                                | Live Link | GitHub |
 |------------------------|--------------------------------------------|-----------|--------|
-| Freelancer Portfolio   | Website for a freelance engineer           | [Live](https://aria-vero-s.github.io/camping/) | [Code](https://github.com/aria-veros/camping) |
-| Musician Portfolio     | Elegant portfolio for a pianist            | [Live](https://paolorubinacci.com) | [Code](https://github.com/aria-veros/pianist) |
-| E-Commerce Website     | Beauty shop with checkout and product management | (WIP)     | [Code](https://github.com/aria-veros/glow) |
-| Python Quiz App        | Terminal app with Google Sheets API        | –         | [Code](https://github.com/aria-veros/enviro) |
-| C Arcade Game          | Retro arcade game written in C             | –         | [Code](https://github.com/aria-veros/so_long) |
+| Freelancer Portfolio   | Website for a freelance engineer           | [Live](https://love-innovations.com/) | –         |
+| Music Festival         | Elegant Music Festival Website             | [Live](https://fmclacbaker.com) | –         |
+| Marketplace Website    | Marketplace website for services           | (WIP)     | [Code](https://github.com/ariastoryreport-wq/bigwatts) |
+| Python Quiz App        | Terminal app with Google Sheets API        | –         | [Code](https://github.com/aria-vero-s/enviro) |
+| C Arcade Game          | Retro arcade game written in C             | –         | [Code](https://github.com/aria-vero-s/so_long) |
 
 
 ## Customization
