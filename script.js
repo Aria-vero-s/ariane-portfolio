@@ -695,17 +695,30 @@ function createPortfolioHTML() {
                 <div class="portfolio-icon-container">
                     <i data-lucide="${item.icon}" class="portfolio-icon"></i>
                 </div>
+
                 <div class="portfolio-preview">
-                    ${item.image ? `
-                        ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
-                            <img src="${item.image}" alt="${item.title}" loading="lazy">
-                        ${item.liveLink ? `</a>` : ''}
-                    ` : `
-                        <div class="portfolio-placeholder">
-                            <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                            <span>Work in Progress</span>
-                        </div>
-                    `}
+                    ${
+                        item.image
+                            ? `
+                                ${
+                                    item.liveLink
+                                        ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">`
+                                        : ''
+                                }
+                                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                                ${
+                                    item.liveLink
+                                        ? `</a>`
+                                        : ''
+                                }
+                            `
+                            : `
+                                <div class="portfolio-placeholder">
+                                    <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                                    <span>Work in Progress</span>
+                                </div>
+                            `
+                    }
                 </div>
             </div>
 
@@ -715,19 +728,27 @@ function createPortfolioHTML() {
                 <p class="portfolio-description">${item.description}</p>
 
                 <div class="portfolio-buttons">
-                    ${item.liveLink ? `
-                        <a href="${item.liveLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            <i data-lucide="external-link"></i>
-                            ${t.portfolio.liveDemo}
-                        </a>
-                    ` : ''}
+                    ${
+                        item.liveLink
+                            ? `
+                                <a href="${item.liveLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i data-lucide="external-link"></i>
+                                    ${t.portfolio.liveDemo}
+                                </a>
+                            `
+                            : ''
+                    }
 
-                    ${item.githubLink ? `
-                        <a href="${item.githubLink}" target="_blank" rel="noopener noreferrer" class="btn btn-outline ${!item.liveLink ? 'single' : ''}">
-                            <i data-lucide="github"></i>
-                            ${t.portfolio.viewCode}
-                        </a>
-                    ` : ''}
+                    ${
+                        item.githubLink
+                            ? `
+                                <a href="${item.githubLink}" target="_blank" rel="noopener noreferrer" class="btn btn-outline ${!item.liveLink ? 'single' : ''}">
+                                    <i data-lucide="github"></i>
+                                    ${t.portfolio.viewCode}
+                                </a>
+                            `
+                            : ''
+                    }
                 </div>
             </div>
         </div>
