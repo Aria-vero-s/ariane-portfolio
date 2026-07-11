@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Club — Case Study — Ariane Saulnier</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="project.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-card">
+            <div class="nav-content">
+                <a href="../index.html?section=portfolio" class="nav-button">
+                    <i data-lucide="arrow-left"></i>
+                    <span class="nav-text">Back</span>
+                </a>
+                <div class="nav-divider"></div>
+                <button class="nav-button" id="lang-toggle" onclick="toggleLang()">FR</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cs-page">
+
+        <!-- ══ ENGLISH ══ -->
+        <article class="cs-article" id="article-en">
+
+            <div class="cs-hero">
+                <span class="cs-tag">UI/UX Case Study</span>
+                <h1>README Club</h1>
+                <p class="cs-hero-sub">Designing a collaborative reading experience that helps book clubs discover, decide, read, and discuss together.</p>
+                <img class="cs-img-real" src="../images/book-club/Hero-mockup-desktop-mobile-homepage.png" alt="README Club — desktop and mobile homepage mockup" style="margin-bottom:0;">
+            </div>
+
+            <div class="cs-meta">
+                <div class="cs-meta-item">
+                    <label>Role</label>
+                    <p>Product Designer · UX Researcher · Frontend Developer</p>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Timeline</label>
+                    <p>4 weeks</p>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Design</label>
+                    <ul><li>Figma</li><li>FigJam</li></ul>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Development</label>
+                    <ul><li>React · TypeScript</li><li>Firebase · Tailwind CSS</li></ul>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Links</label>
+                    <ul>
+                        <li><a href="https://aria-vero-s.github.io/book-club/" target="_blank" rel="noopener noreferrer" style="color:#091bd9;">Live site ↗</a></li>
+                        <li><a href="https://github.com/Aria-vero-s/book-club" target="_blank" rel="noopener noreferrer" style="color:#091bd9;">GitHub ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">01</div>
+                <h2>Project Overview</h2>
+                <h3>The Challenge</h3>
+                <p>Book clubs create meaningful social connections, but many groups still rely on disconnected tools:</p>
+                <ul>
+                    <li>WhatsApp for discussions</li>
+                    <li>Google Forms for voting</li>
+                    <li>Spreadsheets for tracking</li>
+                    <li>Goodreads for discovery</li>
+                </ul>
+                <p>While these tools solve individual problems, they do not support the complete book club journey. Members often have to manually recreate an experience that should feel connected:</p>
+                <div class="cs-flow">
+                    <span class="cs-flow-step">Discover</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Nominate</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Vote</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Read</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Discuss</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Review</span>
+                </div>
+                <div class="cs-callout">
+                    <p>How might we create one platform that helps readers participate in a book club while respecting different reading habits and schedules?</p>
+                </div>
+                <h3>The Solution</h3>
+                <p>README Club is a community reading platform designed to centralise the complete book club experience. The platform allows members to discover and suggest books, vote collaboratively, track reading progress, participate in spoiler-safe discussions, and share reviews and reflections.</p>
+                <p>The goal was not to replace individual reading platforms, but to create the missing collaborative layer between them.</p>
+                <h3>Design Process</h3>
+                <p>The project followed a user-centred design approach:</p>
+                <div class="cs-flow">
+                    <span class="cs-flow-step">Research</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Define</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Ideate</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Prototype</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Test</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Iterate</span>
+                </div>
+                <img class="cs-img-real" src="../images/book-club/UX-process-timeline.png" alt="UX process timeline">
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">02</div>
+                <h2>Understanding the Problem</h2>
+                <p>Before conducting research, I identified assumptions that needed validation.</p>
+                <div class="cs-card">
+                    <div class="cs-label">Hypothesis 1</div>
+                    <h3>Book selection is often controlled by a small number of members.</h3>
+                    <p><strong>Potential impact:</strong> Some members may feel disconnected from group decisions.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Hypothesis 2</div>
+                    <h3>Social accountability can influence reading motivation.</h3>
+                    <p><strong>Potential impact:</strong> Readers may be more likely to complete books when they share the experience with others.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Hypothesis 3</div>
+                    <h3>Existing discussion tools do not support different reading speeds.</h3>
+                    <p><strong>Potential impact:</strong> Readers may avoid conversations because of spoilers or because they feel behind.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">03</div>
+                <h2>Competitive Analysis</h2>
+                <p>The goal was to understand how existing products support book discovery, reading tracking, community interaction, discussions, and group organisation.</p>
+                <img class="cs-img-real" src="../images/book-club/Competitive-analysis-matrix.png" alt="Competitive analysis matrix">
+                <p class="cs-img-caption">Comparing five platforms across five dimensions</p>
+                <h3>Finding 1 — Existing platforms solve individual problems</h3>
+                <p>Goodreads and StoryGraph are effective for discovering and tracking books. However, collaborative activities such as choosing books, tracking group progress, and organising discussions usually happen elsewhere.</p>
+                <h3>Finding 2 — Book clubs depend heavily on manual organisation</h3>
+                <p>Members combine multiple tools to recreate one experience.</p>
+                <div class="cs-callout">
+                    <p><strong>Opportunity:</strong> Create a dedicated workflow where the entire book club journey exists in one place.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">04</div>
+                <h2>User Research</h2>
+                <p>5 semi-structured interviews were conducted remotely, 20 minutes each. Participants were encouraged to describe real experiences rather than hypothetical opinions.</p>
+                <h4>Recruitment criteria</h4>
+                <ul>
+                    <li>Read at least 5 books per year</li>
+                    <li>Participated in a book club or reading community</li>
+                    <li>Used at least one reading-related platform</li>
+                </ul>
+                <div class="cs-table-wrap">
+                    <table class="cs-table">
+                        <thead><tr><th>ID</th><th>Profile</th><th>Behaviour</th></tr></thead>
+                        <tbody>
+                            <tr><td>P1</td><td>Monthly book club member</td><td>Reads 15 books/year</td></tr>
+                            <tr><td>P2</td><td>Library book club member</td><td>Reads 20 books/year</td></tr>
+                            <tr><td>P3</td><td>Frequent solo reader</td><td>Reads 30 books/year</td></tr>
+                            <tr><td>P4</td><td>Goodreads user</td><td>Reads 15 books/year</td></tr>
+                            <tr><td>P5</td><td>Casual reader</td><td>Reads 5 books/year</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <img class="cs-img-real" src="../images/book-club/FigJam-board-interview-notes-quotes-affinity-mapping.png" alt="FigJam board — interview notes, quotes, and affinity mapping">
+                <p>Four major themes emerged from the analysis: book selection, reading motivation, spoiler anxiety, and fragmented tools.</p>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">05</div>
+                <h2>Research Insights</h2>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 1</div>
+                    <h3>Readers want influence without extra responsibility</h3>
+                    <p>3/5 participants described book selection as controlled by organisers.</p>
+                    <blockquote><p>"Usually one person suggests the books because someone has to organise everything."</p></blockquote>
+                    <blockquote><p>"I rarely influence what the group reads."</p></blockquote>
+                    <p><strong>Design opportunity:</strong> Create lightweight participation through nominations and voting.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 2</div>
+                    <h3>Motivation comes from social connection</h3>
+                    <p>3/5 participants mentioned meetings or discussions helped them complete books.</p>
+                    <blockquote><p>"Knowing we have a meeting coming up helps me finish."</p></blockquote>
+                    <p><strong>Design opportunity:</strong> Create progress visibility without pressure.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 3</div>
+                    <h3>Readers need spoiler-safe discussions</h3>
+                    <p>4/5 participants mentioned avoiding discussions when behind.</p>
+                    <blockquote><p>"Someone mentioned the ending without realising I was behind."</p></blockquote>
+                    <p><strong>Design opportunity:</strong> Adapt discussions based on reading progress.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 4</div>
+                    <h3>The experience is fragmented</h3>
+                    <p>5/5 participants used multiple platforms.</p>
+                    <blockquote><p>"WhatsApp works, but conversations become messy."</p></blockquote>
+                    <p><strong>Design opportunity:</strong> Create one connected reading environment.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">06</div>
+                <h2>Research-Based Personas</h2>
+                <p>Personas were created by combining patterns observed during interviews rather than representing individual participants.</p>
+                <div class="cs-persona-grid">
+                    <div class="cs-persona">
+                        <div class="cs-persona-name">Claire</div>
+                        <div class="cs-persona-role">Library book club coordinator, 36 &middot; Based on P1 + P2</div>
+                        <blockquote><p>"Someone has to organise everything."</p></blockquote>
+                        <h4>Goals</h4><ul><li>Keep the club active</li><li>Reduce admin effort</li></ul>
+                        <h4>Pain points</h4><ul><li>Organising everything alone</li><li>Low participation</li></ul>
+                        <h4>Needs</h4><ul><li>Structure</li><li>Automation</li><li>Shared responsibility</li></ul>
+                    </div>
+                    <div class="cs-persona">
+                        <div class="cs-persona-name">Emma</div>
+                        <div class="cs-persona-role">Occasional reader, 28 &middot; Based on P3 + P5</div>
+                        <blockquote><p>"I don't want another obligation."</p></blockquote>
+                        <h4>Goals</h4><ul><li>Participate without pressure</li></ul>
+                        <h4>Pain points</h4><ul><li>Feeling excluded</li><li>Difficulty keeping pace</li></ul>
+                        <h4>Needs</h4><ul><li>Flexibility</li><li>Simple progress tracking</li></ul>
+                    </div>
+                    <div class="cs-persona">
+                        <div class="cs-persona-name">Lucas</div>
+                        <div class="cs-persona-role">Active reader, 30 &middot; Based on P3 + P4</div>
+                        <blockquote><p>"I want my recommendations to count."</p></blockquote>
+                        <h4>Goals</h4><ul><li>Influence group choices</li></ul>
+                        <h4>Pain points</h4><ul><li>Limited contribution to decisions</li></ul>
+                        <h4>Needs</h4><ul><li>Discovery</li><li>Recognition</li><li>Contribution</li></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">07</div>
+                <h2>Ideation &amp; Design Exploration</h2>
+                <h3>Challenge 1 — How can members contribute without increasing organisation?</h3>
+                <div class="cs-decision-grid">
+                    <div class="cs-decision"><h3>Admin-only selection</h3><h4>Rejected</h4><p>Creates a passive audience.</p></div>
+                    <div class="cs-decision"><h3>Random book selection</h3><h4>Rejected</h4><p>Removes community ownership.</p></div>
+                    <div class="cs-decision" style="border-color:rgba(9,27,217,0.5);background:rgba(9,27,217,0.04);"><h3>Collaborative nomination</h3><h4 style="color:#000;">Selected</h4><p>Allows participation while keeping organisation simple.</p></div>
+                </div>
+                <h3>Challenge 2 — How can discussions remain inclusive?</h3>
+                <div class="cs-decision-grid">
+                    <div class="cs-decision"><h3>Single group chat</h3><h4>Rejected</h4><p>Creates spoiler risks.</p></div>
+                    <div class="cs-decision"><h3>Separate channels</h3><h4>Rejected</h4><p>Creates unnecessary complexity.</p></div>
+                    <div class="cs-decision" style="border-color:rgba(9,27,217,0.5);background:rgba(9,27,217,0.04);"><h3>Progress-based discussions</h3><h4 style="color:#000;">Selected</h4><p>Balances safety and participation.</p></div>
+                </div>
+                <h3>Information Architecture</h3>
+                <p>Before designing individual screens, I mapped the product structure to ensure the experience followed a clear reading journey.</p>
+                <div class="cs-flow">
+                    <span class="cs-flow-step">Library</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Nominate</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Vote</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Book of the Month</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Progress</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Discussion</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Reviews</span>
+                </div>
+                <img class="cs-img-real" src="../images/book-club/Sitemap-information-architecture-complete-user-flow.png" alt="Sitemap — information architecture and complete user flow">
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">08</div>
+                <h2>Key Design Decisions</h2>
+                <div class="cs-card">
+                    <h3>Collaborative Voting</h3>
+                    <p><strong>Problem:</strong> Members felt disconnected from book selection.</p>
+                    <p><strong>Solution:</strong> Members nominate books and vote together.</p>
+                    <p><strong>Impact:</strong> Creates shared ownership of the selection process.</p>
+                    <img class="cs-img-real" src="../images/book-club/voting-screen.png" alt="Voting screen" style="margin-top:16px;margin-bottom:0;">
+                </div>
+                <div class="cs-card">
+                    <h3>Reading Progress</h3>
+                    <p><strong>Problem:</strong> Readers progress differently.</p>
+                    <p><strong>Solution:</strong> Simple statuses — Want to Read · Reading · Finished.</p>
+                    <p><strong>Impact:</strong> Creates visibility without pressure.</p>
+                    <img class="cs-img-real" src="../images/book-club/reading-progress.png" alt="Reading progress status component" style="margin-top:16px;margin-bottom:0;">
+                </div>
+                <div class="cs-card">
+                    <h3>Spoiler Protection</h3>
+                    <p><strong>Problem:</strong> Readers avoid discussions when behind.</p>
+                    <p><strong>Solution:</strong> Discussion access adapts to reading progress.</p>
+                    <p><strong>Trade-off:</strong> Less immediate conversation, but a safer experience.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">09</div>
+                <h2>Usability Testing</h2>
+                <p>5 new participants (different from the research phase) were asked to complete three core tasks to validate workflow understanding, action clarity, and feature usefulness.</p>
+                <div class="cs-table-wrap">
+                    <table class="cs-table">
+                        <thead><tr><th>Task</th><th>Success rate</th></tr></thead>
+                        <tbody>
+                            <tr><td>Nominate a book</td><td>4 / 5</td></tr>
+                            <tr><td>Vote for a book</td><td>3 / 5</td></tr>
+                            <tr><td>Join discussion</td><td>3 / 5</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cs-test-item">
+                    <h3>Task 1 — Nominate a Book</h3>
+                    <p><strong>Problem:</strong> Users confused “Save” with “Nominate”.</p>
+                    <p><strong>Iteration:</strong> Changed CTA label from <em>Save</em> to <em>Nominate for Club</em> and added confirmation feedback.</p>
+                </div>
+                <div class="cs-test-item">
+                    <h3>Task 2 — Vote for a Book</h3>
+                    <p><strong>Problem:</strong> Voting rules were unclear.</p>
+                    <p><strong>Iteration:</strong> Added remaining vote count, deadline information, and inline instructions.</p>
+                </div>
+                <div class="cs-test-item">
+                    <h3>Task 3 — Join Discussion</h3>
+                    <p><strong>Problem:</strong> Users understood restrictions but wanted more explanation.</p>
+                    <p><strong>Iteration:</strong> Added contextual message: <em>“Finish the book to join the conversation and avoid spoilers.”</em></p>
+                </div>
+                <h3>Impact of Iterations</h3>
+                <p>After iterations, users understood the purpose of each workflow more quickly, voting rules became clearer, and spoiler protection required less explanation.</p>
+                <div class="cs-callout">
+                    <p>Small changes in wording and visibility significantly improved usability. The final prototype better supported the original goal: creating a collaborative reading experience without adding organisational complexity.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">10</div>
+                <h2>Accessibility Considerations</h2>
+                <div class="cs-a11y-grid">
+                    <div class="cs-a11y-item"><h4>Colour</h4><p>Checked contrast ratios. Avoided colour-only communication.</p></div>
+                    <div class="cs-a11y-item"><h4>Typography</h4><p>Clear hierarchy and readable text sizes throughout.</p></div>
+                    <div class="cs-a11y-item"><h4>Interaction</h4><p>Clear states for selections, progress, locked discussions, and voting.</p></div>
+                    <div class="cs-a11y-item"><h4>Responsive</h4><p>Layouts adapted for desktop and mobile screens.</p></div>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">11</div>
+                <h2>Technical Considerations</h2>
+                <p>Because this project was developed as a functional prototype, technical constraints influenced design decisions. The goal was not only to design an ideal experience, but also to validate whether the experience could realistically be implemented.</p>
+                <h3>Real-Time Collaboration</h3>
+                <p>Firebase supported authentication, user data, and real-time updates — allowing collaborative features to behave closer to a real product experience.</p>
+                <h3>Book Data</h3>
+                <p>Book APIs introduced challenges around metadata availability, category inconsistencies, and different data formats. These limitations influenced how book information was displayed and filtered.</p>
+                <h3>Frontend Architecture</h3>
+                <p>Implemented with React, TypeScript, and Tailwind CSS. A component-based approach allowed faster iteration between design and implementation, supporting UX validation without becoming the focus of the product experience.</p>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">12</div>
+                <h2>Reflection</h2>
+                <p>README Club taught me that designing community products is not simply about adding social features. The challenge was balancing autonomy vs responsibility, motivation vs pressure, and openness vs spoiler protection.</p>
+                <p>The project strengthened my ability to transform research into insights, insights into design decisions, and design decisions into a validated product experience.</p>
+            </div>
+
+        </article>
+
+        <!-- ══ FRENCH ══ -->
+        <article class="cs-article" id="article-fr" hidden>
+
+            <div class="cs-hero">
+                <span class="cs-tag">Étude de Cas UI/UX</span>
+                <h1>README Club</h1>
+                <p class="cs-hero-sub">Concevoir une expérience de lecture collaborative qui aide les clubs de lecture à découvrir, décider, lire et discuter ensemble.</p>
+                <img class="cs-img-real" src="../images/book-club/Hero-mockup-desktop-mobile-homepage.png" alt="README Club — maquette homepage desktop et mobile" style="margin-bottom:0;">
+            </div>
+
+            <div class="cs-meta">
+                <div class="cs-meta-item">
+                    <label>Rôle</label>
+                    <p>Designer Produit · Chercheuse UX · Développeuse Frontend</p>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Durée</label>
+                    <p>4 semaines</p>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Design</label>
+                    <ul><li>Figma</li><li>FigJam</li></ul>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Développement</label>
+                    <ul><li>React · TypeScript</li><li>Firebase · Tailwind CSS</li></ul>
+                </div>
+                <div class="cs-meta-item">
+                    <label>Liens</label>
+                    <ul>
+                        <li><a href="https://aria-vero-s.github.io/book-club/" target="_blank" rel="noopener noreferrer" style="color:#091bd9;">Site en ligne ↗</a></li>
+                        <li><a href="https://github.com/Aria-vero-s/book-club" target="_blank" rel="noopener noreferrer" style="color:#091bd9;">GitHub ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">01</div>
+                <h2>Aperçu du Projet</h2>
+                <h3>Le Défi</h3>
+                <p>Les clubs de lecture créent des liens sociaux significatifs, mais de nombreux groupes s’appuient encore sur des outils déconnectés :</p>
+                <ul>
+                    <li>WhatsApp pour les discussions</li>
+                    <li>Google Forms pour les votes</li>
+                    <li>Tableurs pour le suivi</li>
+                    <li>Goodreads pour la découverte</li>
+                </ul>
+                <p>Ces outils résolvent des problèmes individuels, mais ne soutiennent pas le parcours complet d’un club de lecture. Les membres doivent souvent recréer manuellement une expérience qui devrait se sentir connectée :</p>
+                <div class="cs-flow">
+                    <span class="cs-flow-step">Découvrir</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Nommer</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Voter</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Lire</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Discuter</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Critiquer</span>
+                </div>
+                <div class="cs-callout">
+                    <p>Comment créer une seule plateforme qui aide les lecteurs à participer à un club de lecture tout en respectant leurs habitudes et horaires de lecture différents ?</p>
+                </div>
+                <h3>La Solution</h3>
+                <p>README Club est une plateforme de lecture communautaire conçue pour centraliser l’expérience complète d’un club de lecture. La plateforme permet aux membres de découvrir et suggérer des livres, voter collectivement, suivre leur progression de lecture, participer à des discussions sans risque de spoilers, et partager avis et réflexions.</p>
+                <p>L’objectif n’était pas de remplacer les plateformes de lecture individuelles, mais de créer la couche collaborative manquante entre elles.</p>
+                <h3>Processus de Design</h3>
+                <p>Le projet a suivi une approche de conception centrée sur l’utilisateur :</p>
+                <div class="cs-flow">
+                    <span class="cs-flow-step">Recherche</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Définir</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Idéer</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Prototyper</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Tester</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Itérer</span>
+                </div>
+                <img class="cs-img-real" src="../images/book-club/UX-process-timeline.png" alt="Calendrier du processus UX">
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">02</div>
+                <h2>Comprendre le Problème</h2>
+                <p>Avant de mener des recherches, j’ai identifié des hypothèses à valider.</p>
+                <div class="cs-card">
+                    <div class="cs-label">Hypothèse 1</div>
+                    <h3>La sélection des livres est souvent contrôlée par un petit nombre de membres.</h3>
+                    <p><strong>Impact potentiel :</strong> Certains membres peuvent se sentir déconnectés des décisions du groupe.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Hypothèse 2</div>
+                    <h3>La responsabilité sociale peut influencer la motivation à lire.</h3>
+                    <p><strong>Impact potentiel :</strong> Les lecteurs sont plus susceptibles de terminer les livres lorsqu’ils partagent l’expérience avec d’autres.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Hypothèse 3</div>
+                    <h3>Les outils de discussion existants ne s’adaptent pas aux différentes vitesses de lecture.</h3>
+                    <p><strong>Impact potentiel :</strong> Les lecteurs peuvent éviter les conversations à cause des spoilers ou parce qu’ils se sentent en retard.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">03</div>
+                <h2>Analyse Concurrentielle</h2>
+                <p>L’objectif était de comprendre comment les produits existants soutiennent la découverte de livres, le suivi de lecture, les interactions communautaires, les discussions et l’organisation de groupe.</p>
+                <img class="cs-img-real" src="../images/book-club/Competitive-analysis-matrix.png" alt="Matrice d’analyse concurrentielle">
+                <p class="cs-img-caption">Comparaison de cinq plateformes selon cinq dimensions</p>
+                <h3>Résultat 1 — Les plateformes existantes résolvent des problèmes individuels</h3>
+                <p>Goodreads et StoryGraph sont efficaces pour découvrir et suivre des livres. Cependant, les activités collaboratives telles que choisir des livres, suivre la progression du groupe et organiser des discussions se déroulent généralement ailleurs.</p>
+                <h3>Résultat 2 — Les clubs de lecture dépendent fortement de l’organisation manuelle</h3>
+                <p>Les membres combinent plusieurs outils pour recréer une seule expérience.</p>
+                <div class="cs-callout">
+                    <p><strong>Opportunité :</strong> Créer un flux de travail dédié où l’intégralité du parcours du club de lecture existe en un seul endroit.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">04</div>
+                <h2>Recherche Utilisateur</h2>
+                <p>5 entretiens semi-directifs ont été conduits à distance, de 20 minutes chacun. Les participants ont été encouragés à décrire des expériences réelles plutôt que des opinions hypothétiques.</p>
+                <h4>Critères de recrutement</h4>
+                <ul>
+                    <li>Lit au moins 5 livres par an</li>
+                    <li>A participé à un club de lecture ou une communauté de lecture</li>
+                    <li>A utilisé au moins une plateforme liée à la lecture</li>
+                </ul>
+                <div class="cs-table-wrap">
+                    <table class="cs-table">
+                        <thead><tr><th>ID</th><th>Profil</th><th>Comportement</th></tr></thead>
+                        <tbody>
+                            <tr><td>P1</td><td>Membre d’un club de lecture mensuel</td><td>Lit 15 livres/an</td></tr>
+                            <tr><td>P2</td><td>Membre d’un club de lecture de bibliothèque</td><td>Lit 20 livres/an</td></tr>
+                            <tr><td>P3</td><td>Lecteur solo fréquent</td><td>Lit 30 livres/an</td></tr>
+                            <tr><td>P4</td><td>Utilisateur Goodreads</td><td>Lit 15 livres/an</td></tr>
+                            <tr><td>P5</td><td>Lecteur occasionnel</td><td>Lit 5 livres/an</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <img class="cs-img-real" src="../images/book-club/FigJam-board-interview-notes-quotes-affinity-mapping.png" alt="Tableau FigJam — notes d’entretien, citations et cartographie par affinité">
+                <p>Quatre grands thèmes ont émergé de l’analyse : la sélection des livres, la motivation à lire, l’anxiété des spoilers et les outils fragmentés.</p>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">05</div>
+                <h2>Insights de Recherche</h2>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 1</div>
+                    <h3>Les lecteurs veulent de l’influence sans responsabilités supplémentaires</h3>
+                    <p>3/5 participants ont décrit la sélection des livres comme contrôlée par les organisateurs.</p>
+                    <blockquote><p>« En général, une seule personne suggère les livres car quelqu’un doit tout organiser. »</p></blockquote>
+                    <blockquote><p>« J’influence rarement ce que le groupe lit. »</p></blockquote>
+                    <p><strong>Opportunité de conception :</strong> Créer une participation légère via des nominations et des votes.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 2</div>
+                    <h3>La motivation vient de la connexion sociale</h3>
+                    <p>3/5 participants ont mentionné que les réunions ou discussions les aidaient à terminer les livres.</p>
+                    <blockquote><p>« Savoir qu’une réunion approche m’aide à finir. »</p></blockquote>
+                    <p><strong>Opportunité de conception :</strong> Créer une visibilité de la progression sans pression.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 3</div>
+                    <h3>Les lecteurs ont besoin de discussions sans spoilers</h3>
+                    <p>4/5 participants ont mentionné éviter les discussions lorsqu’ils étaient en retard.</p>
+                    <blockquote><p>« Quelqu’un a mentionné la fin sans réaliser que j’étais en retard. »</p></blockquote>
+                    <p><strong>Opportunité de conception :</strong> Adapter les discussions en fonction de la progression de lecture.</p>
+                </div>
+                <div class="cs-card">
+                    <div class="cs-label">Insight 4</div>
+                    <h3>L’expérience est fragmentée</h3>
+                    <p>5/5 participants utilisaient plusieurs plateformes.</p>
+                    <blockquote><p>« WhatsApp fonctionne, mais les conversations deviennent désordonnées. »</p></blockquote>
+                    <p><strong>Opportunité de conception :</strong> Créer un environnement de lecture connecté.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">06</div>
+                <h2>Personas Basées sur la Recherche</h2>
+                <p>Les personas ont été créées en combinant des schémas observés lors des entretiens plutôt qu’en représentant des participants individuels.</p>
+                <div class="cs-persona-grid">
+                    <div class="cs-persona">
+                        <div class="cs-persona-name">Claire</div>
+                        <div class="cs-persona-role">Coordinatrice d’un club de lecture, 36 ans &middot; Basée sur P1 + P2</div>
+                        <blockquote><p>« Quelqu’un doit tout organiser. »</p></blockquote>
+                        <h4>Objectifs</h4><ul><li>Maintenir le club actif</li><li>Réduire l’effort administratif</li></ul>
+                        <h4>Points de friction</h4><ul><li>Tout organiser seule</li><li>Faible participation</li></ul>
+                        <h4>Besoins</h4><ul><li>Structure</li><li>Automatisation</li><li>Responsabilité partagée</li></ul>
+                    </div>
+                    <div class="cs-persona">
+                        <div class="cs-persona-name">Emma</div>
+                        <div class="cs-persona-role">Lectrice occasionnelle, 28 ans &middot; Basée sur P3 + P5</div>
+                        <blockquote><p>« Je ne veux pas une obligation de plus. »</p></blockquote>
+                        <h4>Objectifs</h4><ul><li>Participer sans pression</li></ul>
+                        <h4>Points de friction</h4><ul><li>Se sentir exclue</li><li>Difficulté à suivre le rythme</li></ul>
+                        <h4>Besoins</h4><ul><li>Flexibilité</li><li>Suivi de progression simple</li></ul>
+                    </div>
+                    <div class="cs-persona">
+                        <div class="cs-persona-name">Lucas</div>
+                        <div class="cs-persona-role">Lecteur actif, 30 ans &middot; Basé sur P3 + P4</div>
+                        <blockquote><p>« Je veux que mes recommandations comptent. »</p></blockquote>
+                        <h4>Objectifs</h4><ul><li>Influencer les choix du groupe</li></ul>
+                        <h4>Points de friction</h4><ul><li>Contribution limitée aux décisions</li></ul>
+                        <h4>Besoins</h4><ul><li>Découverte</li><li>Reconnaissance</li><li>Contribution</li></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">07</div>
+                <h2>Idéation &amp; Exploration du Design</h2>
+                <h3>Défi 1 — Comment les membres peuvent-ils contribuer sans alourdir l’organisation ?</h3>
+                <div class="cs-decision-grid">
+                    <div class="cs-decision"><h3>Sélection par l’admin</h3><h4>Rejeté</h4><p>Crée un public passif.</p></div>
+                    <div class="cs-decision"><h3>Sélection aléatoire</h3><h4>Rejeté</h4><p>Retire l’appropriation communautaire.</p></div>
+                    <div class="cs-decision" style="border-color:rgba(9,27,217,0.5);background:rgba(9,27,217,0.04);"><h3>Nomination collaborative</h3><h4 style="color:#000;">Sélectionné</h4><p>Permet la participation tout en simplifiant l’organisation.</p></div>
+                </div>
+                <h3>Défi 2 — Comment les discussions peuvent-elles rester inclusives ?</h3>
+                <div class="cs-decision-grid">
+                    <div class="cs-decision"><h3>Chat de groupe unique</h3><h4>Rejeté</h4><p>Crée des risques de spoilers.</p></div>
+                    <div class="cs-decision"><h3>Canaux séparés</h3><h4>Rejeté</h4><p>Crée une complexité inutile.</p></div>
+                    <div class="cs-decision" style="border-color:rgba(9,27,217,0.5);background:rgba(9,27,217,0.04);"><h3>Discussions par progression</h3><h4 style="color:#000;">Sélectionné</h4><p>Équilibre sécurité et participation.</p></div>
+                </div>
+                <h3>Architecture de l’Information</h3>
+                <p>Avant de concevoir les écrans individuels, j’ai cartographié la structure du produit pour m’assurer que l’expérience suivait un parcours de lecture clair.</p>
+                <div class="cs-flow">
+                    <span class="cs-flow-step">Bibliothèque</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Nommer</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Voter</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Livre du Mois</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Progression</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Discussion</span><span class="cs-flow-arrow">→</span>
+                    <span class="cs-flow-step">Critiques</span>
+                </div>
+                <img class="cs-img-real" src="../images/book-club/Sitemap-information-architecture-complete-user-flow.png" alt="Plan du site — architecture de l’information et flux utilisateur complet">
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">08</div>
+                <h2>Décisions Clés de Design</h2>
+                <div class="cs-card">
+                    <h3>Vote Collaboratif</h3>
+                    <p><strong>Problème :</strong> Les membres se sentaient déconnectés de la sélection des livres.</p>
+                    <p><strong>Solution :</strong> Les membres nominent des livres et votent ensemble.</p>
+                    <p><strong>Impact :</strong> Crée une appropriation partagée du processus de sélection.</p>
+                    <img class="cs-img-real" src="../images/book-club/voting-screen.png" alt="Écran de vote" style="margin-top:16px;margin-bottom:0;">
+                </div>
+                <div class="cs-card">
+                    <h3>Progression de Lecture</h3>
+                    <p><strong>Problème :</strong> Les lecteurs progressent différemment.</p>
+                    <p><strong>Solution :</strong> Statuts simples — À lire · En cours · Terminé.</p>
+                    <p><strong>Impact :</strong> Crée une visibilité sans pression.</p>
+                    <img class="cs-img-real" src="../images/book-club/reading-progress.png" alt="Composant de statut de progression de lecture" style="margin-top:16px;margin-bottom:0;">
+                </div>
+                <div class="cs-card">
+                    <h3>Protection contre les Spoilers</h3>
+                    <p><strong>Problème :</strong> Les lecteurs évitent les discussions lorsqu’ils sont en retard.</p>
+                    <p><strong>Solution :</strong> L’accès aux discussions s’adapte à la progression de lecture.</p>
+                    <p><strong>Compromis :</strong> Moins de conversations immédiates, mais une expérience plus sûre.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">09</div>
+                <h2>Tests d’Utilisabilité</h2>
+                <p>5 nouveaux participants (différents de la phase de recherche) ont été invités à compléter trois tâches principales pour valider la compréhension des flux, la clarté des actions et l’utilité des fonctionnalités.</p>
+                <div class="cs-table-wrap">
+                    <table class="cs-table">
+                        <thead><tr><th>Tâche</th><th>Taux de succès</th></tr></thead>
+                        <tbody>
+                            <tr><td>Nommer un livre</td><td>4 / 5</td></tr>
+                            <tr><td>Voter pour un livre</td><td>3 / 5</td></tr>
+                            <tr><td>Rejoindre une discussion</td><td>3 / 5</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cs-test-item">
+                    <h3>Tâche 1 — Nommer un Livre</h3>
+                    <p><strong>Problème :</strong> Les utilisateurs confondaient « Enregistrer » avec « Nommer ».</p>
+                    <p><strong>Itération :</strong> L’étiquette du CTA a été changée de <em>Enregistrer</em> à <em>Nommer pour le Club</em> et un retour de confirmation a été ajouté.</p>
+                </div>
+                <div class="cs-test-item">
+                    <h3>Tâche 2 — Voter pour un Livre</h3>
+                    <p><strong>Problème :</strong> Les règles de vote n’étaient pas claires.</p>
+                    <p><strong>Itération :</strong> Ajout du nombre de votes restants, des informations sur la date limite et des instructions intégrées.</p>
+                </div>
+                <div class="cs-test-item">
+                    <h3>Tâche 3 — Rejoindre une Discussion</h3>
+                    <p><strong>Problème :</strong> Les utilisateurs comprenaient les restrictions mais voulaient plus d’explications.</p>
+                    <p><strong>Itération :</strong> Ajout d’un message contextuel : <em>« Terminez le livre pour rejoindre la conversation et éviter les spoilers. »</em></p>
+                </div>
+                <h3>Impact des Itérations</h3>
+                <p>Après les itérations, les utilisateurs ont compris le but de chaque flux plus rapidement, les règles de vote sont devenues plus claires et la protection contre les spoilers a nécessité moins d’explications.</p>
+                <div class="cs-callout">
+                    <p>De petits changements dans la formulation et la visibilité ont significativement amélioré l’utilisabilité. Le prototype final a mieux soutenu l’objectif initial : créer une expérience de lecture collaborative sans ajouter de complexité organisationnelle.</p>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">10</div>
+                <h2>Considérations d’Accessibilité</h2>
+                <div class="cs-a11y-grid">
+                    <div class="cs-a11y-item"><h4>Couleur</h4><p>Ratios de contraste vérifiés. Communication non basée uniquement sur la couleur.</p></div>
+                    <div class="cs-a11y-item"><h4>Typographie</h4><p>Hiérarchie claire et tailles de texte lisibles.</p></div>
+                    <div class="cs-a11y-item"><h4>Interaction</h4><p>États clairs pour les sélections, la progression, les discussions verrouillées et les votes.</p></div>
+                    <div class="cs-a11y-item"><h4>Responsive</h4><p>Mises en page adaptées aux écrans desktop et mobile.</p></div>
+                </div>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">11</div>
+                <h2>Considérations Techniques</h2>
+                <p>Ce projet ayant été développé comme un prototype fonctionnel, les contraintes techniques ont influencé les décisions de design. L’objectif n’était pas seulement de concevoir une expérience idéale, mais aussi de valider si cette expérience pouvait être réalistement implémentée.</p>
+                <h3>Collaboration en Temps Réel</h3>
+                <p>Firebase a pris en charge l’authentification, les données utilisateur et les mises à jour en temps réel — permettant aux fonctionnalités collaboratives de se comporter de manière plus proche d’un vrai produit.</p>
+                <h3>Données des Livres</h3>
+                <p>Les API de livres ont introduit des défis liés à la disponibilité des métadonnées, aux incohérences des catégories et aux différents formats de données. Ces limitations ont influencé la façon dont les informations sur les livres étaient affichées et filtrées.</p>
+                <h3>Architecture Frontend</h3>
+                <p>Implémenté avec React, TypeScript et Tailwind CSS. Une approche basée sur les composants a permis une itération plus rapide entre le design et l’implémentation, soutenant la validation UX sans que cela devienne le centre de l’expérience produit.</p>
+            </div>
+
+            <div class="cs-section">
+                <div class="cs-section-num">12</div>
+                <h2>Réflexion</h2>
+                <p>README Club m’a appris que concevoir des produits communautaires ne consiste pas simplement à ajouter des fonctionnalités sociales. Le défi était d’équilibrer : autonomie vs responsabilité, motivation vs pression, et ouverture vs protection contre les spoilers.</p>
+                <p>Ce projet a renforcé ma capacité à transformer la recherche en insights, les insights en décisions de design, et les décisions de design en une expérience produit validée.</p>
+            </div>
+
+        </article>
+
+    </div>
+
+    <script>
+        function toggleLang() {
+            var en = document.getElementById('article-en');
+            var fr = document.getElementById('article-fr');
+            var btn = document.getElementById('lang-toggle');
+            if (en.hidden) {
+                en.hidden = false;
+                fr.hidden = true;
+                btn.textContent = 'FR';
+                document.documentElement.lang = 'en';
+            } else {
+                en.hidden = true;
+                fr.hidden = false;
+                btn.textContent = 'EN';
+                document.documentElement.lang = 'fr';
+            }
+        }
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -17,13 +17,24 @@ const sections = [
 const portfolioItems = {
     en: [
         {
+            title: 'README Club',
+            type: 'Full-Stack Web App',
+            description: 'A monthly book club platform where members discover, vote on, and read books together.',
+            image: 'images/book-club.png',
+            liveLink: 'https://aria-vero-s.github.io/book-club/',
+            githubLink: 'https://github.com/Aria-vero-s/book-club',
+            icon: 'book-open',
+            slug: 'book-club'
+        },
+        {
             title: 'BigWatts',
             type: 'Full-Stack Web App',
             description: 'A green energy marketplace connecting certified providers with property owners. Built with Django, React, and PostgreSQL.',
             image: 'images/bigwatts.png',
             liveLink: 'https://bigwatts.vercel.app/',
             githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
-            icon: 'zap'
+            icon: 'zap',
+            slug: 'bigwatts'
         },
         {
             title: 'Freelancer Portfolio',
@@ -32,7 +43,8 @@ const portfolioItems = {
             image: 'images/freelancer-portfolio.png',
             liveLink: 'https://love-innovations.com/',
             githubLink: '',
-            icon: 'briefcase'
+            icon: 'briefcase',
+            slug: 'freelancer-portfolio'
         },
         {
             title: 'Music Festival',
@@ -41,7 +53,8 @@ const portfolioItems = {
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
             githubLink: '',
-            icon: 'music'
+            icon: 'music',
+            slug: 'music-festival'
         },
         {
             title: 'Python Quiz App',
@@ -50,7 +63,8 @@ const portfolioItems = {
             image: 'images/python.png',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/enviro',
-            icon: 'code'
+            icon: 'code',
+            slug: 'python-quiz'
         },
         {
             title: 'C Arcade Game',
@@ -59,7 +73,8 @@ const portfolioItems = {
             image: 'images/game.png',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/so_long',
-            icon: 'code'
+            icon: 'code',
+            slug: 'arcade-game'
         },
         {
             title: 'Linear Regression AI Project',
@@ -68,10 +83,21 @@ const portfolioItems = {
             image: '',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/linear-regression',
-            icon: 'brain'
-        }
+            icon: 'brain',
+            slug: 'linear-regression'
+        },
     ],
     fr: [
+        {
+            title: 'README Club',
+            type: 'Application Web Full-Stack',
+            description: 'Une plateforme de club de lecture mensuel où les membres découvrent, votent et lisent des livres ensemble.',
+            image: 'images/book-club.png',
+            liveLink: 'https://aria-vero-s.github.io/book-club/',
+            githubLink: 'https://github.com/Aria-vero-s/book-club',
+            icon: 'book-open',
+            slug: 'book-club'
+        },
         {
             title: 'BigWatts',
             type: 'Application Web Full-Stack',
@@ -79,7 +105,8 @@ const portfolioItems = {
             image: 'images/bigwatts.png',
             liveLink: 'https://bigwatts.vercel.app/',
             githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
-            icon: 'zap'
+            icon: 'zap',
+            slug: 'bigwatts'
         },
         {
             title: 'Portfolio Freelance',
@@ -88,7 +115,8 @@ const portfolioItems = {
             image: 'images/freelancer-portfolio.png',
             liveLink: 'https://love-innovations.com/',
             githubLink: '',
-            icon: 'briefcase'
+            icon: 'briefcase',
+            slug: 'freelancer-portfolio'
         },
         {
             title: 'Festival de Musique',
@@ -97,7 +125,8 @@ const portfolioItems = {
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
             githubLink: '',
-            icon: 'music'
+            icon: 'music',
+            slug: 'music-festival'
         },
         {
             title: 'Application Quiz Python',
@@ -106,7 +135,8 @@ const portfolioItems = {
             image: 'images/python.png',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/enviro',
-            icon: 'code'
+            icon: 'code',
+            slug: 'python-quiz'
         },
         {
             title: 'Jeu d\'Arcade en C',
@@ -115,7 +145,8 @@ const portfolioItems = {
             image: 'images/game.png',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/so_long',
-            icon: 'code'
+            icon: 'code',
+            slug: 'arcade-game'
         },
         {
             title: 'Projet IA Régression Linéaire',
@@ -124,8 +155,9 @@ const portfolioItems = {
             image: '',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/linear-regression',
-            icon: 'brain'
-        }
+            icon: 'brain',
+            slug: 'linear-regression'
+        },
     ]
 };
 
@@ -173,8 +205,7 @@ const content = {
         },
         portfolio: {
             title: 'Portfolio',
-            liveDemo: 'Live Demo',
-            viewCode: 'GitHub'
+            viewProject: 'View Project'
         },
         contact: {
             title: 'Get In Touch',
@@ -213,8 +244,7 @@ const content = {
         },
         portfolio: {
             title: 'Portfolio',
-            liveDemo: 'Démo Live',
-            viewCode: 'GitHub'
+            viewProject: 'Voir le Projet'
         },
         contact: {
             title: 'Contactez-Moi',
@@ -691,24 +721,24 @@ function createPortfolioHTML() {
 
     const portfolioItemHTML = (item) => `
         <div class="portfolio-item" data-title="${item.title}">
-            <div class="portfolio-thumbnail">
-                <div class="portfolio-icon-container">
-                    <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                </div>
+            <a href="projects/${item.slug}.html" class="portfolio-thumbnail-link">
+                <div class="portfolio-thumbnail">
+                    <div class="portfolio-icon-container">
+                        <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                    </div>
 
-                <div class="portfolio-preview">
-                    ${item.image ? `
-                        ${item.liveLink ? `<a href="${item.liveLink}" target="_blank" rel="noopener noreferrer">` : ''}
+                    <div class="portfolio-preview">
+                        ${item.image ? `
                             <img src="${item.image}" alt="${item.title}" loading="lazy">
-                        ${item.liveLink ? `</a>` : ''}
-                    ` : `
-                        <div class="portfolio-placeholder">
-                            <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                            <span>Work in Progress</span>
-                        </div>
-                    `}
+                        ` : `
+                            <div class="portfolio-placeholder">
+                                <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                                <span>Work in Progress</span>
+                            </div>
+                        `}
+                    </div>
                 </div>
-            </div>
+            </a>
 
             <div class="portfolio-content">
                 <h3 class="portfolio-title">${item.title}</h3>
@@ -716,19 +746,10 @@ function createPortfolioHTML() {
                 <p class="portfolio-description">${item.description}</p>
 
                 <div class="portfolio-buttons">
-                    ${item.liveLink ? `
-                        <a href="${item.liveLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            <i data-lucide="external-link"></i>
-                            ${t.portfolio.liveDemo}
-                        </a>
-                    ` : ''}
-
-                    ${item.githubLink ? `
-                        <a href="${item.githubLink}" target="_blank" rel="noopener noreferrer" class="btn btn-outline ${!item.liveLink ? 'single' : ''}">
-                            <i data-lucide="github"></i>
-                            ${t.portfolio.viewCode}
-                        </a>
-                    ` : ''}
+                    <a href="projects/${item.slug}.html" class="btn btn-primary single">
+                        <i data-lucide="arrow-right"></i>
+                        ${t.portfolio.viewProject}
+                    </a>
                 </div>
             </div>
         </div>
@@ -744,7 +765,7 @@ function createPortfolioHTML() {
                     ${items.map(item => portfolioItemHTML(item)).join('')}
                 </div>
 
-                <!-- Tablet: 2 + 2 + 2 -->
+                <!-- Tablet: 2 + 2 + 2 + 1 -->
                 <div class="portfolio-tablet">
                     <div class="portfolio-tablet-row-1">
                         ${items.slice(0, 2).map(item => portfolioItemHTML(item)).join('')}
@@ -757,9 +778,14 @@ function createPortfolioHTML() {
                     <div class="portfolio-tablet-row-2">
                         ${items.slice(4, 6).map(item => portfolioItemHTML(item)).join('')}
                     </div>
+
+                    ${items.length > 6 ? `
+                    <div class="portfolio-tablet-row-3">
+                        ${items.slice(6).map(item => portfolioItemHTML(item)).join('')}
+                    </div>` : ''}
                 </div>
 
-                <!-- Desktop: 3 + 3 -->
+                <!-- Desktop: 3 + 3 + 1 -->
                 <div class="portfolio-desktop">
                     <div class="portfolio-desktop-row-1">
                         ${items.slice(0, 3).map(item => portfolioItemHTML(item)).join('')}
@@ -768,6 +794,11 @@ function createPortfolioHTML() {
                     <div class="portfolio-desktop-row-1">
                         ${items.slice(3, 6).map(item => portfolioItemHTML(item)).join('')}
                     </div>
+
+                    ${items.length > 6 ? `
+                    <div class="portfolio-desktop-row-last">
+                        ${items.slice(6).map(item => portfolioItemHTML(item)).join('')}
+                    </div>` : ''}
                 </div>
             </div>
         </div>
@@ -936,6 +967,13 @@ function setupEventListeners() {
 function init() {
     // Setup event listeners
     setupEventListeners();
+
+    // Check if a specific section was requested via URL param (e.g. ?section=portfolio)
+    const params = new URLSearchParams(window.location.search);
+    const requestedSection = params.get('section');
+    if (requestedSection && sections.some(s => s.id === requestedSection)) {
+        currentSection = requestedSection;
+    }
 
     // Ensure initial clip-path state is correct
     const currentContainer = document.getElementById('sectionCurrent');

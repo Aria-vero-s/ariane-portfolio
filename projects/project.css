@@ -1,0 +1,461 @@
+/* ── Coming Soon ── */
+.project-page {
+    min-height: 100vh;
+    background-color: #f5f1f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 96px 16px;
+}
+.project-coming-soon {
+    text-align: center;
+}
+.project-coming-soon h1 {
+    font-size: 3rem;
+    color: #091bd9;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+.project-coming-soon p {
+    font-size: 1.25rem;
+    color: #000;
+}
+
+/* ── Page shell ── */
+.cs-page {
+    background: #f5f1f0;
+    min-height: 100vh;
+    padding-top: 120px;
+    padding-bottom: 96px;
+}
+
+/* ── Article container ── */
+.cs-article {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ── Hero ── */
+.cs-hero {
+    margin-bottom: 64px;
+}
+.cs-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #091bd9;
+    border: 1px solid rgba(9,27,217,0.35);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+}
+.cs-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 500;
+    color: #091bd9;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+.cs-hero-sub {
+    font-size: 1.15rem;
+    color: #000;
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+.cs-hero-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(9,27,217,0.06);
+    border: 1px solid rgba(9,27,217,0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(9,27,217,0.35);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+}
+
+/* ── Meta strip ── */
+.cs-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(9,27,217,0.15);
+    border-bottom: 1px solid rgba(9,27,217,0.15);
+    margin-bottom: 64px;
+}
+.cs-meta-item label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 6px;
+}
+.cs-meta-item p, .cs-meta-item ul {
+    font-size: 14px;
+    color: #000;
+    list-style: none;
+    line-height: 1.6;
+}
+
+/* ── Section ── */
+.cs-section {
+    margin-bottom: 72px;
+}
+.cs-section-num {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(9,27,217,0.5);
+    margin-bottom: 8px;
+}
+.cs-section > h2 {
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: #091bd9;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(9,27,217,0.15);
+}
+
+/* ── Sub-headings ── */
+.cs-article h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+.cs-article h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #091bd9;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ── Body text ── */
+.cs-article p {
+    font-size: 1rem;
+    color: #000;
+    line-height: 1.75;
+    margin-bottom: 16px;
+}
+.cs-article ul, .cs-article ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+.cs-article li {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+/* ── Blockquote ── */
+.cs-article blockquote {
+    margin: 24px 0;
+    padding: 18px 24px;
+    border-left: 3px solid #091bd9;
+    background: rgba(9,27,217,0.04);
+    border-radius: 0 6px 6px 0;
+}
+.cs-article blockquote p {
+    font-size: 1rem;
+    font-style: italic;
+    color: #000;
+    margin: 0;
+}
+
+/* ── Highlight box (HMW / opportunity) ── */
+.cs-callout {
+    background: rgba(9,27,217,0.06);
+    border: 1px solid rgba(9,27,217,0.2);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0;
+}
+.cs-callout p {
+    margin: 0;
+    font-size: 1rem;
+    color: #091bd9;
+    font-style: italic;
+}
+
+/* ── Image placeholder ── */
+.cs-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(9,27,217,0.05);
+    border: 1px solid rgba(9,27,217,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(9,27,217,0.4);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin: 24px 0;
+}
+.cs-img-caption {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(0,0,0,0.45);
+    margin-top: -14px;
+    margin-bottom: 24px;
+}
+
+/* ── Table ── */
+.cs-table-wrap {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(9,27,217,0.18);
+}
+.cs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.cs-table thead tr {
+    background: rgba(9,27,217,0.08);
+}
+.cs-table th {
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #091bd9;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.cs-table td {
+    padding: 10px 16px;
+    color: #000;
+    border-top: 1px solid rgba(9,27,217,0.1);
+}
+.cs-table tbody tr:nth-child(even) td {
+    background: rgba(9,27,217,0.02);
+}
+
+/* ── Persona cards ── */
+.cs-persona-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+.cs-persona {
+    background: #fff;
+    border: 1px solid rgba(9,27,217,0.2);
+    border-radius: 8px;
+    padding: 20px;
+}
+.cs-persona-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #091bd9;
+    margin-bottom: 2px;
+}
+.cs-persona-role {
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 12px;
+}
+.cs-persona blockquote {
+    margin: 0 0 12px 0;
+    padding: 10px 14px;
+    border-left: 2px solid #091bd9;
+    background: rgba(9,27,217,0.04);
+    border-radius: 0 4px 4px 0;
+}
+.cs-persona blockquote p {
+    font-size: 13px;
+}
+.cs-persona ul {
+    font-size: 13px;
+    padding-left: 16px;
+    margin-bottom: 8px;
+}
+.cs-persona li {
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+.cs-persona h4 {
+    font-size: 11px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+/* ── Design decision cards ── */
+.cs-decision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+.cs-decision {
+    background: #fff;
+    border: 1px solid rgba(9,27,217,0.2);
+    border-radius: 8px;
+    padding: 20px;
+}
+.cs-decision h3 {
+    margin-top: 0;
+    color: #091bd9;
+    font-size: 1rem;
+}
+.cs-decision h4 {
+    margin-top: 14px;
+}
+.cs-decision p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* ── Hypothesis & insight cards ── */
+.cs-card {
+    background: #fff;
+    border: 1px solid rgba(9,27,217,0.2);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+}
+.cs-card h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+.cs-card p {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.cs-card .cs-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(9,27,217,0.55);
+    margin-bottom: 4px;
+}
+
+/* ── Process flow ── */
+.cs-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+}
+.cs-flow-step {
+    background: rgba(9,27,217,0.08);
+    border: 1px solid rgba(9,27,217,0.2);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #091bd9;
+    white-space: nowrap;
+}
+.cs-flow-arrow {
+    color: rgba(9,27,217,0.4);
+    font-size: 16px;
+    padding: 0 6px;
+}
+
+/* ── Testing result row ── */
+.cs-test-item {
+    background: #fff;
+    border: 1px solid rgba(9,27,217,0.15);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+}
+.cs-test-item h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+.cs-test-item p {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* ── Divider ── */
+.cs-divider {
+    border: none;
+    border-top: 1px solid rgba(9,27,217,0.12);
+    margin: 40px 0;
+}
+
+/* ── Accessibility grid ── */
+.cs-a11y-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+}
+.cs-a11y-item {
+    background: #fff;
+    border: 1px solid rgba(9,27,217,0.15);
+    border-radius: 8px;
+    padding: 16px;
+}
+.cs-a11y-item h4 {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+.cs-a11y-item p {
+    font-size: 13px;
+    margin: 0;
+}
+
+/* ── Links ── */
+.cs-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+.cs-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.cs-links a.primary {
+    background: #091bd9;
+    color: #fff;
+}
+.cs-links a.primary:hover { background: #000; }
+.cs-links a.outline {
+    border: 1px solid rgba(9,27,217,0.4);
+    color: #091bd9;
+}
+.cs-links a.outline:hover { background: rgba(9,27,217,0.06); }
+.cs-links a i { width: 16px; height: 16px; }
+
+/* ── Real images ── */
+.cs-img-real {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin: 24px 0;
+    border: 1px solid rgba(9,27,217,0.1);
+}
