@@ -57,16 +57,6 @@ const portfolioItems = {
             slug: 'music-festival'
         },
         {
-            title: 'Python Quiz App',
-            type: 'Programming',
-            description: 'Terminal quiz with Google Sheets API integration.',
-            image: 'images/python.png',
-            liveLink: '',
-            githubLink: 'https://github.com/Aria-vero-s/enviro',
-            icon: 'code',
-            slug: 'python-quiz'
-        },
-        {
             title: 'C Arcade Game',
             type: 'Programming',
             description: 'A retro pixel arcade game made entirely with C programming.',
@@ -127,16 +117,6 @@ const portfolioItems = {
             githubLink: '',
             icon: 'music',
             slug: 'music-festival'
-        },
-        {
-            title: 'Application Quiz Python',
-            type: 'Programmation',
-            description: 'Quiz en terminal avec intégration de l\'API Google Sheets.',
-            image: 'images/python.png',
-            liveLink: '',
-            githubLink: 'https://github.com/Aria-vero-s/enviro',
-            icon: 'code',
-            slug: 'python-quiz'
         },
         {
             title: 'Jeu d\'Arcade en C',

@@ -77,9 +77,9 @@ The site supports English and French. Toggle switches language dynamically witho
 | Project Name           | Description                                | Live Link | GitHub |
 |------------------------|--------------------------------------------|-----------|--------|
 | Freelancer Portfolio   | Website for a freelance engineer           | [Live](https://love-innovations.com/) | –         |
-| Music Festival         | Elegant Music Festival Website             | [Live](https://fmclacbaker.com) | –         |
+| Music Festival         | Wordpress Music Festival Website             | [Live](https://fmclacbaker.com) | –         |
 | Marketplace Website    | Marketplace website for services           | (WIP)     | [Code](https://github.com/ariastoryreport-wq/bigwatts) |
-| Python Quiz App        | Terminal app with Google Sheets API        | –         | [Code](https://github.com/aria-vero-s/enviro) |
+| Book Club Website       | Book club with OpenBook API and GoogleBooks API        | –         | [Live](https://aria-vero-s.github.io/book-club/) |
 | C Arcade Game          | Retro arcade game written in C             | –         | [Code](https://github.com/aria-vero-s/so_long) |
 
 
