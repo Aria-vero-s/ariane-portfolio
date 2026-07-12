@@ -306,8 +306,14 @@ body {
 }
 
 .container {
-    max-width: 1152px;
+    max-width: 80%;
     margin: 0 auto;
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 50%;
+    }
 }
 
 .section-title {
@@ -325,7 +331,6 @@ body {
     border: 1px solid rgba(9, 27, 217, 0.3);
     border-radius: 8px;
     padding: 32px;
-    max-width: 1024px;
     margin: 0 auto;
 }
 
@@ -728,12 +733,6 @@ body {
     /* collapse extra top padding now that website-types sits above */
 }
 
-
-/* Contact Section */
-.contact-container {
-    max-width: 1024px;
-}
-
 .contact-subtitle {
     color: #000;
     margin-bottom: 32px;
@@ -743,21 +742,21 @@ body {
 
 .contact-buttons {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
     align-items: center;
     margin-bottom: 48px;
 }
 
+.contact-btn {
+    flex: 1 1 auto;
+}
+
 @media (min-width: 640px) {
     .contact-buttons {
         flex-direction: row;
     }
-}
-
-.contact-btn {
-    width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -771,7 +770,6 @@ body {
     border: 1px solid rgba(9, 27, 217, 0.3);
     border-radius: 8px;
     padding: 32px;
-    max-width: 672px;
     margin: 0 auto;
 }
 

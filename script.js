@@ -699,41 +699,59 @@ function createPortfolioHTML() {
     const t = content[language];
     const items = portfolioItems[language];
 
-    const portfolioItemHTML = (item) => `
-        <div class="portfolio-item" data-title="${item.title}">
-            <a href="projects/${item.slug}.html" class="portfolio-thumbnail-link">
-                <div class="portfolio-thumbnail">
-                    <div class="portfolio-icon-container">
-                        <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+    const getProjectLink = (item) => {
+        // README Club has separate localized case studies
+        if (item.slug === 'book-club') {
+            if (language === 'fr') {
+                return `projects/fr/book-club.html`;
+            }
+
+            return `projects/book-club.html`;
+        }
+
+        // Other projects keep the original URL
+        return `projects/${item.slug}.html`;
+    };
+
+    const portfolioItemHTML = (item) => {
+        const projectLink = getProjectLink(item);
+
+        return `
+            <div class="portfolio-item" data-title="${item.title}">
+                <a href="${projectLink}" class="portfolio-thumbnail-link">
+                    <div class="portfolio-thumbnail">
+                        <div class="portfolio-icon-container">
+                            <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                        </div>
+
+                        <div class="portfolio-preview">
+                            ${item.image ? `
+                                <img src="${item.image}" alt="${item.title}" loading="lazy">
+                            ` : `
+                                <div class="portfolio-placeholder">
+                                    <i data-lucide="${item.icon}" class="portfolio-icon"></i>
+                                    <span>Work in Progress</span>
+                                </div>
+                            `}
+                        </div>
                     </div>
+                </a>
 
-                    <div class="portfolio-preview">
-                        ${item.image ? `
-                            <img src="${item.image}" alt="${item.title}" loading="lazy">
-                        ` : `
-                            <div class="portfolio-placeholder">
-                                <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                                <span>Work in Progress</span>
-                            </div>
-                        `}
+                <div class="portfolio-content">
+                    <h3 class="portfolio-title">${item.title}</h3>
+                    <p class="portfolio-type">${item.type}</p>
+                    <p class="portfolio-description">${item.description}</p>
+
+                    <div class="portfolio-buttons">
+                        <a href="${projectLink}" class="btn btn-primary single">
+                            <i data-lucide="arrow-right"></i>
+                            ${t.portfolio.viewProject}
+                        </a>
                     </div>
-                </div>
-            </a>
-
-            <div class="portfolio-content">
-                <h3 class="portfolio-title">${item.title}</h3>
-                <p class="portfolio-type">${item.type}</p>
-                <p class="portfolio-description">${item.description}</p>
-
-                <div class="portfolio-buttons">
-                    <a href="projects/${item.slug}.html" class="btn btn-primary single">
-                        <i data-lucide="arrow-right"></i>
-                        ${t.portfolio.viewProject}
-                    </a>
                 </div>
             </div>
-        </div>
-    `;
+        `;
+    };
 
     return `
         <div class="portfolio-section">
@@ -790,7 +808,7 @@ function createContactHTML() {
 
     return `
         <div class="contact-section">
-            <div class="container contact-container">
+            <div class="container">
                 <h2 class="section-title">${t.contact.title}</h2>
                 <p class="contact-subtitle">${t.contact.subtitle}</p>
                 
@@ -835,11 +853,6 @@ function createContactHTML() {
             </div>
         </div>
     `;
-}
-
-function setupPortfolioGrid() {
-    // Portfolio layout is now handled by CSS and HTML structure
-    // No JavaScript manipulation needed
 }
 
 // Animate skill bars
