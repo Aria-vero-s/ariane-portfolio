@@ -332,6 +332,7 @@ body {
     border-radius: 8px;
     padding: 32px;
     margin: 0 auto;
+    margin-bottom: 100px;
 }
 
 .about-grid {
@@ -354,8 +355,29 @@ body {
     font-size: 16px;
 }
 
+/* Profile picture + bio row */
+.about-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid rgba(9, 27, 217, 0.25);
+}
+
+.about-profile {
+    margin-bottom: 0;
+}
+
 .about-section-item {
-    margin-bottom: 16px;
+    margin-bottom: 40px;
 }
 
 .about-section-title {
@@ -414,6 +436,107 @@ body {
     border-radius: 4px;
     width: 0%;
     transition: width 1.5s ease-out;
+}
+
+/* Skill Categories (CV-style) */
+.skill-categories {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .skill-categories {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.skill-category {
+    border: 1px solid rgba(9, 27, 217, 0.2);
+    border-radius: 6px;
+    padding: 14px 16px;
+}
+
+.skill-category-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #091bd9;
+    margin-bottom: 6px;
+}
+
+.skill-category-items {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.skill-category-practice {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.55);
+    line-height: 1.4;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.skill-category-bars {
+    gap: 10px;
+}
+
+/* CV Items (Education & Experience) */
+.cv-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.cv-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(9, 27, 217, 0.15);
+}
+
+.cv-item:last-child {
+    border-bottom: none;
+}
+
+.cv-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.cv-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.cv-dates {
+    font-size: 12px;
+    color: #091bd9;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.cv-item-meta {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 4px;
+}
+
+.cv-item-description {
+    font-size: 13px;
+    color: #000;
+    line-height: 1.5;
+}
+
+.cv-item-location {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 2px;
+    font-style: italic;
 }
 
 /* Portfolio Section */

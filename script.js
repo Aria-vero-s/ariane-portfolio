@@ -169,19 +169,85 @@ const content = {
             viewPortfolio: 'View Portfolio'
         },
         about: {
-            title: 'About',
-            description: 'Ariane is a programming and development student at École 42 Paris, with a background in music education and a passion for UI/UX design. She has experience creating clean, user-friendly websites for small businesses and freelancers. Detail-oriented and motivated, she is currently a UI/UX designer at BeautifulCalf Productions. She combines artistic vision and technical skills to build effective digital experiences.',
-            education: 'Education:',
+            title: 'Ariane Saulnier',
+            profile: 'Currently studying at École 42 in Paris and completing an internship at Air France in IT, I design and contribute to complex digital interfaces in enterprise environments. I have experience in mobile-first design, prototyping, and iterative product workflows within fast-paced teams. Originally from Canada, I am fully bilingual in French and English, and I am developing a career in UI/UX design focused on improving both user experience and product outcomes.',
+            skillsTitle: 'Skills',
+            skillCategories: [
+                {
+                    name: 'UX/UI Design',
+                    items: 'Wireframes, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
+                    practice: 'Applied in: Air France, BeautifulCalf Productions, personal portfolio, 42 / Code Institute projects',
+                    skills: [
+                        { name: 'Wireframing & Mockups', percentage: 88 },
+                        { name: 'Prototyping', percentage: 85 },
+                        { name: 'User Testing', percentage: 82 },
+                        { name: 'Design & Branding', percentage: 92 },
+                    ]
+                },
+                {
+                    name: 'Tools & Technologies',
+                    items: 'Figma, Photoshop, Wordpress, Git, GitHub, HTML, CSS, JavaScript, React, Python, C and C++',
+                    practice: 'Applied in: client websites, academic projects, visual and multimedia creation',
+                    skills: [
+                        { name: 'HTML / CSS', percentage: 90 },
+                        { name: 'JavaScript', percentage: 82 },
+                        { name: 'Python', percentage: 80 },
+                        { name: 'C / C++', percentage: 85 },
+                        { name: 'Adobe Creative Suite', percentage: 88 },
+                    ]
+                },
+                {
+                    name: 'Soft Skills & Methods',
+                    items: 'Needs analysis, user listening, teamwork, continuous improvement, agile methodology',
+                    practice: 'Applied in: Air France, Service Canada, music teaching, web projects',
+                    skills: [
+                        { name: 'Communication', percentage: 90 },
+                        { name: 'Teamwork', percentage: 88 },
+                        { name: 'Agile Methodology', percentage: 82 },
+                        { name: 'Problem Solving', percentage: 85 },
+                    ]
+                }
+            ],
+            educationTitle: 'Education',
             educationItems: [
-                'Currently studying at Ecole 42, Paris',
-                'Graduate from Code Institute, London'
+                { school: 'École 42', location: 'Paris, France', degree: 'Certificat d\'Architecte en Technologie Numérique', dates: '05/2024 – Present' },
+                { school: 'Code Institute London', location: 'United Kingdom', degree: 'Diploma in Software Development (E-commerce Applications)', dates: '02/2022 – 02/2023' },
+                { school: 'Université de Moncton', location: 'Canada', degree: "Bachelor's Degree in Music Education", dates: '09/2017 – 05/2020' },
+                { school: "Université d'Ottawa", location: 'Canada', degree: "Bachelor's Degree in Music Performance", dates: '09/2013 – 05/2017' }
             ],
-            experience: 'Experience:',
+            experienceTitle: 'Professional Experience',
             experienceItems: [
-                'UI/UX web developer for BeautifulCalf Productions',
-                'Freelance Web designer (View portfolio)'
+                {
+                    title: 'IT Intern – Flight Ops',
+                    company: 'Air France, CDG Île-de-France',
+                    description: 'Collaboration and participation in internal tool migration projects, interface mockup design, and observation of business needs within IT Flight Ops.',
+                    location: 'France',
+                    dates: '2026 – Present'
+                },
+                {
+                    title: 'Web Developer & Designer',
+                    company: 'BeautifulCalf Productions (Canadian company)',
+                    description: 'Design and development of websites using Webflow, Wix, WordPress, and Shopify for various clients.',
+                    location: 'Remote',
+                    dates: '2024 – Present'
+                },
+                {
+                    title: 'Teacher – Public schools & Music education',
+                    company: 'Teaching Artist – Sistema NB, schools in Canada and the United Kingdom',
+                    description: 'Experience in pedagogy, communication, and group management in multicultural environments.',
+                    location: 'Canada & United Kingdom',
+                    dates: '2017 – 2023'
+                },
+                {
+                    title: 'Citizen Services Officer',
+                    company: 'Service Canada, Government of Canada',
+                    description: 'Handling nationwide calls, problem resolution, and secure database data entry.',
+                    location: 'Canada',
+                    dates: '2018 – 2019'
+                }
             ],
-            skillsTitle: 'Skills'
+            languagesTitle: 'Languages & Interests',
+            languages: 'Bilingual French–English · Beginner Italian (A2) · Adobe Creative Suite · Music · DaVinci Resolve (youtube.com/@ariane.saulnier) · Graphic Design (behance.net/arianesaulnier) · Chess (3 years)'
         },
         portfolio: {
             title: 'Portfolio',
@@ -208,19 +274,85 @@ const content = {
             viewPortfolio: 'Voir Portfolio'
         },
         about: {
-            title: 'À Propos',
-            description: 'Ariane est étudiante en programmation et développement à l\'École 42 Paris, avec un parcours en éducation musicale et une passion pour le design UI/UX. Elle a de l\'expérience dans la création de sites clairs et conviviaux pour petites entreprises et freelances. Rigoureuse et motivée, elle est actuellement UI/UX designer chez BeautifulCalf Productions. Elle allie vision artistique et compétences techniques pour créer des expériences digitales efficaces.',
-            education: 'Formation :',
+            title: 'Ariane Saulnier',
+            profile: 'Conceptrice UX/UI en formation à l\'École 42 (Maîtrise en Web & IA) et actuellement stagiaire au sein des équipes IT Flight Ops d\'Air France à Paris, je travaille sur des interfaces métier à forte contrainte opérationnelle. Mon approche combine UX design, compréhension des besoins utilisateurs et compréhension technique. Je souhaite rejoindre une équipe UX afin de contribuer à des projets structurés autour de la recherche utilisateur, de la conception itérative et de la création d\'expériences numériques accessibles et utiles.',
+            skillsTitle: 'Compétences',
+            skillCategories: [
+                {
+                    name: 'UX/UI',
+                    items: 'Parcours Utilisateurs (User Flow), User Stories, Prototypage, Tests, Interfaces Métier',
+                    practice: 'Mise en pratique : Air France, projets 42, BeautifulCalf Productions, portfolio, freelance',
+                    skills: [
+                        { name: 'Wireframing & Maquettes', percentage: 88 },
+                        { name: 'Prototypage', percentage: 85 },
+                        { name: 'Tests Utilisateurs', percentage: 82 },
+                        { name: 'Design & Identité', percentage: 92 },
+                    ]
+                },
+                {
+                    name: 'Outils & Technologies',
+                    items: 'Figma, Photoshop, Wordpress, Git, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C et C++',
+                    practice: 'Mise en pratique : sites web clients, projets académiques, création visuelle et multimédia',
+                    skills: [
+                        { name: 'HTML / CSS', percentage: 90 },
+                        { name: 'JavaScript', percentage: 82 },
+                        { name: 'Python', percentage: 80 },
+                        { name: 'C / C++', percentage: 85 },
+                        { name: 'Adobe Creative Suite', percentage: 88 },
+                    ]
+                },
+                {
+                    name: 'Soft Skills & Méthode',
+                    items: 'Organisation, Communication, Travail en Équipe, Amélioration Continue et Méthode Agile',
+                    practice: 'Mise en pratique : Air France, Service Canada, enseignement musical, projets web',
+                    skills: [
+                        { name: 'Communication', percentage: 90 },
+                        { name: 'Travail en Équipe', percentage: 88 },
+                        { name: 'Méthode Agile', percentage: 82 },
+                        { name: 'Résolution de Problèmes', percentage: 85 },
+                    ]
+                }
+            ],
+            educationTitle: 'Formation',
             educationItems: [
-                'Actuellement étudiante à l\'École 42, Paris',
-                'Diplômée du Code Institute, Londres'
+                { school: 'École 42', location: 'Paris, France', degree: 'Certificat d\'Architecte en Technologie Numérique', dates: '05/2024 – Présent' },
+                { school: 'Code Institute London', location: 'Royaume-Uni', degree: 'Diplôme en Développement logiciel (E-commerce Applications)', dates: '02/2022 – 02/2023' },
+                { school: 'Université de Moncton', location: 'Canada', degree: 'Baccalauréat en Éducation musicale', dates: '09/2017 – 05/2020' },
+                { school: "Université d'Ottawa", location: 'Canada', degree: 'Baccalauréat en Interprétation musicale', dates: '09/2013 – 05/2017' }
             ],
-            experience: 'Expérience :',
+            experienceTitle: 'Expérience professionnelle',
             experienceItems: [
-                'Développeuse web UI/UX pour BeautifulCalf Productions',
-                'Designer web freelance (Voir portfolio)'
+                {
+                    title: 'Stagiaire IT Flight Ops',
+                    company: 'Air France, CDG Île-de-France',
+                    description: 'Collaboration et participation à des projets de migration d\'outils internes, conception de maquettes d\'interfaces et observation des besoins métiers au sein de IT Flight Ops.',
+                    location: 'France',
+                    dates: '2026 – Présent'
+                },
+                {
+                    title: 'Web Developer & Designer',
+                    company: 'BeautifulCalf Productions, compagnie canadienne',
+                    description: 'Conception de sites web sur Webflow, Wix, Wordpress et Shopify pour différents besoins clients.',
+                    location: 'Télétravail',
+                    dates: '2024 – Présent'
+                },
+                {
+                    title: 'Enseignante – école publique & enseignement musical',
+                    company: '\'Teaching Artist\' Sistema NB, écoles au Canada et au Royaume-Uni',
+                    description: 'Expérience en pédagogie, communication et gestion de groupe dans des contextes multiculturels.',
+                    location: 'Canada & Royaume-Uni',
+                    dates: '2017 – 2023'
+                },
+                {
+                    title: 'Agent de services aux citoyens',
+                    company: 'Service Canada, Gouvernement du Canada',
+                    description: 'Gestion d\'appels à l\'échelle nationale, résolution de problèmes et saisie de données en bases sécurisées.',
+                    location: 'Canada',
+                    dates: '2018 – 2019'
+                }
             ],
-            skillsTitle: 'Compétences'
+            languagesTitle: 'Langues et intérêts',
+            languages: 'Bilingue français-anglais · Italien débutant (A2) · Adobe Creative Suite · Musique · DaVinci Resolve (youtube.com/@ariane.saulnier) · Graphisme (behance.net/arianesaulnier) · Échecs (depuis 3 ans)'
         },
         portfolio: {
             title: 'Portfolio',
@@ -649,15 +781,52 @@ function createHeroHTML() {
 
 function createAboutHTML(isPreview = false) {
     const t = content[language];
-    const skillsHTML = skills[language].map(skill => `
-        <div class="skill-item">
-            <div class="skill-header">
-                <span>${skill.name}</span>
-                <span>${skill.percentage}%</span>
+
+    const skillCategoriesHTML = t.about.skillCategories.map(cat => {
+        const barsHTML = cat.skills.map(skill => `
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span>${skill.name}</span>
+                    <span>${skill.percentage}%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-percentage="${skill.percentage}" style="width: ${isPreview ? skill.percentage + '%' : '0%'}"></div>
+                </div>
             </div>
-            <div class="skill-bar">
-                <div class="skill-progress" data-percentage="${skill.percentage}" style="width: ${isPreview ? skill.percentage + '%' : '0%'}"></div>
+        `).join('');
+
+        return `
+            <div class="skill-category">
+                <div class="skill-category-name">${cat.name}</div>
+                <p class="skill-category-items">${cat.items}</p>
+                <div class="skills-container skill-category-bars">
+                    ${barsHTML}
+                </div>
+                <p class="skill-category-practice">${cat.practice}</p>
             </div>
+        `;
+    }).join('');
+
+    const educationHTML = t.about.educationItems.map(item => `
+        <div class="cv-item">
+            <div class="cv-item-header">
+                <span class="cv-item-title">${item.school}</span>
+                <span class="cv-dates">${item.dates}</span>
+            </div>
+            <p class="cv-item-meta">${item.location}</p>
+            <p class="cv-item-description">${item.degree}</p>
+        </div>
+    `).join('');
+
+    const experienceHTML = t.about.experienceItems.map(item => `
+        <div class="cv-item">
+            <div class="cv-item-header">
+                <span class="cv-item-title">${item.title}</span>
+                <span class="cv-dates">${item.dates}</span>
+            </div>
+            <p class="cv-item-meta">${item.company}</p>
+            <p class="cv-item-description">${item.description}</p>
+            <p class="cv-item-location">${item.location}</p>
         </div>
     `).join('');
 
@@ -666,28 +835,35 @@ function createAboutHTML(isPreview = false) {
             <div class="container">
                 <h2 class="section-title">${t.about.title}</h2>
                 <div class="about-card">
-                    <div class="about-grid">
-                        <div>
-                            <p class="about-description">${t.about.description}</p>
-                            <div class="about-section-item">
-                                <h3 class="about-section-title">${t.about.education}</h3>
-                                <ul class="about-list">
-                                    ${t.about.educationItems.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div class="about-section-item">
-                                <h3 class="about-section-title">${t.about.experience}</h3>
-                                <ul class="about-list">
-                                    ${t.about.experienceItems.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                            </div>
+                    <div class="about-profile">
+                        <img src="images/profile-pic.jpg" alt="Ariane Saulnier" class="profile-pic">
+                        <p class="about-description">${t.about.profile}</p>
+                    </div>
+
+                    <div class="about-section-item">
+                        <h3 class="about-section-title">${t.about.skillsTitle}</h3>
+                        <div class="skill-categories">
+                            ${skillCategoriesHTML}
                         </div>
-                        <div>
-                            <h3 class="skills-title">${t.about.skillsTitle}</h3>
-                            <div class="skills-container">
-                                ${skillsHTML}
-                            </div>
+                    </div>
+
+                    <div class="about-section-item">
+                        <h3 class="about-section-title">${t.about.experienceTitle}</h3>
+                        <div class="cv-items">
+                            ${experienceHTML}
                         </div>
+                    </div>
+
+                    <div class="about-section-item">
+                        <h3 class="about-section-title">${t.about.educationTitle}</h3>
+                        <div class="cv-items">
+                            ${educationHTML}
+                        </div>
+                    </div>
+
+                    <div class="about-section-item">
+                        <h3 class="about-section-title">${t.about.languagesTitle}</h3>
+                        <p class="about-description" style="margin-bottom: 0">${t.about.languages}</p>
                     </div>
                 </div>
             </div>
@@ -883,14 +1059,6 @@ function toggleLanguage() {
 
     // Update navigation
     updateNavigation();
-
-    // Re-animate skill bars if on about page
-    if (currentSection === 'about') {
-        aboutAnimationReady = true;
-        setTimeout(() => {
-            animateSkillBars();
-        }, 100);
-    }
 }
 
 // Event listeners
