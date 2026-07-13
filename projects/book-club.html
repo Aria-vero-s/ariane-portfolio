@@ -30,7 +30,17 @@
 
             <div class="cs-hero">
                 <span class="cs-tag">UI/UX Case Study</span>
-                <h1>README Club</h1>
+                <h1>
+                    <a href="https://aria-vero-s.github.io/book-club/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="external-link">
+                        README Club
+                        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg>
+                    </a>
+                </h1>
                 <p class="cs-hero-sub">Designing a collaborative reading experience that helps book clubs discover, decide, read, and discuss together.</p>
                 <div class="cs-banner">
                     <img
@@ -59,8 +69,12 @@
                 <div class="cs-meta-item">
                     <label>Links</label>
                     <ul>
-                        <li><a href="https://aria-vero-s.github.io/book-club/" target="_blank" rel="noopener noreferrer" style="color:#091bd9;">Live site ↗</a></li>
-                        <li><a href="https://github.com/Aria-vero-s/book-club" target="_blank" rel="noopener noreferrer" style="color:#091bd9;">GitHub ↗</a></li>
+                        <li><a href="https://aria-vero-s.github.io/book-club/" target="_blank" class="external-link" rel="noopener noreferrer" style="color:#091bd9;">Live site <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg></a></li>
+                        <li><a href="https://github.com/Aria-vero-s/book-club" target="_blank" class="external-link" rel="noopener noreferrer" style="color:#091bd9;">GitHub <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg></a></li>
                     </ul>
                 </div>
             </div>
@@ -244,6 +258,15 @@
                     <span class="cs-flow-step">Discussion</span>
                 </div>
                 <img class="cs-img-real" src="../images/book-club/Sitemap-information-architecture-complete-user-flow.png" alt="Sitemap — information architecture and complete user flow">
+                <a href="https://www.figma.com/board/IpIBh4XcJcTSCN8DMfBuKP/Sitemap--Community-?node-id=0-1&t=Ko08RIFs893uJ6gf-1" target="_blank" rel="noopener noreferrer" class="external-link" style="color:#091bd9;">Figjam <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg></a>
+                <br><br>
+                <img class="cs-img-real" src="../../images/book-club/miro.png" alt="Tableau Miro" style="margin-top:16px;margin-bottom:0;">
+                <br>
+                <a href="https://miro.com/app/board/uXjVH8bgaZs=/?share_link_id=835384989994" target="_blank" rel="noopener noreferrer" class="external-link" style="color:#091bd9;">Miro Board <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg></a>
             </div>
 
             <div class="cs-section">
@@ -311,10 +334,25 @@
                 <div class="cs-section-num">10</div>
                 <h2>Accessibility Considerations</h2>
                 <div class="cs-a11y-grid">
-                    <div class="cs-a11y-item"><h4>Colour</h4><p>Checked contrast ratios. Avoided colour-only communication.</p></div>
-                    <div class="cs-a11y-item"><h4>Typography</h4><p>Clear hierarchy and readable text sizes throughout.</p></div>
-                    <div class="cs-a11y-item"><h4>Interaction</h4><p>Clear states for selections, progress, locked discussions, and voting.</p></div>
-                    <div class="cs-a11y-item"><h4>Responsive</h4><p>Layouts adapted for desktop and mobile screens.</p></div>
+                    <div class="cs-a11y-item">
+                        <h4>Colour</h4>
+                        <p>Semantic colour palette with sufficient contrast, dedicated UI states, and support for light and dark themes.</p>
+                    </div>
+
+                    <div class="cs-a11y-item">
+                        <h4>Typography</h4>
+                        <p>Quando headings and Lato body text with a consistent type scale, spacing, and clear visual hierarchy.</p>
+                    </div>
+
+                    <div class="cs-a11y-item">
+                        <h4>Interaction</h4>
+                        <p>Clear hover, focus, selected, disabled, voting, and progress states with multiple visual cues.</p>
+                    </div>
+
+                    <div class="cs-a11y-item">
+                        <h4>Responsive</h4>
+                        <p>Mobile-first layouts with reusable design tokens that adapt smoothly across screen sizes.</p>
+                    </div>
                 </div>
             </div>
 
@@ -343,6 +381,23 @@
 
     <script>
         lucide.createIcons();
+
+        // Arrow rolling animation — plays to completion even after cursor leaves
+        document.addEventListener('mouseenter', function(e) {
+            const link = e.target.closest('.external-link');
+            if (!link) return;
+            const arrow = link.querySelector('.arrow');
+            if (!arrow) return;
+            arrow.classList.remove('rolling');
+            void arrow.offsetWidth; // force reflow to restart animation
+            arrow.classList.add('rolling');
+        }, true);
+
+        document.addEventListener('animationend', function(e) {
+            if (e.target.classList.contains('arrow')) {
+                e.target.classList.remove('rolling');
+            }
+        }, true);
     </script>
 </body>
 </html>

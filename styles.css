@@ -1345,3 +1345,38 @@ body {
     width: 100% !important;
     max-width: none !important;
 }
+
+/* arrow animation */
+/* on hover, the arrow will reappear like a mask is being lifted. This is achieved by using CSS transitions and transforms on the arrow element when the parent link is hovered over. */
+
+.external-link {
+    color: #091bd9;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arrow {
+    width: 0.8em;
+    height: 0.8em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 0;
+}
+
+@keyframes arrowRoll {
+    0%   { stroke-dashoffset: 0;   animation-timing-function: ease-in; }
+    45%  { stroke-dashoffset: 40;  animation-timing-function: step-end; }
+    50%  { stroke-dashoffset: -40; animation-timing-function: ease-out; }
+    100% { stroke-dashoffset: 0; }
+}
+
+.arrow.rolling {
+    animation: arrowRoll 0.7s;
+}
+
