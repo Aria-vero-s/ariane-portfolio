@@ -1,0 +1,47 @@
+:root {
+    /* Typography */
+    --font-page-title: clamp(2rem, 5vw, 3rem);
+    --font-heading: 1.5rem;
+    --font-subtitle: 1.25rem;
+    --font-body: 1rem;
+    --font-meta: 0.875rem;
+    --font-small: 0.8125rem;
+    --font-tag: 0.75rem;
+
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+
+    /* Colors */
+    --color-background: #f5f1f0;
+    --color-surface: #ffffff;
+    --color-primary: #091bd9;
+    --color-text: #000000;
+
+    --color-primary-light: rgba(9, 27, 217, .06);
+    --color-primary-border: rgba(9, 27, 217, .2);
+    --color-primary-muted: rgba(9, 27, 217, .35);
+    --color-primary-divider: rgba(9, 27, 217, .15);
+    --color-text-muted: rgba(0, 0, 0, .4);
+
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 56px;
+    --space-2xl: 64px;
+    --space-page: 96px;
+
+
+    /* Layout */
+    --content-width: 800px;
+
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+}
