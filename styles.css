@@ -405,39 +405,6 @@ body {
     font-weight: 500;
 }
 
-.skills-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.skill-item {
-    width: 100%;
-}
-
-.skill-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    color: #000;
-}
-
-.skill-bar {
-    width: 100%;
-    height: 8px;
-    background: #e5e7eb;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.skill-progress {
-    height: 100%;
-    background: #091bd9;
-    border-radius: 4px;
-    width: 0%;
-    transition: width 1.5s ease-out;
-}
-
 /* Skill Categories (CV-style) */
 .skill-categories {
     display: grid;
@@ -464,11 +431,18 @@ body {
     margin-bottom: 6px;
 }
 
-.skill-category-items {
+.skill-category-list {
     font-size: 14px;
     color: #000;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 10px;
+    padding-left: 16px;
+}
+
+.languages-interests-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
 
 .skill-category-practice {

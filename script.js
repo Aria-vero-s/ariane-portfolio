@@ -4,7 +4,6 @@ let nextSection = null;
 let isRevealing = false;
 let revealCenter = { x: 50, y: 50 };
 let language = 'en';
-let aboutAnimationReady = false;
 
 // Content Data
 const sections = [
@@ -141,25 +140,6 @@ const portfolioItems = {
     ]
 };
 
-const skills = {
-    en: [
-        { name: 'HTML/CSS', percentage: 90 },
-        { name: 'JavaScript', percentage: 82 },
-        { name: 'Python', percentage: 80 },
-        { name: 'C/C++', percentage: 85 },
-        { name: 'Design & Branding', percentage: 92 },
-        { name: 'Adobe Creative Suite', percentage: 88 },
-    ],
-    fr: [
-        { name: 'HTML/CSS', percentage: 90 },
-        { name: 'JavaScript', percentage: 82 },
-        { name: 'Python', percentage: 80 },
-        { name: 'C/C++', percentage: 85 },
-        { name: 'Design & Branding', percentage: 92 },
-        { name: 'Adobe Creative Suite', percentage: 88 },
-    ]
-};
-
 const content = {
     en: {
         hero: {
@@ -177,35 +157,16 @@ const content = {
                     name: 'UX/UI Design',
                     items: 'Wireframes, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
                     practice: 'Applied in: Air France, BeautifulCalf Productions, personal portfolio, 42 / Code Institute projects',
-                    skills: [
-                        { name: 'Wireframing & Mockups', percentage: 88 },
-                        { name: 'Prototyping', percentage: 85 },
-                        { name: 'User Testing', percentage: 82 },
-                        { name: 'Design & Branding', percentage: 92 },
-                    ]
                 },
                 {
                     name: 'Tools & Technologies',
                     items: 'Figma, Photoshop, Wordpress, Git, GitHub, HTML, CSS, JavaScript, React, Python, C and C++',
                     practice: 'Applied in: client websites, academic projects, visual and multimedia creation',
-                    skills: [
-                        { name: 'HTML / CSS', percentage: 90 },
-                        { name: 'JavaScript', percentage: 82 },
-                        { name: 'Python', percentage: 80 },
-                        { name: 'C / C++', percentage: 85 },
-                        { name: 'Adobe Creative Suite', percentage: 88 },
-                    ]
                 },
                 {
                     name: 'Soft Skills & Methods',
                     items: 'Needs analysis, user listening, teamwork, continuous improvement, agile methodology',
                     practice: 'Applied in: Air France, Service Canada, music teaching, web projects',
-                    skills: [
-                        { name: 'Communication', percentage: 90 },
-                        { name: 'Teamwork', percentage: 88 },
-                        { name: 'Agile Methodology', percentage: 82 },
-                        { name: 'Problem Solving', percentage: 85 },
-                    ]
                 }
             ],
             educationTitle: 'Education',
@@ -247,7 +208,10 @@ const content = {
                 }
             ],
             languagesTitle: 'Languages & Interests',
-            languages: 'Bilingual French–English · Beginner Italian (A2) · Adobe Creative Suite · Music · DaVinci Resolve (youtube.com/@ariane.saulnier) · Graphic Design (behance.net/arianesaulnier) · Chess (3 years)'
+            languagesSubtitle: 'Languages',
+            interestsSubtitle: 'Interests',
+            languages: ['Bilingual French–English', 'Beginner Italian (A2)'],
+            interests: ['Adobe Creative Suite', 'Music (guitar, clarinet, piano)', 'DaVinci Resolve (youtube.com/@ariane.saulnier)', 'Graphic Design (behance.net/arianesaulnier)', 'Chess (3 years)']
         },
         portfolio: {
             title: 'Portfolio',
@@ -282,35 +246,16 @@ const content = {
                     name: 'UX/UI',
                     items: 'Parcours Utilisateurs (User Flow), User Stories, Prototypage, Tests, Interfaces Métier',
                     practice: 'Mise en pratique : Air France, projets 42, BeautifulCalf Productions, portfolio, freelance',
-                    skills: [
-                        { name: 'Wireframing & Maquettes', percentage: 88 },
-                        { name: 'Prototypage', percentage: 85 },
-                        { name: 'Tests Utilisateurs', percentage: 82 },
-                        { name: 'Design & Identité', percentage: 92 },
-                    ]
                 },
                 {
                     name: 'Outils & Technologies',
                     items: 'Figma, Photoshop, Wordpress, Git, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C et C++',
                     practice: 'Mise en pratique : sites web clients, projets académiques, création visuelle et multimédia',
-                    skills: [
-                        { name: 'HTML / CSS', percentage: 90 },
-                        { name: 'JavaScript', percentage: 82 },
-                        { name: 'Python', percentage: 80 },
-                        { name: 'C / C++', percentage: 85 },
-                        { name: 'Adobe Creative Suite', percentage: 88 },
-                    ]
                 },
                 {
                     name: 'Soft Skills & Méthode',
                     items: 'Organisation, Communication, Travail en Équipe, Amélioration Continue et Méthode Agile',
                     practice: 'Mise en pratique : Air France, Service Canada, enseignement musical, projets web',
-                    skills: [
-                        { name: 'Communication', percentage: 90 },
-                        { name: 'Travail en Équipe', percentage: 88 },
-                        { name: 'Méthode Agile', percentage: 82 },
-                        { name: 'Résolution de Problèmes', percentage: 85 },
-                    ]
                 }
             ],
             educationTitle: 'Formation',
@@ -352,7 +297,10 @@ const content = {
                 }
             ],
             languagesTitle: 'Langues et intérêts',
-            languages: 'Bilingue français-anglais · Italien débutant (A2) · Adobe Creative Suite · Musique · DaVinci Resolve (youtube.com/@ariane.saulnier) · Graphisme (behance.net/arianesaulnier) · Échecs (depuis 3 ans)'
+            languagesSubtitle: 'Langues',
+            interestsSubtitle: 'Intérêts',
+            languages: ['Bilingue français-anglais', 'Italien débutant (A2)'],
+            interests: ['Adobe Creative Suite', 'Musique (guitare, clarinette, piano)', 'DaVinci Resolve (youtube.com/@ariane.saulnier)', 'Graphisme (behance.net/arianesaulnier)', 'Échecs (depuis 3 ans)']
         },
         portfolio: {
             title: 'Portfolio',
@@ -671,21 +619,11 @@ function navigateToSection(sectionId, event) {
     nextSection = null;
     isRevealing = false;
 
-    renderSection(currentSection, currentContainer.querySelector('.section-content'), false);
+    renderSection(currentSection, currentContainer.querySelector('.section-content'));
     previewContainer.innerHTML = '';
 
     // Update navigation
     updateNavigation();
-
-    // Handle section-specific animations
-    if (currentSection === 'about') {
-        setTimeout(() => {
-            aboutAnimationReady = true;
-            animateSkillBars();
-        }, 100);
-    } else {
-        aboutAnimationReady = false;
-    }
 
     // Reset circuit animation flag and remove resize listener when leaving hero
     if (currentSection !== 'hero') {
@@ -729,7 +667,7 @@ function updateNavigation() {
 }
 
 // Render section content
-function renderSection(sectionId, container, isPreview = false) {
+function renderSection(sectionId, container) {
     const t = content[language];
 
     switch (sectionId) {
@@ -737,7 +675,7 @@ function renderSection(sectionId, container, isPreview = false) {
             container.innerHTML = createHeroHTML();
             break;
         case 'about':
-            container.innerHTML = createAboutHTML(isPreview);
+            container.innerHTML = createAboutHTML();
             break;
         case 'portfolio':
             container.innerHTML = createPortfolioHTML();
@@ -779,33 +717,18 @@ function createHeroHTML() {
     `;
 }
 
-function createAboutHTML(isPreview = false) {
+function createAboutHTML() {
     const t = content[language];
 
-    const skillCategoriesHTML = t.about.skillCategories.map(cat => {
-        const barsHTML = cat.skills.map(skill => `
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span>${skill.name}</span>
-                    <span>${skill.percentage}%</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-percentage="${skill.percentage}" style="width: ${isPreview ? skill.percentage + '%' : '0%'}"></div>
-                </div>
-            </div>
-        `).join('');
-
-        return `
-            <div class="skill-category">
-                <div class="skill-category-name">${cat.name}</div>
-                <p class="skill-category-items">${cat.items}</p>
-                <div class="skills-container skill-category-bars">
-                    ${barsHTML}
-                </div>
-                <p class="skill-category-practice">${cat.practice}</p>
-            </div>
-        `;
-    }).join('');
+    const skillCategoriesHTML = t.about.skillCategories.map(cat => `
+        <div class="skill-category">
+            <div class="skill-category-name">${cat.name}</div>
+            <ul class="skill-category-list">
+                ${cat.items.split(', ').map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            <p class="skill-category-practice">${cat.practice}</p>
+        </div>
+    `).join('');
 
     const educationHTML = t.about.educationItems.map(item => `
         <div class="cv-item">
@@ -863,7 +786,20 @@ function createAboutHTML(isPreview = false) {
 
                     <div class="about-section-item">
                         <h3 class="about-section-title">${t.about.languagesTitle}</h3>
-                        <p class="about-description" style="margin-bottom: 0">${t.about.languages}</p>
+                        <div class="languages-interests-grid">
+                            <div>
+                                <div class="skill-category-name">${t.about.languagesSubtitle}</div>
+                                <ul class="skill-category-list">
+                                    ${t.about.languages.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="skill-category-name">${t.about.interestsSubtitle}</div>
+                                <ul class="skill-category-list">
+                                    ${t.about.interests.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1031,31 +967,13 @@ function createContactHTML() {
     `;
 }
 
-// Animate skill bars
-function animateSkillBars() {
-    if (!aboutAnimationReady || currentSection !== 'about') return;
-
-    const skillBars = document.querySelectorAll('.skill-progress');
-    skillBars.forEach((bar, index) => {
-        const percentage = bar.dataset.percentage;
-
-        // Only animate if not already animated (prevents resets during transitions)
-        if (bar.style.width === '0%' || bar.style.width === '' || bar.style.width === '0px') {
-            // Animate to target width with staggered delay
-            setTimeout(() => {
-                bar.style.width = percentage + '%';
-            }, index * 200);
-        }
-    });
-}
-
 // Toggle language
 function toggleLanguage() {
     language = language === 'en' ? 'fr' : 'en';
 
     // Update current section content
     const currentContainer = document.getElementById('sectionCurrent').querySelector('.section-content');
-    renderSection(currentSection, currentContainer, false);
+    renderSection(currentSection, currentContainer);
 
     // Update navigation
     updateNavigation();
@@ -1141,7 +1059,7 @@ function init() {
     currentContainer.style.clipPath = `circle(150% at 50% 50%)`;
 
     // Show initial section
-    renderSection(currentSection, currentContainer.querySelector('.section-content'), false);
+    renderSection(currentSection, currentContainer.querySelector('.section-content'));
 
     // Update navigation
     updateNavigation();
