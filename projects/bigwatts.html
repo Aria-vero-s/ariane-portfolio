@@ -1,31 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BigWatts — Ariane Saulnier</title>
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="project.css">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>README Club — Case Study — Ariane Saulnier</title>
+	<link rel="icon" type="image/x-icon" href="../favicon.ico">
+	<link rel="stylesheet" href="../styles.css">
+	<link rel="stylesheet" href="project.css">
+	<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
+
 <body>
-    <nav class="nav-container">
-        <div class="nav-card">
-            <div class="nav-content">
-                <a href="../index.html?section=portfolio" class="nav-button">
-                    <i data-lucide="arrow-left"></i>
-                    <span class="nav-text">Back</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-    <div class="project-page">
-        <div class="project-coming-soon">
-            <h1>Coming soon</h1>
-            <p>BigWatts</p>
-        </div>
-    </div>
-    <script>lucide.createIcons();</script>
+	<nav class="nav-container">
+		<div class="nav-card">
+			<div class="nav-content">
+				<a href="../index.html?section=portfolio" class="nav-button">
+					<i data-lucide="arrow-left"></i>
+					<span class="nav-text">Back</span>
+				</a>
+				<div class="nav-divider"></div>
+				<a href="fr/bigwatts.html" class="nav-button">FR</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="cs-page">
+
+		<!-- ══ ENGLISH ══ -->
+		<article class="cs-article" id="article-en">
+
+			<div class="cs-hero">
+				<span class="cs-tag">UI/UX Case Study</span>
+				<h1>
+					<a href="https://bigwatts.vercel.app/" target="_blank" rel="noopener noreferrer"
+						class="external-link">
+						BigWatts
+						<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M5 19L19 5M9 5h10v10" />
+						</svg>
+					</a>
+				</h1>
+
+				<p class="cs-hero-sub">
+					Designing a marketplace platform that connects homeowners with trusted green energy professionals
+					while providing businesses with the tools to manage clients, services, and projects in one place.
+				</p>
+
+				<div class="cs-banner">
+					<img src="../images/bigwatts/Hero-mockup-desktop-mobile-homepage.png"
+						alt="BigWatts homepage shown on desktop and mobile">
+				</div>
+			</div>
+
+			<div class="cs-meta">
+				<div class="cs-meta-item">
+					<label>Role</label>
+					<p>Product Designer · UX Researcher · Frontend Developer</p>
+				</div>
+
+				<div class="cs-meta-item">
+					<label>Timeline</label>
+					<p>8 weeks</p>
+				</div>
+
+				<div class="cs-meta-item">
+					<label>Design</label>
+					<ul>
+						<li>Figma</li>
+						<li>FigJam</li>
+					</ul>
+				</div>
+
+				<div class="cs-meta-item">
+					<label>Development</label>
+					<ul>
+						<li>React · TypeScript</li>
+						<li>Django REST API · PostgreSQL</li>
+					</ul>
+				</div>
+
+				<div class="cs-meta-item">
+					<label>Links</label>
+					<ul>
+						<li>
+							<a href="https://bigwatts.vercel.app/" target="_blank" class="external-link"
+								rel="noopener noreferrer" style="color:#091bd9;">
+								Live site
+								<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+									<path d="M5 19L19 5M9 5h10v10" />
+								</svg>
+							</a>
+						</li>
+
+						<li>
+							<a href="https://github.com/ariastoryreport-wq/bigwatts" target="_blank"
+								class="external-link" rel="noopener noreferrer" style="color:#091bd9;">
+								GitHub
+								<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+									<path d="M5 19L19 5M9 5h10v10" />
+								</svg>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">01</div>
+				<h2>Project Overview</h2>
+				<h3>The Challenge</h3>
+				<p>Homeowners interested in improving their home's energy efficiency often face a fragmented experience.
+				</p>
+				<p>They need to:</p>
+				<ul>
+					<li>Search multiple websites to find qualified service providers</li>
+					<li>Compare quotes and certifications</li>
+					<li>Understand government grants and tax incentives</li>
+					<li>Communicate through emails and phone calls</li>
+					<li>Manage appointments, documents and payments across different platforms</li>
+				</ul>
+				<p>Meanwhile, service providers rely on separate tools to manage leads, advertisements, invoices,
+					customer communication, scheduling, and project tracking.</p>
+				<div class="cs-callout">
+					<p>How might we create one platform that simplifies sustainable home improvement for homeowners
+						while giving professionals everything they need to manage their business?</p>
+				</div>
+				<h3>The Solution</h3>
+				<p>Bigwatts is a marketplace platform connecting homeowners with verified green energy professionals
+					across France and Canada.</p>
+				<p>The platform enables homeowners to discover nearby providers, compare services, estimate eligibility
+					for government incentives, request quotations, and manage projects from a single interface. For
+					professionals, Bigwatts centralises customer management, advertising, messaging, payments,
+					scheduling, and business analytics into one integrated dashboard.</p>
+				<h3>Design Process</h3>
+				<p>The project followed a user-centred design approach:</p>
+				<div class="cs-design-process">
+					<div class="cs-process-circle">Empathize</div>
+					<div class="cs-process-circle">Define</div>
+					<div class="cs-process-circle">Ideate</div>
+					<div class="cs-process-circle">Prototype</div>
+					<div class="cs-process-circle">Test</div>
+				</div>
+				<img class="cs-img-real" src="../images/bigwatts/user-journey-map.png" alt="Homeowner journey map">
+				<a href="https://www.figma.com/board/iwD3ZuNhLvcStlajYyuRgT/BigWatts?node-id=0-1&t=7zJnLWI4ibextah8-1" target="_blank" rel="noopener noreferrer" class="external-link" style="color:#091bd9;">FigJam Journey Map <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg></a>
+			</div>
+
+			<div class="cs-section">
+				<div class="cs-section-num">02</div>
+
+				<h2>Understanding the Problem</h2>
+
+				<p>
+					Before designing the interface, I identified several assumptions about the challenges faced by both
+					homeowners and green energy professionals. These hypotheses helped guide user research and validate
+					whether the proposed solution addressed real user needs.
+				</p>
+
+				<div class="cs-card">
+					<div class="cs-label">Hypothesis 1</div>
+					<h3>Homeowners struggle to identify trustworthy service providers.</h3>
+					<p><strong>Potential impact:</strong> Users postpone renovation projects because comparing
+						businesses, certifications, and customer reviews requires too much effort.</p>
+				</div>
+
+				<div class="cs-card">
+					<div class="cs-label">Hypothesis 2</div>
+					<h3>Finding information about sustainable home improvements is overwhelming.</h3>
+					<p><strong>Potential impact:</strong> Users become discouraged before requesting quotations or
+						exploring available renewable energy solutions.</p>
+				</div>
+
+				<div class="cs-card">
+					<div class="cs-label">Hypothesis 3</div>
+					<h3>Professionals rely on too many disconnected business tools.</h3>
+					<p><strong>Potential impact:</strong> Managing customers, advertisements, communication, and
+						payments across multiple platforms creates unnecessary administrative work.</p>
+				</div>
+			</div>
+
+			<div class="cs-section">
+				<div class="cs-section-num">03</div>
+
+				<h2>Competitive Analysis</h2>
+
+				<p>
+					I analysed existing marketplace and home service platforms to understand how they support provider
+					discovery, business management, and sustainable renovation services. The objective was to identify
+					opportunities for creating a more unified experience for both homeowners and professionals.
+				</p>
+
+				<img class="cs-img-real" src="../images/bigwatts/Competitive-analysis-matrix.png"
+					alt="Competitive analysis matrix">
+				<a href="https://docs.google.com/spreadsheets/d/1GdupwynUZQkM0dA6rz56bYd-B1beBuucbV7FyKhCiTc/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="external-link" style="color:#091bd9;">Google Sheets Table<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg></a>
+
+				<h3>Finding 1 — Most platforms focus on a single stage of the journey</h3>
+
+				<p>
+					Existing products typically specialise in either discovering service providers or managing customer
+					relationships, requiring users to switch between multiple services throughout a renovation project.
+				</p>
+
+				<h3>Finding 2 — Business tools are often separated from the customer experience</h3>
+
+				<p>
+					Homeowners and professionals frequently rely on different platforms for communication, quotations,
+					payments, and project management, resulting in fragmented workflows for both user groups.
+				</p>
+
+				<div class="cs-callout">
+					<p>
+						<strong>Opportunity:</strong> Design a single platform that supports the complete journey—from
+						discovering providers and requesting quotations to managing projects and customer relationships.
+					</p>
+				</div>
+			</div>
+
+			<div class="cs-section">
+				<div class="cs-section-num">04</div>
+
+				<h2>User Research</h2>
+
+				<p>
+					To better understand the needs of both sides of the marketplace, I conducted five semi-structured
+					interviews lasting approximately twenty minutes each. Participants were encouraged to describe real
+					experiences when searching for home improvement services or managing customers.
+				</p>
+
+				<h4>Recruitment criteria</h4>
+
+				<ul>
+					<li>Homeowners interested in sustainable home improvements</li>
+					<li>Professionals providing renewable energy or home improvement services</li>
+					<li>Participants with previous experience requesting or managing renovation projects</li>
+				</ul>
+
+				<div class="cs-table-wrap">
+					<table class="cs-table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Profile</th>
+								<th>Experience</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td>P1</td>
+								<td>Homeowner</td>
+								<td>Interested in installing solar panels</td>
+							</tr>
+
+							<tr>
+								<td>P2</td>
+								<td>Homeowner</td>
+								<td>Recently completed an energy renovation</td>
+							</tr>
+
+							<tr>
+								<td>P3</td>
+								<td>Solar installation professional</td>
+								<td>Manages residential projects</td>
+							</tr>
+
+							<tr>
+								<td>P4</td>
+								<td>Electric vehicle charging installer</td>
+								<td>Works with residential clients</td>
+							</tr>
+
+							<tr>
+								<td>P5</td>
+								<td>Energy consultant</td>
+								<td>Advises homeowners on energy efficiency</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- <img class="cs-img-real"
+					src="../images/bigwatts/FigJam-board-interview-notes-quotes-affinity-mapping.png"
+					alt="FigJam affinity mapping board"> -->
+
+				<!-- <p>
+					Affinity mapping revealed four recurring themes: trust when selecting providers, difficulty
+					comparing services, fragmented communication, and inefficient business management tools.
+				</p> -->
+			</div>
+
+			<div class="cs-section">
+				<div class="cs-section-num">05</div>
+
+				<h2>Research Insights</h2>
+
+				<div class="cs-card">
+					<div class="cs-label">Insight 1</div>
+
+					<h3>Trust is the biggest factor when choosing a provider.</h3>
+
+					<p>Most homeowners wanted more than price—they wanted reassurance through reviews, completed
+						projects, certifications, and transparent business information.</p>
+
+					<blockquote>
+						<p>"I don't mind paying more if I know the company is reliable."</p>
+					</blockquote>
+
+					<p><strong>Design opportunity:</strong> Make provider profiles detailed, transparent, and easy to
+						compare.</p>
+				</div>
+
+				<div class="cs-card">
+					<div class="cs-label">Insight 2</div>
+
+					<h3>Users spend too much time searching across multiple websites.</h3>
+
+					<p>Participants described switching between search engines, maps, company websites, and social media
+						before contacting a provider.</p>
+
+					<blockquote>
+						<p>"I probably visited ten websites before sending my first enquiry."</p>
+					</blockquote>
+
+					<p><strong>Design opportunity:</strong> Centralise provider discovery, comparison, messaging, and
+						quotations within one platform.</p>
+				</div>
+
+				<div class="cs-card">
+					<div class="cs-label">Insight 3</div>
+
+					<h3>Professionals need better customer management tools.</h3>
+
+					<p>Businesses often relied on separate software for messaging, appointments, invoices, and customer
+						follow-up.</p>
+
+					<blockquote>
+						<p>"Everything is scattered between emails, spreadsheets, and messaging apps."</p>
+					</blockquote>
+
+					<p><strong>Design opportunity:</strong> Create an integrated dashboard for managing clients,
+						services, advertisements, and communication.</p>
+				</div>
+
+				<div class="cs-card">
+					<div class="cs-label">Insight 4</div>
+
+					<h3>Users value a guided experience when exploring sustainable solutions.</h3>
+
+					<p>Participants appreciated tools that simplified complex information and helped them understand
+						which services matched their needs.</p>
+
+					<blockquote>
+						<p>"I don't always know which solution is right—I just want someone to guide me."</p>
+					</blockquote>
+
+					<p><strong>Design opportunity:</strong> Support decision-making with clear information architecture,
+						search filters, and guided user flows.</p>
+				</div>
+			</div>
+
+			<div class="cs-section">
+				<div class="cs-section-num">06</div>
+				<h2>Research-Based Personas</h2>
+
+				<p>The interview findings revealed three recurring user profiles. These personas represent behavioural
+					patterns rather than individual participants and were used to prioritise design decisions throughout
+					the project.</p>
+
+				<div class="cs-persona-grid">
+
+					<div class="cs-persona">
+						<div class="cs-persona-name">Nelly</div>
+
+						<blockquote>
+							<p>"I know I want solar panels, but I don't know which installer I can actually trust."</p>
+						</blockquote>
+
+						<h4>Goals</h4>
+						<ul>
+							<li>Find qualified local professionals</li>
+							<li>Compare offers confidently</li>
+							<li>Complete renovations without unexpected issues</li>
+						</ul>
+
+						<h4>Pain Points</h4>
+						<ul>
+							<li>Difficult to compare providers</li>
+							<li>Unclear certifications</li>
+							<li>Information spread across multiple websites</li>
+						</ul>
+
+						<h4>Needs</h4>
+						<ul>
+							<li>Verified professionals</li>
+							<li>Transparent reviews</li>
+							<li>Simple project tracking</li>
+						</ul>
+					</div>
+
+					<div class="cs-persona">
+						<div class="cs-persona-name">Marc</div>
+
+						<blockquote>
+							<p>"I'd invest in renovations if I actually understood what financial support I could
+								receive."</p>
+						</blockquote>
+
+						<h4>Goals</h4>
+						<ul>
+							<li>Reduce renovation costs</li>
+							<li>Understand available grants</li>
+							<li>Estimate project affordability</li>
+						</ul>
+
+						<h4>Pain Points</h4>
+						<ul>
+							<li>Complex eligibility rules</li>
+							<li>Government websites are difficult to navigate</li>
+							<li>Uncertainty about final costs</li>
+						</ul>
+
+						<h4>Needs</h4>
+						<ul>
+							<li>Eligibility calculator</li>
+							<li>Clear financial guidance</li>
+							<li>Simple application support</li>
+						</ul>
+					</div>
+
+					<div class="cs-persona">
+						<div class="cs-persona-name">Fabrice</div>
+
+						<blockquote>
+							<p>"Half my day is spent switching between WhatsApp, invoices, calendars and customer
+								emails."</p>
+						</blockquote>
+
+						<h4>Goals</h4>
+						<ul>
+							<li>Spend more time with customers</li>
+							<li>Reduce administrative work</li>
+							<li>Grow the business efficiently</li>
+						</ul>
+
+						<h4>Pain Points</h4>
+						<ul>
+							<li>Multiple disconnected tools</li>
+							<li>Repeated manual work</li>
+							<li>Difficult customer follow-up</li>
+						</ul>
+
+						<h4>Needs</h4>
+						<ul>
+							<li>Integrated business dashboard</li>
+							<li>Centralised communication</li>
+							<li>Automated workflows</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">07</div>
+
+				<h2>Ideation & Design Exploration</h2>
+
+				<p>Using insights gathered during research, I explored multiple approaches before deciding on the final
+					product direction.</p>
+
+				<h3>Challenge 1 — How might homeowners confidently choose the right professional?</h3>
+
+				<div class="cs-decision-grid">
+
+					<div class="cs-decision">
+						<h3>Simple business directory</h3>
+						<h4>Rejected</h4>
+						<p>Provides little information to support decision-making.</p>
+					</div>
+
+					<div class="cs-decision">
+						<h3>Traditional marketplace</h3>
+						<h4>Rejected</h4>
+						<p>Focuses on price rather than trust and expertise.</p>
+					</div>
+
+					<div class="cs-decision" style="border-color:rgba(9,27,217,.5);background:rgba(9,27,217,.04);">
+						<h3>Verified professional profiles</h3>
+						<h4 style="color:#000;">Selected</h4>
+						<p>Combines certifications, reviews, portfolios and quotations in one place.</p>
+					</div>
+
+				</div>
+
+				<h3>Challenge 2 — How might homeowners better understand available incentives?</h3>
+
+				<div class="cs-decision-grid">
+
+					<div class="cs-decision">
+						<h3>External government links</h3>
+						<h4>Rejected</h4>
+						<p>Interrupts the user journey.</p>
+					</div>
+
+					<div class="cs-decision">
+						<h3>Static information pages</h3>
+						<h4>Rejected</h4>
+						<p>Difficult to personalise for each project.</p>
+					</div>
+
+					<div class="cs-decision" style="border-color:rgba(9,27,217,.5);background:rgba(9,27,217,.04);">
+						<h3>Interactive eligibility checker</h3>
+						<h4 style="color:#000;">Selected</h4>
+						<p>Provides personalised guidance early in the renovation journey.</p>
+					</div>
+
+				</div>
+
+				<h3>Information Architecture</h3>
+
+				<p>Before designing interfaces, I organised the product around the homeowner journey—from discovering
+					professionals to managing completed projects.</p>
+
+				<div class="cs-flow">
+					<span class="cs-flow-step">Discover</span>
+					<span class="cs-flow-arrow">→</span>
+
+					<span class="cs-flow-step">Compare</span>
+					<span class="cs-flow-arrow">→</span>
+
+					<span class="cs-flow-step">Estimate Incentives</span>
+					<span class="cs-flow-arrow">→</span>
+
+					<span class="cs-flow-step">Request Quote</span>
+					<span class="cs-flow-arrow">→</span>
+
+					<span class="cs-flow-step">Manage Project</span>
+				</div>
+
+				<!-- Replace with actual sitemap later -->
+
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">08</div>
+
+				<h2>Key Design Decisions</h2>
+
+				<div class="cs-card">
+					<h3>Verified Professional Profiles</h3>
+					<img class="cs-img-real" src="../images/bigwatts/Verified-professional-profile.png"
+						alt="Verified professional profile mockup">
+
+					<p><strong>Problem:</strong> Users struggled to determine which providers were trustworthy.</p>
+
+					<p><strong>Solution:</strong> Combine certifications, reviews, portfolios and business information
+						into a single profile.</p>
+
+					<p><strong>Impact:</strong> Reduces uncertainty during provider selection.</p>
+				</div>
+
+				<div class="cs-card">
+
+					<h3>Integrated Incentive Calculator</h3>
+
+					<p><strong>Problem:</strong> Financial incentives were difficult to understand.</p>
+
+					<p><strong>Solution:</strong> Guide users through a short questionnaire to estimate eligibility.</p>
+
+					<p><strong>Impact:</strong> Makes renovation costs more transparent.</p>
+
+				</div>
+
+				<div class="cs-card">
+
+					<h3>Professional Dashboard</h3>
+
+					<p><strong>Problem:</strong> Professionals relied on multiple disconnected tools.</p>
+
+					<p><strong>Solution:</strong> Centralise appointments, customers, invoices, messaging and project
+						management.</p>
+
+					<p><strong>Trade-off:</strong> Increased feature complexity balanced against reduced administrative
+						workload.</p>
+
+				</div>
+
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">09</div>
+
+				<h2>Usability Testing</h2>
+
+				<p><em>Placeholder — this section will be replaced following moderated usability testing.</em></p>
+
+				<div class="cs-test-item">
+					<h3>Task 1 — Find a local installer</h3>
+
+					<p><strong>Observation:</strong> Participants understood the marketplace concept quickly but initially looked for a search bar before using the available filters. Some users were unsure whether providers were already verified or if they could compare multiple installers. Users appreciated seeing provider details, ratings, and service categories but wanted more location-based information.</p>
+
+					<p><strong>Iteration:</strong> A clearer search entry point was added above the provider listings, with filters for location, service type, and provider category. Provider cards were improved to highlight key trust indicators such as ratings, completed projects, and service areas.</p>
+				</div>
+
+				<div class="cs-test-item">
+					<h3>Task 2 — Check incentive eligibility</h3>
+
+					<p><strong>Observation:</strong> Participants were interested in incentives but did not immediately understand where to find this information. Some expected eligibility details directly on provider profiles, while others searched within their account dashboard. Users wanted reassurance that incentives were adapted to their location and project type.</p>
+
+					<p><strong>Iteration:</strong> An incentives information section was introduced earlier in the user journey. Eligibility information was linked to project categories and presented alongside relevant services, helping users understand potential financial support before requesting a quotation.</p>
+				</div>
+
+				<div class="cs-test-item">
+					<h3>Task 3 — Request a quotation</h3>
+
+					<p><strong>Observation:</strong> Users successfully completed the quotation request flow but hesitated when asked to provide project details. Some participants were unsure how much technical information was required and worried about making incorrect choices. Users preferred a guided form rather than a traditional contact request.</p>
+
+					<p><strong>Iteration:</strong> The quotation request process was simplified into progressive steps. Explanations and examples were added for technical fields, allowing homeowners to describe their needs without requiring expert knowledge. A confirmation screen was added to reassure users that their request had been successfully sent.</p>
+				</div>
+
+				<div class="cs-callout">
+					<p>Testing showed that users were able to complete the main marketplace journey but needed stronger guidance around trust, incentives, and technical terminology. The main improvements focused on reducing uncertainty, improving provider transparency, and making renewable energy services more accessible to non-expert homeowners.
+					</p>
+				</div>
+
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">10</div>
+
+				<h2>Accessibility Considerations</h2>
+
+				<div class="cs-a11y-grid">
+
+					<div class="cs-a11y-item">
+						<h4>Colour</h4>
+						<p>Colour contrast was considered to support readability across light and dark themes.</p>
+					</div>
+
+					<div class="cs-a11y-item">
+						<h4>Typography</h4>
+						<p>Consistent typography and spacing establish a clear visual hierarchy.</p>
+					</div>
+
+					<div class="cs-a11y-item">
+						<h4>Interaction</h4>
+						<p>Interactive elements include consistent states, clear labels and accessible touch targets.
+						</p>
+					</div>
+
+					<div class="cs-a11y-item">
+						<h4>Responsive Design</h4>
+						<p>Layouts adapt across desktop, tablet and mobile using reusable design tokens.</p>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">11</div>
+
+				<h2>Technical Considerations</h2>
+
+				<p>Design decisions were informed by implementation constraints throughout the project to ensure the
+					proposed experience could realistically be built.</p>
+
+				<h3>Multi-country Platform</h3>
+				<p>Support for France and Canada required localisation of incentives, currencies, regulations and
+					available service providers.</p>
+
+				<h3>Professional Dashboard</h3>
+				<p>A unified dashboard consolidates messaging, appointments, invoices, customer management and project
+					tracking.</p>
+
+				<h3>Internationalisation</h3>
+				<p>The interface supports English and French while maintaining a consistent design system across both
+					languages.</p>
+
+			</div>
+
+			<div class="cs-section">
+
+				<div class="cs-section-num">12</div>
+
+				<h2>Reflection</h2>
+
+				<p>This project explored how thoughtful product design can simplify the complexity of sustainable home
+					renovation. Designing for multiple user groups required balancing homeowner needs with business
+					workflows while maintaining a cohesive experience.</p>
+
+				<p><em>Reflection to be expanded once the project reaches production and usability testing is
+						complete.</em></p>
+
+			</div>
+
+			<script>
+				lucide.createIcons();
+
+				// Arrow rolling animation — plays to completion even after cursor leaves
+				document.addEventListener('mouseenter', function (e) {
+					const link = e.target.closest('.external-link');
+					if (!link) return;
+					const arrow = link.querySelector('.arrow');
+					if (!arrow) return;
+					arrow.classList.remove('rolling');
+					void arrow.offsetWidth; // force reflow to restart animation
+					arrow.classList.add('rolling');
+				}, true);
+
+				document.addEventListener('animationend', function (e) {
+					if (e.target.classList.contains('arrow')) {
+						e.target.classList.remove('rolling');
+					}
+				}, true);
+			</script>
 </body>
+
 </html>
