@@ -36,16 +36,6 @@ const portfolioItems = {
             slug: 'bigwatts'
         },
         {
-            title: 'Freelancer Portfolio',
-            type: 'Portfolio Website',
-            description: 'Website for a freelance engineer built with React.',
-            image: 'images/freelancer-portfolio.png',
-            liveLink: 'https://love-innovations.com/',
-            githubLink: '',
-            icon: 'briefcase',
-            slug: 'freelancer-portfolio'
-        },
-        {
             title: 'Music Festival',
             type: 'Event Website',
             description: 'Elegant music festival website built with Wordpress.',
@@ -96,16 +86,6 @@ const portfolioItems = {
             githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
             icon: 'zap',
             slug: 'bigwatts'
-        },
-        {
-            title: 'Portfolio Freelance',
-            type: 'Site Portfolio',
-            description: 'Site web pour une ingénieure freelance créé avec React.',
-            image: 'images/freelancer-portfolio.png',
-            liveLink: 'https://love-innovations.com/',
-            githubLink: '',
-            icon: 'briefcase',
-            slug: 'freelancer-portfolio'
         },
         {
             title: 'Festival de Musique',

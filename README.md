@@ -76,7 +76,6 @@ The site supports English and French. Toggle switches language dynamically witho
 
 | Project Name           | Description                                | Live Link | GitHub |
 |------------------------|--------------------------------------------|-----------|--------|
-| Freelancer Portfolio   | Website for a freelance engineer           | [Live](https://love-innovations.com/) | –         |
 | Music Festival         | Wordpress Music Festival Website             | [Live](https://fmclacbaker.com) | –         |
 | Marketplace Website    | Marketplace website for services           | (WIP)     | [Code](https://github.com/ariastoryreport-wq/bigwatts) |
 | Book Club Website       | Book club with OpenBook API and GoogleBooks API        | –         | [Live](https://aria-vero-s.github.io/book-club/) |
