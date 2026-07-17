@@ -37,7 +37,7 @@ const portfolioItems = {
         },
         {
             title: 'Music Festival',
-            type: 'Event Website',
+            type: 'Wordpress Website',
             description: 'Elegant music festival website built with Wordpress.',
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
@@ -89,7 +89,7 @@ const portfolioItems = {
         },
         {
             title: 'Festival de Musique',
-            type: 'Site Événementiel',
+            type: 'Site Wordpress',
             description: 'Site web élégant pour un festival de musique créé avec Wordpress.',
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
