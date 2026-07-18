@@ -17,105 +17,125 @@ const portfolioItems = {
     en: [
         {
             title: 'README Club',
-            type: 'Full-Stack Web App',
-            description: 'A monthly book club platform where members discover, vote on, and read books together.',
+            category: 'UX Design Case Study + Full-Stack Application',
+            description: 'Designing a social reading experience that helps book clubs discover, vote, and engage around shared reading goals.',
+            tags: ['UX Research', 'User Flow', 'Product Design', 'React', 'Firebase'],
             image: 'images/book-club.png',
             liveLink: 'https://aria-vero-s.github.io/book-club/',
             githubLink: 'https://github.com/Aria-vero-s/book-club',
             icon: 'book-open',
-            slug: 'book-club'
+            slug: 'book-club',
+            featured: true,
         },
         {
             title: 'BigWatts',
-            type: 'Full-Stack Web App',
-            description: 'A green energy marketplace connecting certified providers with property owners. Built with Django, React, and PostgreSQL.',
+            category: 'Green Energy Marketplace — UX & Full-Stack Product',
+            description: 'Designing a marketplace connecting homeowners with certified renewable energy providers through trust-focused user experiences.',
+            tags: ['Product Design', 'UX/UI', 'React', 'Django', 'PostgreSQL'],
             image: 'images/bigwatts.png',
             liveLink: 'https://bigwatts.vercel.app/',
             githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
             icon: 'zap',
-            slug: 'bigwatts'
+            slug: 'bigwatts',
+            featured: true,
         },
         {
             title: 'Music Festival',
-            type: 'Wordpress Website',
-            description: 'Elegant music festival website built with Wordpress.',
+            category: 'Website Redesign — UI Design & WordPress',
+            description: 'A visual redesign focused on improving navigation, storytelling, and event discovery for an annual music festival.',
+            tags: ['UI Design', 'Visual Design', 'WordPress', 'UX'],
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
             githubLink: '',
             icon: 'music',
-            slug: 'music-festival'
+            slug: 'music-festival',
+            featured: true,
         },
         {
             title: 'C Arcade Game',
-            type: 'Programming',
-            description: 'A retro pixel arcade game made entirely with C programming.',
+            category: 'Systems Programming',
+            description: 'Retro arcade game developed in C, demonstrating programming fundamentals and problem solving.',
+            tags: ['C', 'Systems Programming', '42 School'],
             image: 'images/game.png',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/so_long',
             icon: 'code',
-            slug: 'arcade-game'
+            slug: 'arcade-game',
+            featured: false,
         },
         {
             title: 'Linear Regression AI Project',
-            type: 'AI / Machine Learning',
-            description: 'Work-in-progress AI project exploring linear regression and machine learning fundamentals.',
+            category: 'Machine Learning',
+            description: 'Machine learning exploration project focused on understanding AI fundamentals.',
+            tags: ['Python', 'AI', '42 School'],
             image: '',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/linear-regression',
             icon: 'brain',
-            slug: 'linear-regression'
+            slug: 'linear-regression',
+            featured: false,
         },
     ],
     fr: [
         {
             title: 'README Club',
-            type: 'Application Web Full-Stack',
-            description: 'Une plateforme de club de lecture mensuel où les membres découvrent, votent et lisent des livres ensemble.',
+            category: 'Étude de Cas UX + Application Full-Stack',
+            description: 'Conception d\'une expérience de lecture sociale permettant aux clubs de livres de découvrir, voter et s\'engager autour d\'objectifs de lecture communs.',
+            tags: ['Recherche UX', 'Parcours Utilisateur', 'Product Design', 'React', 'Firebase'],
             image: 'images/book-club.png',
             liveLink: 'https://aria-vero-s.github.io/book-club/',
             githubLink: 'https://github.com/Aria-vero-s/book-club',
             icon: 'book-open',
-            slug: 'book-club'
+            slug: 'book-club',
+            featured: true,
         },
         {
             title: 'BigWatts',
-            type: 'Application Web Full-Stack',
-            description: 'Une marketplace d\'énergie verte connectant des prestataires certifiés avec des propriétaires. Développée avec Django, React et PostgreSQL.',
+            category: 'Marketplace Énergie Verte — UX & Produit Full-Stack',
+            description: 'Conception d\'une marketplace connectant des propriétaires avec des prestataires d\'énergie renouvelable certifiés via des expériences centrées sur la confiance.',
+            tags: ['Product Design', 'UX/UI', 'React', 'Django', 'PostgreSQL'],
             image: 'images/bigwatts.png',
             liveLink: 'https://bigwatts.vercel.app/',
             githubLink: 'https://github.com/ariastoryreport-wq/bigwatts',
             icon: 'zap',
-            slug: 'bigwatts'
+            slug: 'bigwatts',
+            featured: true,
         },
         {
             title: 'Festival de Musique',
-            type: 'Site Wordpress',
-            description: 'Site web élégant pour un festival de musique créé avec Wordpress.',
+            category: 'Refonte de Site Web — UI Design & WordPress',
+            description: 'Une refonte visuelle axée sur l\'amélioration de la navigation, de la narration et de la découverte des événements pour un festival de musique annuel.',
+            tags: ['UI Design', 'Design Visuel', 'WordPress', 'UX'],
             image: 'images/music-festival.png',
             liveLink: 'https://fmclacbaker.com',
             githubLink: '',
             icon: 'music',
-            slug: 'music-festival'
+            slug: 'music-festival',
+            featured: true,
         },
         {
             title: 'Jeu d\'Arcade en C',
-            type: 'Programmation',
-            description: 'Un jeu d\'arcade rétro en pixels, entièrement programmé en C.',
+            category: 'Programmation Système',
+            description: 'Jeu d\'arcade rétro développé en C, démontrant les fondamentaux de la programmation et la résolution de problèmes.',
+            tags: ['C', 'Programmation Système', 'École 42'],
             image: 'images/game.png',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/so_long',
             icon: 'code',
-            slug: 'arcade-game'
+            slug: 'arcade-game',
+            featured: false,
         },
         {
             title: 'Projet IA Régression Linéaire',
-            type: 'IA / Machine Learning',
-            description: 'Projet en cours explorant la régression linéaire et les bases du machine learning.',
+            category: 'Machine Learning',
+            description: 'Projet d\'exploration en machine learning axé sur la compréhension des fondamentaux de l\'IA.',
+            tags: ['Python', 'IA', 'École 42'],
             image: '',
             liveLink: '',
             githubLink: 'https://github.com/Aria-vero-s/linear-regression',
             icon: 'brain',
-            slug: 'linear-regression'
+            slug: 'linear-regression',
+            featured: false,
         },
     ]
 };
@@ -195,7 +215,11 @@ const content = {
         },
         portfolio: {
             title: 'Portfolio',
-            viewProject: 'View Project'
+            intro: 'UX Design thinking with front-end development skills — a hybrid approach to building digital products.',
+            featuredTitle: 'Featured Projects',
+            otherTitle: 'Other Technical Projects',
+            viewProject: 'View Project',
+            viewCaseStudy: 'View Case Study',
         },
         contact: {
             title: 'Get In Touch',
@@ -284,7 +308,11 @@ const content = {
         },
         portfolio: {
             title: 'Portfolio',
-            viewProject: 'Voir le Projet'
+            intro: 'Pensée UX Design avec des compétences en développement front-end — une approche hybride pour construire des produits numériques.',
+            featuredTitle: 'Projets Sélectionnés',
+            otherTitle: 'Autres Projets Techniques',
+            viewProject: 'Voir le Projet',
+            viewCaseStudy: 'Voir l\'Étude de Cas',
         },
         contact: {
             title: 'Contactez-Moi',
@@ -863,106 +891,143 @@ function createPortfolioHTML() {
     const items = portfolioItems[language];
 
     const getProjectLink = (item) => {
-        // README Club has separate localized case studies
         if (item.slug === 'book-club') {
-            if (language === 'fr') {
-                return `projects/fr/book-club.html`;
-            }
-
-            return `projects/book-club.html`;
+            return language === 'fr' ? 'projects/fr/book-club.html' : 'projects/book-club.html';
         }
-
-        // Other projects keep the original URL
+        if (item.slug === 'bigwatts' && language === 'fr') {
+            return 'projects/fr/bigwatts.html';
+        }
         return `projects/${item.slug}.html`;
     };
 
-    const portfolioItemHTML = (item) => {
-        const projectLink = getProjectLink(item);
+    const tagsHTML = (tags) => tags.map(tag =>
+        `<span class="project-tag">${tag}</span>`
+    ).join('');
+
+    const featuredProjectHTML = (item, index) => {
+        const link = getProjectLink(item);
 
         return `
-            <div class="portfolio-item" data-title="${item.title}">
-                <a href="${projectLink}" class="portfolio-thumbnail-link">
-                    <div class="portfolio-thumbnail">
-                        <div class="portfolio-icon-container">
-                            <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                        </div>
+        <article class="project-showcase ${index % 2 !== 0 ? 'reverse' : ''}">
+            
+            <div class="project-image">
+                ${
+                    item.image
+                    ? `<img src="${item.image}" alt="${item.title}">`
+                    : `<div class="project-placeholder">
+                        <i data-lucide="${item.icon}"></i>
+                      </div>`
+                }
+            </div>
 
-                        <div class="portfolio-preview">
-                            ${item.image ? `
-                                <img src="${item.image}" alt="${item.title}" loading="lazy">
-                            ` : `
-                                <div class="portfolio-placeholder">
-                                    <i data-lucide="${item.icon}" class="portfolio-icon"></i>
-                                    <span>Work in Progress</span>
-                                </div>
-                            `}
-                        </div>
-                    </div>
+            <div class="project-content">
+
+                <span class="project-category">
+                    ${item.category}
+                </span>
+
+                <h3>${item.title}</h3>
+
+                <p>
+                    ${item.description}
+                </p>
+
+                <div class="project-tags">
+                    ${tagsHTML(item.tags)}
+                </div>
+
+                <a href="${link}" class="project-link">
+                    ${item.slug === 'book-club' || item.slug === 'bigwatts'
+                    ? t.portfolio.viewCaseStudy
+                    : t.portfolio.viewProject}
+                    <i data-lucide="arrow-right"></i>
                 </a>
 
-                <div class="portfolio-content">
-                    <h3 class="portfolio-title">${item.title}</h3>
-                    <p class="portfolio-type">${item.type}</p>
-                    <p class="portfolio-description">${item.description}</p>
-
-                    <div class="portfolio-buttons">
-                        <a href="${projectLink}" class="btn btn-primary single">
-                            <i data-lucide="arrow-right"></i>
-                            ${t.portfolio.viewProject}
-                        </a>
-                    </div>
-                </div>
             </div>
+
+        </article>
         `;
     };
 
-    return `
-        <div class="portfolio-section">
-            <div class="container">
-                <h2 class="section-title">${t.portfolio.title}</h2>
 
-                <!-- Mobile: all projects stacked -->
-                <div class="portfolio-mobile">
-                    ${items.map(item => portfolioItemHTML(item)).join('')}
-                </div>
+    const technicalProjectHTML = (item) => {
+        const link = getProjectLink(item);
 
-                <!-- Tablet: 2 + 2 + 2 + 1 -->
-                <div class="portfolio-tablet">
-                    <div class="portfolio-tablet-row-1">
-                        ${items.slice(0, 2).map(item => portfolioItemHTML(item)).join('')}
-                    </div>
+        return `
+        <article class="technical-project">
 
-                    <div class="portfolio-tablet-row-2">
-                        ${items.slice(2, 4).map(item => portfolioItemHTML(item)).join('')}
-                    </div>
+            <div class="technical-icon">
+                <i data-lucide="${item.icon}"></i>
+            </div>
 
-                    <div class="portfolio-tablet-row-2">
-                        ${items.slice(4, 6).map(item => portfolioItemHTML(item)).join('')}
-                    </div>
+            <div>
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
 
-                    ${items.length > 6 ? `
-                    <div class="portfolio-tablet-row-3">
-                        ${items.slice(6).map(item => portfolioItemHTML(item)).join('')}
-                    </div>` : ''}
-                </div>
-
-                <!-- Desktop: 3 + 3 + 1 -->
-                <div class="portfolio-desktop">
-                    <div class="portfolio-desktop-row-1">
-                        ${items.slice(0, 3).map(item => portfolioItemHTML(item)).join('')}
-                    </div>
-
-                    <div class="portfolio-desktop-row-1">
-                        ${items.slice(3, 6).map(item => portfolioItemHTML(item)).join('')}
-                    </div>
-
-                    ${items.length > 6 ? `
-                    <div class="portfolio-desktop-row-last">
-                        ${items.slice(6).map(item => portfolioItemHTML(item)).join('')}
-                    </div>` : ''}
+                <div class="project-tags">
+                    ${tagsHTML(item.tags)}
                 </div>
             </div>
+
+            <a href="${link}">
+                ${t.portfolio.viewProject}
+            </a>
+
+        </article>
+        `;
+    };
+
+
+    const featured = items.filter(item => item.featured);
+    const technical = items.filter(item => !item.featured);
+
+
+    return `
+    <div class="portfolio-section">
+
+        <div class="container">
+
+            <header class="portfolio-header">
+
+                <h2 class="section-title">
+                    ${t.portfolio.featuredTitle}
+                </h2>
+
+
+
+            </header>
+
+
+            <section class="featured-projects">
+
+
+                ${featured.map((item,index)=> 
+                    featuredProjectHTML(item,index)
+                ).join('')}
+
+
+            </section>
+
+
+
+            <section class="technical-projects">
+
+
+                <div class="technical-grid">
+
+                    ${technical.map(item =>
+                        technicalProjectHTML(item)
+                    ).join('')}
+
+                </div>
+
+
+            </section>
+
+
         </div>
+
+    </div>
     `;
 }
 
