@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site web de festival de musique — Étude de cas — Ariane Saulnier</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../project.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+    <nav class="nav-container">
+        <div class="nav-card">
+            <div class="nav-content">
+                <a href="../index.html?section=portfolio" class="nav-button">
+                    <i data-lucide="arrow-left"></i>
+                    <span class="nav-text">Retour</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="../music-festival.html" class="nav-button">EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cs-page">
+
+        <!-- ══ FRANÇAIS ══ -->
+        <article class="cs-article" id="article-fr">
+
+            <div class="cs-hero">
+                <span class="cs-tag">Étude de cas UI/UX</span>
+
+                <h1>
+                    <a href="https://fmclacbaker.com/" target="_blank" class="external-link">
+                        Refonte du site web d'un festival de musique
+                        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 19L19 5M9 5h10v10" />
+                        </svg>
+                    </a>
+                </h1>
+
+                <p class="cs-hero-sub">
+                    Refonte et développement d'un site WordPress pour un festival de musique communautaire afin
+                    d'améliorer la navigation, l'expérience mobile, la gestion du contenu et l'expérience globale des
+                    visiteurs, tout en offrant aux organisateurs un site plus facile à maintenir année après année.
+                </p>
+
+                <div class="cs-banner">
+                    <img src="../../images/festival/Hero-mockup-desktop-mobile-homepage.png"
+                        alt="Site du festival affiché sur ordinateur et appareils mobiles">
+                </div>
+            </div>
+
+            <div class="cs-meta">
+
+                <div class="cs-meta-item">
+                    <label>Rôle</label>
+                    <p>Designer UX/UI · Développeuse WordPress</p>
+                </div>
+
+                <div class="cs-meta-item">
+                    <label>Durée</label>
+                    <p>6 semaines</p>
+                </div>
+
+                <div class="cs-meta-item">
+                    <label>Design</label>
+                    <ul>
+                        <li>Figma</li>
+                        <li>FigJam</li>
+                    </ul>
+                </div>
+
+                <div class="cs-meta-item">
+                    <label>Développement</label>
+                    <ul>
+                        <li>WordPress</li>
+                        <li>Elementor · CSS personnalisé</li>
+                    </ul>
+                </div>
+
+                <div class="cs-meta-item">
+                    <label>Liens</label>
+                    <ul>
+                        <li>
+                            <a href="https://fmclacbaker.com/" target="_blank" class="external-link"
+                                rel="noopener noreferrer" style="color:#091bd9;">
+                                Site en ligne
+                                <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 19L19 5M9 5h10v10" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">01</div>
+
+                <h2>Présentation du projet</h2>
+
+                <h3>Le défi</h3>
+
+                <p>
+                    Le site web existant du festival avait été construit progressivement au fil des années et ne
+                    reflétait plus son identité. Les visiteurs avaient des difficultés à trouver rapidement les
+                    informations pratiques, tandis que les organisateurs trouvaient le site de plus en plus difficile
+                    à mettre à jour avant chaque édition du festival.
+                </p>
+
+                <p>Les principaux défis étaient :</p>
+
+                <ul>
+                    <li>Une identité visuelle vieillissante qui ne représentait plus l'image du festival</li>
+                    <li>Une navigation confuse entre les différentes pages</li>
+                    <li>Une mauvaise expérience de navigation mobile pendant l'événement</li>
+                    <li>Une gestion du contenu difficile pour les organisateurs</li>
+                    <li>Des mises en page et une hiérarchie d'informations incohérentes</li>
+                </ul>
+
+                <p>
+                    L'ancien site développé avec Weebly limitait également les possibilités d'évolution, rendant plus
+                    difficile l'ajout de nouveaux contenus, l'amélioration des performances et le maintien d'une
+                    identité visuelle cohérente sur l'ensemble du site.
+                </p>
+
+                <div class="cs-image-grid">
+                    <p>Avant</p>
+                    <p>Après</p>
+                    <img class="cs-img-real-2" src="../../images/festival/old-website.png"
+                        alt="Ancienne version du site du festival">
+                    <img class="cs-img-real-2" src="../../images/festival/new-website.png"
+                        alt="Nouvelle version du site du festival">
+                </div>
+
+                <div class="cs-callout">
+                    <p>
+                        Comment pourrions-nous repenser le site du festival afin d'aider les visiteurs à trouver
+                        rapidement les informations essentielles tout en permettant aux organisateurs de mettre à jour
+                        facilement le contenu chaque année ?
+                    </p>
+                </div>
+
+                <h3>La solution</h3>
+
+                <p>
+                    J'ai repensé le site avec une approche centrée utilisateur avant de le reconstruire dans WordPress
+                    avec Elementor. Le nouveau site privilégie une navigation claire, des mises en page responsives et
+                    une structure de contenu flexible permettant aux organisateurs de mettre facilement à jour les
+                    artistes, programmes, commanditaires, actualités et informations pratiques sans connaissances
+                    techniques particulières.
+                </p>
+
+                <p>
+                    Cette refonte a également permis d'établir une identité visuelle plus cohérente, d'améliorer la
+                    lisibilité sur tous les appareils et de créer une base évolutive pour les futures éditions du
+                    festival.
+                </p>
+
+                <h3>Processus de conception</h3>
+
+                <p>Le projet a suivi une démarche de conception centrée utilisateur :</p>
+
+                <div class="cs-design-process">
+                    <div class="cs-process-circle">Recherche</div>
+                    <div class="cs-process-circle">Définition</div>
+                    <div class="cs-process-circle">Idéation</div>
+                    <div class="cs-process-circle">Prototype</div>
+                    <div class="cs-process-circle">Développement</div>
+                </div>
+
+                <img class="cs-img-real" src="../../images/festival/user-flow.png"
+                    alt="Parcours utilisateur du site du festival">
+
+                <a href="https://www.figma.com/board/OyIXM9AsZpphq33uX3trKv/Music-Festival?node-id=0-1&t=1VdtQwR7G4aaFw7C-1"
+                    target="_blank" rel="noopener noreferrer" class="external-link" style="color:#091bd9;">
+                    Parcours utilisateur FigJam
+                    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 19L19 5M9 5h10v10" />
+                    </svg>
+                </a>
+
+            </div>
+            <div class="cs-section">
+                <div class="cs-section-num">02</div>
+
+                <h2>Comprendre le problème</h2>
+
+                <p>
+                    Avant de créer les wireframes, j'ai évalué le site existant et identifié les principaux problèmes
+                    d'utilisabilité affectant à la fois les visiteurs du festival et les organisateurs. Ces observations
+                    ont
+                    permis de prioriser la refonte et ont guidé les décisions prises tout au long du projet.
+                </p>
+
+                <div class="cs-card">
+                    <div class="cs-label">Constat 1</div>
+
+                    <h3>Les visiteurs avaient du mal à trouver rapidement les informations essentielles.</h3>
+
+                    <p><strong>Impact potentiel :</strong> Les utilisateurs perdaient du temps à chercher les horaires
+                        des concerts,
+                        les informations sur les billets et les détails pratiques, augmentant le risque qu'ils quittent
+                        le site
+                        avant de planifier leur visite.</p>
+                </div>
+
+                <div class="cs-card">
+                    <div class="cs-label">Constat 2</div>
+
+                    <h3>L'identité visuelle ne reflétait plus la qualité du festival.</h3>
+
+                    <p><strong>Impact potentiel :</strong> Une interface vieillissante ne communiquait pas le
+                        professionnalisme
+                        et l'excellence artistique de l'événement, réduisant la confiance des visiteurs et l'impact de
+                        la
+                        première impression.</p>
+                </div>
+
+                <div class="cs-card">
+                    <div class="cs-label">Constat 3</div>
+
+                    <h3>La mise à jour annuelle du site demandait un effort inutile.</h3>
+
+                    <p><strong>Impact potentiel :</strong> Les organisateurs devaient effectuer de nombreuses
+                        modifications
+                        manuelles répétitives, ce qui compliquait la publication efficace des nouveaux programmes de
+                        concerts,
+                        biographies d'artistes, actualités et informations du festival.</p>
+                </div>
+
+            </div>
+
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">03</div>
+
+                <h2>Analyse concurrentielle</h2>
+
+                <p>
+                    J'ai analysé plusieurs sites web de festivals de musique et d'événements artistiques afin de
+                    comprendre
+                    comment ils présentent leurs programmes, leurs artistes, la billetterie et les informations
+                    destinées aux
+                    visiteurs. L'objectif était d'identifier les bonnes pratiques UX tout en trouvant des opportunités
+                    pour
+                    créer une expérience plus intuitive et mémorable pour le Festival de musique de chambre du Lac
+                    Baker.
+                </p>
+
+                <a href="https://norfolkmusic.org/" target="_blank" rel="noopener noreferrer" class="external-link"
+                    style="color:#091bd9;">
+                    Norfolk Chamber Music Festival
+                    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 19L19 5M9 5h10v10" />
+                    </svg>
+                </a>
+                <br>
+
+                <a href="https://www.corbridgechambermusicfestival.com/" target="_blank" rel="noopener noreferrer"
+                    class="external-link" style="color:#091bd9;">
+                    Corbridge Chamber Music Festival
+                    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 19L19 5M9 5h10v10" />
+                    </svg>
+                </a>
+                <br>
+
+                <a href="https://www.domaineforget.com/" target="_blank" rel="noopener noreferrer" class="external-link"
+                    style="color:#091bd9;">
+                    Domaine Forget
+                    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 19L19 5M9 5h10v10" />
+                    </svg>
+                </a>
+                <br>
+
+                <a href="https://www.lamusikfestparisienne.com/" target="_blank" rel="noopener noreferrer"
+                    class="external-link" style="color:#091bd9;">
+                    La Musikfest Parisienne
+                    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 19L19 5M9 5h10v10" />
+                    </svg>
+                </a>
+
+                <h3>Constat 1 — Les sites de festivals performants mettent le programme au centre de l'expérience.</h3>
+
+                <p>
+                    Les meilleurs exemples plaçaient les concerts, les horaires et l'accès aux billets au cœur de
+                    l'expérience,
+                    permettant aux visiteurs de comprendre immédiatement ce qui se passe et à quel moment.
+                </p>
+
+                <h3>Constat 2 — Une narration forte renforce la confiance et l'identité.</h3>
+
+                <p>
+                    Les sites de festivals les plus réussis combinaient informations pratiques, photographies, profils
+                    d'artistes et histoire du festival afin de créer une connexion émotionnelle avant même que les
+                    visiteurs
+                    achètent leurs billets ou planifient leur voyage.
+                </p>
+
+                <div class="cs-callout">
+                    <p>
+                        <strong>Opportunité :</strong> Créer un site qui équilibre les informations pratiques destinées
+                        aux
+                        visiteurs avec l'identité artistique du festival, en facilitant la découverte des concerts tout
+                        en
+                        transmettant l'atmosphère unique qui rend le Festival de musique de chambre du Lac Baker
+                        spécial.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">04</div>
+
+                <h2>Recherche utilisateur</h2>
+
+                <p>
+                    Afin de mieux comprendre les besoins des visiteurs et des organisateurs du festival, j'ai réalisé
+                    cinq
+                    entretiens semi-directifs d'environ vingt minutes chacun. Les participants ont expliqué comment ils
+                    découvraient les informations du festival, planifiaient leur visite et utilisaient le site avant et
+                    pendant
+                    l'événement.
+                </p>
+
+                <h4>Critères de recrutement</h4>
+
+                <ul>
+                    <li>Anciens visiteurs du festival</li>
+                    <li>Organisateurs et bénévoles responsables des mises à jour du site</li>
+                    <li>Musiciens ayant déjà participé au festival</li>
+                </ul>
+
+                <div class="cs-table-wrap">
+                    <table class="cs-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Profil</th>
+                                <th>Expérience</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>P1</td>
+                                <td>Visiteur du festival</td>
+                                <td>A participé à plusieurs éditions du festival</td>
+                            </tr>
+
+                            <tr>
+                                <td>P2</td>
+                                <td>Nouveau visiteur</td>
+                                <td>Souhaite planifier une future visite</td>
+                            </tr>
+
+                            <tr>
+                                <td>P3</td>
+                                <td>Bénévole du festival</td>
+                                <td>Accompagne les visiteurs pendant l'événement</td>
+                            </tr>
+
+                            <tr>
+                                <td>P4</td>
+                                <td>Organisateur du festival</td>
+                                <td>Met à jour le contenu du site chaque saison</td>
+                            </tr>
+
+                            <tr>
+                                <td>P5</td>
+                                <td>Musicien participant</td>
+                                <td>A participé à des éditions précédentes</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">05</div>
+
+                <h2>Résultats de la recherche</h2>
+
+                <div class="cs-card">
+
+                    <div class="cs-label">Insight 1</div>
+
+                    <h3>Les visiteurs souhaitent accéder immédiatement aux informations pratiques.</h3>
+
+                    <p>
+                        La majorité des participants recherchaient en priorité le programme des concerts, les dates, le
+                        lieu et
+                        les informations concernant les billets lorsqu'ils arrivaient sur le site.
+                    </p>
+
+                    <blockquote>
+                        <p>"La première chose que je cherche, c'est ce qui se passe et quand."</p>
+                    </blockquote>
+
+                    <p>
+                        <strong>Opportunité de design :</strong> Mettre en avant le programme, les appels à l'action et
+                        les
+                        informations essentielles pour les visiteurs dès la page d'accueil.
+                    </p>
+
+                </div>
+                <div class="cs-card">
+
+                    <div class="cs-label">Insight 2</div>
+
+                    <h3>Le site doit refléter l'identité artistique du festival.</h3>
+
+                    <p>
+                        Les participants décrivaient le festival comme un événement intime et de grande qualité, mais
+                        estimaient que
+                        l'ancien site ne reflétait pas cette expérience.
+                    </p>
+
+                    <blockquote>
+                        <p>"Le festival est magnifique en personne — le site devrait transmettre la même sensation."</p>
+                    </blockquote>
+
+                    <p>
+                        <strong>Opportunité de design :</strong> Utiliser la photographie, la typographie et l'espace
+                        négatif pour
+                        renforcer l'identité élégante, haut de gamme et chaleureuse du festival.
+                    </p>
+
+                </div>
+
+
+                <div class="cs-card">
+
+                    <div class="cs-label">Insight 3</div>
+
+                    <h3>Les organisateurs ont besoin d'un site facile à maintenir.</h3>
+
+                    <p>
+                        Chaque nouvelle édition nécessite la mise à jour des artistes, des concerts, des commanditaires
+                        et des
+                        annonces. Répéter les mêmes tâches chaque année demandait beaucoup de temps et augmentait le
+                        risque
+                        d'incohérences dans le contenu.
+                    </p>
+
+                    <blockquote>
+                        <p>"Mettre tout à jour chaque été devrait être simple, pas stressant."</p>
+                    </blockquote>
+
+                    <p>
+                        <strong>Opportunité de design :</strong> Créer des modèles de pages réutilisables et une
+                        structure de contenu
+                        claire afin de simplifier les mises à jour annuelles.
+                    </p>
+
+                </div>
+
+
+                <div class="cs-card">
+
+                    <div class="cs-label">Insight 4</div>
+
+                    <h3>Plusieurs participants ont mentionné consulter le site sur mobile pendant leurs déplacements ou
+                        durant le festival.</h3>
+
+                    <p>
+                        Les participants consultaient souvent le site lorsqu'ils voyageaient ou pendant l'événement,
+                        rendant la
+                        lisibilité et l'adaptation aux différents écrans essentielles.
+                    </p>
+
+                    <blockquote>
+                        <p>"Je cherche généralement les informations sur mon téléphone alors que je suis déjà en route."
+                        </p>
+                    </blockquote>
+
+                    <p>
+                        <strong>Opportunité de design :</strong> Adopter une approche mobile-first avec une navigation
+                        claire, des
+                        zones tactiles suffisamment grandes et des mises en page responsives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">06</div>
+
+                <h2>Personas basés sur la recherche</h2>
+
+                <p>
+                    La recherche a révélé trois principaux groupes d'utilisateurs. Ces personas ont permis de prioriser
+                    le
+                    contenu, la navigation et la gestion du site tout au long de la refonte.
+                </p>
+
+                <div class="cs-persona-grid">
+
+                    <div class="cs-persona">
+
+                        <div class="cs-persona-name">Emma</div>
+
+                        <blockquote>
+                            <p>"Je veux simplement voir rapidement ce qui est proposé et organiser mon week-end."</p>
+                        </blockquote>
+
+                        <h4>Objectifs</h4>
+                        <ul>
+                            <li>Consulter le programme des concerts</li>
+                            <li>Acheter des billets facilement</li>
+                            <li>Planifier une visite avec ses proches</li>
+                        </ul>
+
+                        <h4>Points de friction</h4>
+                        <ul>
+                            <li>Les informations importantes sont difficiles à trouver</li>
+                            <li>La navigation semble confuse</li>
+                            <li>Trop de défilement avant d'accéder au programme</li>
+                        </ul>
+
+                        <h4>Besoins</h4>
+                        <ul>
+                            <li>Une navigation claire</li>
+                            <li>Un accès rapide aux concerts et billets</li>
+                            <li>Une expérience adaptée au mobile</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="cs-persona">
+
+                        <div class="cs-persona-name">Daniel</div>
+
+                        <blockquote>
+                            <p>"Je ne suis jamais venu — je veux comprendre ce qui rend ce festival spécial."</p>
+                        </blockquote>
+
+                        <h4>Objectifs</h4>
+                        <ul>
+                            <li>Découvrir l'histoire du festival</li>
+                            <li>Découvrir les artistes invités</li>
+                            <li>Déterminer si le festival vaut le déplacement</li>
+                        </ul>
+
+                        <h4>Points de friction</h4>
+                        <ul>
+                            <li>Peu de contexte sur l'événement</li>
+                            <li>Difficile de comprendre l'expérience globale</li>
+                            <li>Les informations pratiques ne sont pas évidentes à trouver</li>
+                        </ul>
+
+                        <h4>Besoins</h4>
+                        <ul>
+                            <li>Des photographies inspirantes</li>
+                            <li>Des informations claires sur le festival</li>
+                            <li>Un guide simple pour les visiteurs</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="cs-persona">
+
+                        <div class="cs-persona-name">Sarah</div>
+
+                        <blockquote>
+                            <p>"Chaque été, je dois mettre à jour les artistes, les concerts et les annonces sans
+                                reconstruire
+                                le site."</p>
+                        </blockquote>
+
+                        <h4>Objectifs</h4>
+                        <ul>
+                            <li>Mettre à jour le contenu rapidement</li>
+                            <li>Maintenir une image de marque cohérente</li>
+                            <li>Publier efficacement le programme annuel</li>
+                        </ul>
+
+                        <h4>Points de friction</h4>
+                        <ul>
+                            <li>Mises à jour manuelles répétitives</li>
+                            <li>Mises en page incohérentes</li>
+                            <li>Gestion du contenu chronophage</li>
+                        </ul>
+
+                        <h4>Besoins</h4>
+                        <ul>
+                            <li>Des modèles de pages réutilisables</li>
+                            <li>Une édition simple dans WordPress</li>
+                            <li>Une structure de contenu flexible</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">07</div>
+
+                <h2>Idéation & exploration du design</h2>
+
+                <p>
+                    À partir des résultats de recherche, j'ai exploré différentes approches pour simplifier la
+                    navigation,
+                    améliorer la hiérarchie du contenu et mieux communiquer l'identité du festival avant de développer
+                    la
+                    version finale du design.
+                </p>
+
+                <h3>Défi 1 — Comment permettre aux visiteurs de trouver rapidement l'information recherchée ?</h3>
+
+                <div class="cs-decision-grid">
+
+                    <div class="cs-decision">
+                        <h3>Une seule longue page d'accueil</h3>
+                        <h4>Rejeté</h4>
+                        <p>Les informations importantes deviennent difficiles à retrouver à mesure que le site évolue
+                            chaque année.</p>
+                    </div>
+
+                    <div class="cs-decision">
+                        <h3>Une navigation complexe à plusieurs niveaux</h3>
+                        <h4>Rejeté</h4>
+                        <p>Ajoute une complexité inutile pour un site relativement petit.</p>
+                    </div>
+
+                    <div class="cs-decision" style="border-color:rgba(9,27,217,.5);background:rgba(9,27,217,.04);">
+                        <h3>Une navigation simple basée sur les tâches</h3>
+                        <h4 style="color:#000;">Sélectionné</h4>
+                        <p>Organise le contenu autour des objectifs des visiteurs : découvrir les concerts, en apprendre
+                            davantage
+                            sur le festival et préparer leur visite.</p>
+                    </div>
+
+                </div>
+
+
+                <h3>Défi 2 — Comment transmettre l'atmosphère du festival à travers le site ?</h3>
+
+                <div class="cs-decision-grid">
+
+                    <div class="cs-decision">
+                        <h3>Des pages riches en texte</h3>
+                        <h4>Rejeté</h4>
+                        <p>Ne parvient pas à transmettre l'émotion et l'intimité du festival.</p>
+                    </div>
+
+                    <div class="cs-decision">
+                        <h3>Des éléments visuels très décoratifs</h3>
+                        <h4>Rejeté</h4>
+                        <p>Créent un impact visuel mais détournent l'attention des informations importantes.</p>
+                    </div>
+
+                    <div class="cs-decision" style="border-color:rgba(9,27,217,.5);background:rgba(9,27,217,.04);">
+                        <h3>Une narration équilibrée</h3>
+                        <h4 style="color:#000;">Sélectionné</h4>
+                        <p>Combine photographie, espace négatif et contenu concis afin de présenter à la fois
+                            l'expérience du
+                            festival et les informations pratiques.</p>
+                    </div>
+
+                </div>
+
+
+                <h3>Architecture de l'information</h3>
+
+                <p>
+                    J'ai réorganisé le site autour du parcours utilisateur afin que les visiteurs puissent naturellement
+                    passer
+                    de la découverte du festival à la préparation de leur visite.
+                </p>
+
+                <div class="cs-flow">
+
+                    <span class="cs-flow-step">Accueil</span>
+                    <span class="cs-flow-arrow">→</span>
+
+                    <span class="cs-flow-step">Concerts</span>
+                    <span class="cs-flow-arrow">→</span>
+
+                    <span class="cs-flow-step">Artistes</span>
+                    <span class="cs-flow-arrow">→</span>
+
+                    <span class="cs-flow-step">À propos</span>
+                    <span class="cs-flow-arrow">→</span>
+
+                    <span class="cs-flow-step">Planifier sa visite</span>
+
+                </div>
+
+            </div>
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">08</div>
+
+                <h2>Décisions de conception clés</h2>
+
+                <div class="cs-card">
+
+                    <h3>Hiérarchie claire de la page d'accueil</h3>
+
+                    <img class="cs-img-real" src="../../images/festival/homepage-design.png"
+                        alt="Refonte de la page d'accueil du festival">
+
+                    <p><strong>Problème :</strong> Les visiteurs avaient des difficultés à identifier les dates du
+                        festival,
+                        le programme des concerts et les principales actions à effectuer.</p>
+
+                    <p><strong>Solution :</strong> Une section d'introduction simplifiée met immédiatement en avant les
+                        dates du festival, les actions principales et le programme à venir tout en présentant
+                        l'identité du festival.</p>
+
+                    <p><strong>Impact :</strong> Les utilisateurs comprennent l'objectif du site en quelques secondes.
+                    </p>
+
+                </div>
+
+                <div class="cs-card">
+
+                    <h3>Amélioration de la structure du contenu</h3>
+
+                    <p><strong>Problème :</strong> Les informations importantes étaient dispersées sur plusieurs
+                        pages avec des mises en page incohérentes.</p>
+
+                    <p><strong>Solution :</strong> Le contenu a été réorganisé en sections claires avec une
+                        hiérarchie visuelle cohérente et des modèles de pages réutilisables.</p>
+
+                    <p><strong>Impact :</strong> Les visiteurs trouvent les informations plus rapidement tandis que
+                        les organisateurs bénéficient de mises à jour annuelles simplifiées.</p>
+
+                </div>
+
+                <div class="cs-card">
+
+                    <h3>Expérience mobile responsive</h3>
+
+                    <p><strong>Problème :</strong> De nombreux visiteurs consultaient le site sur des appareils mobiles,
+                        notamment pendant leurs déplacements ou durant le festival.</p>
+
+                    <p><strong>Solution :</strong> Des mises en page pensées pour le mobile en priorité, une navigation
+                        simplifiée,
+                        une typographie responsive et des zones tactiles plus grandes améliorent l'expérience
+                        utilisateur
+                        sur tous les appareils.</p>
+
+                    <p><strong>Compromis :</strong> Les éléments décoratifs ont été réduits sur les petits écrans afin
+                        de
+                        privilégier la lisibilité et les performances.</p>
+
+                </div>
+
+            </div>
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">09</div>
+
+                <h2>Tests d'utilisabilité</h2>
+
+                <p>
+                    Des sessions informelles de tests utilisateurs ont été menées afin d'évaluer la navigation,
+                    la hiérarchie du contenu et les principales tâches des utilisateurs.
+                </p>
+
+                <div class="cs-test-item">
+
+                    <h3>Tâche 1 — Trouver le programme des concerts</h3>
+
+                    <p><strong>Observation :</strong> La plupart des participants recherchaient le programme depuis la
+                        page
+                        d'accueil et s'attendaient à un accès rapide.</p>
+
+                    <p><strong>Itération :</strong> Le programme a été rendu plus visible grâce à une meilleure mise en
+                        avant
+                        dans la navigation et les appels à l'action de la page d'accueil.</p>
+
+                </div>
+
+                <div class="cs-test-item">
+
+                    <h3>Tâche 2 — Découvrir le festival</h3>
+
+                    <p><strong>Observation :</strong> Les utilisateurs voulaient rapidement comprendre ce qui rend le
+                        festival unique avant d'explorer le programme.</p>
+
+                    <p><strong>Itération :</strong> La page d'accueil a été améliorée afin de mieux communiquer
+                        l'histoire du festival grâce à des textes concis, des images et une hiérarchie claire des
+                        sections.</p>
+
+                </div>
+
+                <div class="cs-test-item">
+
+                    <h3>Tâche 3 — Trouver les informations pratiques pour les visiteurs</h3>
+
+                    <p><strong>Observation :</strong> Les participants recherchaient les coordonnées,
+                        l'emplacement et les informations pratiques vers la fin de leur parcours.</p>
+
+                    <p><strong>Itération :</strong> Les informations de contact et les détails pratiques ont été rendus
+                        plus visibles sur l'ensemble du site et renforcés dans le pied de page.</p>
+
+                </div>
+
+                <div class="cs-callout">
+                    <p>
+                        Les retours ont montré qu'une navigation et une hiérarchie plus claires aidaient davantage les
+                        visiteurs
+                        à trouver les informations essentielles.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">10</div>
+
+                <h2>Considérations d'accessibilité</h2>
+
+                <div class="cs-a11y-grid">
+
+                    <div class="cs-a11y-item">
+                        <h4>Couleurs & Contraste</h4>
+                        <p>Les couleurs ont été ajustées afin de maintenir un contraste lisible tout en préservant
+                            l'identité
+                            visuelle du festival.</p>
+                    </div>
+
+                    <div class="cs-a11y-item">
+                        <h4>Typographie</h4>
+                        <p>Une hiérarchie typographique claire, des espacements généreux et une structure cohérente des
+                            titres
+                            améliorent
+                            la lisibilité sur l'ensemble des pages.</p>
+                    </div>
+
+                    <div class="cs-a11y-item">
+                        <h4>Clavier & Navigation</h4>
+                        <p>Les éléments interactifs utilisent des labels descriptifs, des états de focus visibles et des
+                            zones
+                            tactiles adaptées
+                            afin d'améliorer l'accessibilité.</p>
+                    </div>
+
+                    <div class="cs-a11y-item">
+                        <h4>Expérience responsive</h4>
+                        <p>L'interface a été conçue pour s'adapter harmonieusement aux ordinateurs, tablettes et
+                            appareils
+                            mobiles,
+                            permettant aux visiteurs d'accéder facilement aux informations du festival où qu'ils soient.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">11</div>
+
+                <h2>Considérations techniques</h2>
+
+                <p>
+                    Bien que le projet se soit concentré sur l'amélioration de l'expérience utilisateur, les choix
+                    d'implémentation ont été réalisés en gardant à l'esprit la maintenabilité à long terme afin que
+                    le site puisse être facilement mis à jour pour les futures éditions du festival.
+                </p>
+
+                <h3>Gestion de contenu WordPress</h3>
+
+                <p>
+                    Le site a été reconstruit avec WordPress et Elementor, permettant aux organisateurs de modifier les
+                    pages,
+                    mettre à jour les programmes de concerts, publier des actualités et gérer le contenu sans nécessiter
+                    de
+                    connaissances techniques.
+                </p>
+
+                <h3>Composants réutilisables</h3>
+
+                <p>
+                    Des mises en page réutilisables et des styles globaux facilitent les futures mises à jour tout en
+                    maintenant
+                    une cohérence visuelle.
+                </p>
+
+                <h3>Performance responsive</h3>
+
+                <p>
+                    Le site a été développé avec des mises en page adaptatives, des images optimisées et du CSS
+                    personnalisé
+                    léger
+                    afin d'offrir une expérience cohérente sur ordinateur, tablette et mobile.
+                </p>
+
+            </div>
+
+            <div class="cs-section">
+
+                <div class="cs-section-num">12</div>
+
+                <h2>Réflexion</h2>
+
+                <p>
+                    En prenant en compte les visiteurs et les organisateurs, j'ai repensé le site autour d'une
+                    navigation plus
+                    claire,
+                    d'une hiérarchie de contenu pertinente et d'une maintenance simplifiée. Cette approche a permis de
+                    créer un
+                    système
+                    de gestion de contenu durable pour les organisateurs tout en offrant une meilleure expérience aux
+                    visiteurs.
+                </p>
+
+                <p>
+                    L'une des leçons les plus importantes a été de trouver un équilibre entre esthétique et
+                    utilisabilité. En
+                    tant que site culturel,
+                    le design devait transmettre l'élégance et l'atmosphère du festival tout en permettant aux visiteurs
+                    de
+                    trouver rapidement
+                    les informations pratiques telles que les concerts, les billets et les coordonnées.
+                </p>
+
+                <p>
+                    Travailler directement avec WordPress a également renforcé ma compréhension de la conception
+                    d'interfaces
+                    qui
+                    ne sont pas seulement agréables pour les visiteurs, mais aussi pratiques pour les administrateurs
+                    non
+                    techniques qui
+                    géreront le site année après année.
+                </p>
+
+            </div>
+
+            <script>
+                lucide.createIcons();
+
+                // Animation de rotation de la flèche — va jusqu'au bout même si le curseur quitte le lien
+                document.addEventListener('mouseenter', function (e) {
+                    const link = e.target.closest('.external-link');
+                    if (!link) return;
+                    const arrow = link.querySelector('.arrow');
+                    if (!arrow) return;
+                    arrow.classList.remove('rolling');
+                    void arrow.offsetWidth;
+                    arrow.classList.add('rolling');
+                }, true);
+
+                document.addEventListener('animationend', function (e) {
+                    if (e.target.classList.contains('arrow')) {
+                        e.target.classList.remove('rolling');
+                    }
+                }, true);
+            </script>
+
+</body>
+
+</html>
