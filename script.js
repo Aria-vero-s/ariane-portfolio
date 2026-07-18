@@ -135,12 +135,12 @@ const content = {
             skillCategories: [
                 {
                     name: 'UX/UI Design',
-                    items: 'Wireframes, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
+                    items: 'Wireframes, User Flow, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
                     practice: 'Applied in: Air France, BeautifulCalf Productions, personal portfolio, 42 / Code Institute projects',
                 },
                 {
                     name: 'Tools & Technologies',
-                    items: 'Figma, Photoshop, Wordpress, Git, GitHub, HTML, CSS, JavaScript, React, Python, C and C++',
+                    items: 'Figma, Wordpress, Git, GitHub, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C and C++',
                     practice: 'Applied in: client websites, academic projects, visual and multimedia creation',
                 },
                 {
@@ -219,17 +219,17 @@ const content = {
         },
         about: {
             title: 'Ariane Saulnier',
-            profile: 'Conceptrice UX/UI en formation à l\'École 42 (Maîtrise en Web & IA) et actuellement stagiaire au sein des équipes IT Flight Ops d\'Air France à Paris, je travaille sur des interfaces métier à forte contrainte opérationnelle. Mon approche combine UX design, compréhension des besoins utilisateurs et compréhension technique. Je souhaite rejoindre une équipe UX afin de contribuer à des projets structurés autour de la recherche utilisateur, de la conception itérative et de la création d\'expériences numériques accessibles et utiles.',
+            profile: 'Étudiante à l\'École 42 (Maîtrise en Web & IA). Actuellement stagiaire au sein des équipes IT Flight Ops d\'Air France à Paris, où je travaille sur des interfaces métier et en analyse d\'architecture. Mon approche combine UX design, compréhension des besoins utilisateurs et compréhension technique. Je souhaite rejoindre une équipe UX afin de contribuer à des projets structurés autour de la recherche utilisateur, de la conception itérative et de la création d\'expériences numériques accessibles et utiles.',
             skillsTitle: 'Compétences',
             skillCategories: [
                 {
                     name: 'UX/UI',
-                    items: 'Parcours Utilisateurs (User Flow), User Stories, Prototypage, Tests, Interfaces Métier',
+                    items: 'Wireframes, User Flow, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
                     practice: 'Mise en pratique : Air France, projets 42, BeautifulCalf Productions, portfolio, freelance',
                 },
                 {
                     name: 'Outils & Technologies',
-                    items: 'Figma, Photoshop, Wordpress, Git, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C et C++',
+                    items: 'Figma, Wordpress, Git, GitHub, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C et C++',
                     practice: 'Mise en pratique : sites web clients, projets académiques, création visuelle et multimédia',
                 },
                 {
@@ -634,7 +634,7 @@ function updateNavigation() {
         if (button) {
             const textSpan = button.querySelector('.nav-text');
             if (textSpan) {
-                textSpan.textContent = section.name[language];
+                textSpan.innerHTML = createKineticText(section.name[language]);
             }
         }
     });
@@ -642,7 +642,9 @@ function updateNavigation() {
     // Update language button
     const langButton = document.querySelector('.language-toggle .nav-text');
     if (langButton) {
-        langButton.textContent = language === 'en' ? 'FR' : 'EN';
+        langButton.innerHTML = createKineticText(
+            language === 'en' ? 'FR' : 'EN'
+        );
     }
 }
 
@@ -675,6 +677,75 @@ function renderSection(sectionId, container) {
             createCircuitPattern();
         });
     }
+}
+
+const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+function scrambleNavText(element) {
+    if (element.dataset.scrambling === "true") return;
+
+    element.dataset.scrambling = "true";
+
+    const letters = [...element.querySelectorAll(".nav-letter")]
+    .filter(letter => !letter.classList.contains("space"));
+
+    const original = [...letters].map(letter => letter.dataset.char || " ");
+
+    let frame = 0;
+    const totalFrames = 18;
+
+    letters.forEach(letter => {
+        letter.classList.add("scrambling");
+    });
+
+    const interval = setInterval(() => {
+
+        letters.forEach((letter, index) => {
+
+            const progress = frame / totalFrames;
+
+            if (progress > index / letters.length) {
+                letter.textContent = original[index];
+            } else {
+                letter.textContent =
+                    scrambleChars[
+                        Math.floor(Math.random() * scrambleChars.length)
+                    ];
+            }
+
+        });
+
+        frame++;
+
+        if (frame >= totalFrames) {
+            clearInterval(interval);
+
+            letters.forEach((letter, index) => {
+                letter.textContent = original[index];
+                letter.classList.remove("scrambling");
+            });
+
+            element.dataset.scrambling = "false";
+        }
+
+    }, 35);
+}
+
+function createKineticText(text) {
+    return text
+        .split("")
+        .map(char => {
+            if (char === " ") {
+                return `<span class="nav-letter space">&nbsp;</span>`;
+            }
+
+            return `
+                <span class="nav-letter" data-char="${char}">
+                    ${char}
+                </span>
+            `;
+        })
+        .join("");
 }
 
 // Create HTML for each section
@@ -976,6 +1047,14 @@ function setupEventListeners() {
             toggleLanguage();
         }
     });
+
+    document.addEventListener('mouseenter', (e) => {
+        const navText = e.target.closest('.nav-button .nav-text');
+
+        if (navText) {
+            scrambleNavText(navText);
+        }
+    }, true);
 
     // document.addEventListener('submit', (e) => {
     //     if (e.target.matches('.contact-form')) {
