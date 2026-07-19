@@ -633,6 +633,16 @@ function navigateToSection(sectionId, event) {
     // Update navigation
     updateNavigation();
 
+    document
+    .querySelector(".hamburger")
+    ?.classList.remove("active");
+
+    document
+    .querySelector(".nav-content")
+    ?.classList.remove("open");
+
+    document.body.classList.remove("menu-open");
+
     // Reset circuit animation flag and remove resize listener when leaving hero
     if (currentSection !== 'hero') {
         if (circuitResizeHandler) {
@@ -1097,6 +1107,17 @@ function toggleLanguage() {
 
 // Event listeners
 function setupEventListeners() {
+    const hamburger = document.querySelector(".hamburger");
+    const nav = document.querySelector(".nav-content");
+
+    if (hamburger && nav) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            nav.classList.toggle("open");
+            document.body.classList.toggle("menu-open");
+        });
+    }
+
     document.addEventListener('click', (e) => {
         if (e.target.closest('[data-action="navigate"]')) {
             const target = e.target.closest('[data-action="navigate"]').dataset.target;
