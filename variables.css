@@ -6,6 +6,7 @@
     --color-surface: #ffffff;
     --color-text: #000000;
     --color-muted: #666666;
+    --circuit-content-opacity: 0.35;
 
     /* Typography */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -23,6 +24,9 @@
     --space-4: 1rem;
     --space-5: 1.5rem;
     --space-6: 2rem;
+
+    /* Room above page content so headings clear the fixed navigation */
+    --nav-offset: 9rem;
 
     /* Radius */
     --radius-sm: 6px;

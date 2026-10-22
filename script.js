@@ -1,8 +1,6 @@
 // Application State
 let currentSection = 'hero';
-let nextSection = null;
-let isRevealing = false;
-let revealCenter = { x: 50, y: 50 };
+let isTravelling = false;
 let language = 'en';
 
 // Content Data
@@ -329,9 +327,11 @@ const content = {
     }
 };
 
-// Global circuit animation state - preserve across transitions
-let circuitAnimationInitialized = false;
-let circuitAnimationTimer = null;
+// Circuit board background – one persistent SVG behind every section
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const TRAVEL_DURATION = 1400;   // ms for the camera to glide to the next board
+const CAMERA_PULLBACK = 0.08;   // how far the camera zooms out mid-flight
+let circuitSize = { w: 0, h: 0 };
 
 // Circuit Pattern Animation
 // Builds the circuit paths using real pixel coordinates so the pattern
@@ -436,202 +436,309 @@ function buildCircuitData(w, h) {
     return { circuitTraces, componentPads, viaConnections };
 }
 
-let circuitResizeHandler = null;
+function getCircuitSize() {
+    const box = document.querySelector('.circuit-pattern').getBoundingClientRect();
+    return { w: Math.round(box.width), h: Math.round(box.height) };
+}
 
-function createCircuitPattern() {
+// Appends one "board" of traces, pads and vias to the SVG and returns its group.
+//   'intro'   – first page load: traces draw in on their original schedule, then replay forever
+//   'settled' – already drawn: each trace picks up at a random point of its replay cycle
+//   'travel'  – the board the camera is flying to: drawn once, quickly, starting from the
+//               side the camera comes from (dir = 1 → from the left, -1 → from the right)
+function createCircuitBoard(svg, w, h, mode, dir = 1) {
+    const { circuitTraces, componentPads, viaConnections } = buildCircuitData(w, h);
+
+    const board = document.createElementNS(SVG_NS, 'g');
+    board.classList.add('circuit-board');
+    svg.appendChild(board);
+
+    // Travel mode: fraction of the flight at which an x position comes into view
+    const arrival = x => 0.25 + 0.4 * (dir > 0 ? x / w : 1 - x / w);
+    const travelAnimate = (el, keyframes, start, length) => el.animate(keyframes, {
+        delay: start * TRAVEL_DURATION,
+        duration: length * TRAVEL_DURATION,
+        easing: 'ease-out',
+        fill: 'both',
+    });
+
+    // Pad / hole size in pixels — fixed to match line thickness
+    const padSize = 4;      // 4px half-width → 8px square, matching ~2px line weight
+    const holeSize = 1.8;   // small inner hole
+
+    // Create circuit traces
+    let horizontalIndex = 0;
+    circuitTraces.forEach((trace) => {
+        const path = document.createElementNS(SVG_NS, 'path');
+        path.setAttribute('d', trace.path);
+        path.setAttribute('stroke', '#091bd9');
+        path.setAttribute('stroke-width', trace.strokeWidth.toString());
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'square');
+        path.setAttribute('stroke-linejoin', 'miter');
+
+        board.appendChild(path);
+
+        const pathLength = path.getTotalLength();
+        path.style.strokeDasharray = pathLength.toString();
+        path.style.strokeDashoffset = pathLength.toString();
+        path.style.opacity = '0';
+        path.style.setProperty('--path-length', pathLength.toString());
+        path.classList.add('circuit-trace-react');
+
+        // Horizontal traces carry the camera (and its signal pulses) between boards
+        const box = path.getBBox();
+        const horizontal = box.width > box.height;
+        if (horizontal) path.classList.add('circuit-trace-horizontal');
+
+        if (mode === 'travel') {
+            path.style.opacity = '1';
+
+            if (horizontal) {
+                // Draw them from the side the camera comes from
+                const from = dir > 0 ? pathLength : -pathLength;
+                travelAnimate(path, [{ strokeDashoffset: `${from}` }, { strokeDashoffset: '0' }],
+                    0.12 + 0.05 * horizontalIndex++, 0.5);
+            } else {
+                const length = box.height < h / 2 ? 0.15 : 0.3;
+                travelAnimate(path, [{ strokeDashoffset: `${pathLength}` }, { strokeDashoffset: '0' }],
+                    arrival(box.x), length);
+            }
+            return;
+        }
+
+        const totalCycleDuration = trace.duration + 3;
+        const drawPercentage = (trace.duration / totalCycleDuration) * 100;
+
+        let animationName = 'drawTrace40';
+        if (Math.round(drawPercentage) <= 15) animationName = 'drawTrace14';
+        else if (Math.round(drawPercentage) <= 37) animationName = 'drawTrace36';
+        else if (Math.round(drawPercentage) <= 39) animationName = 'drawTrace38';
+        else if (Math.round(drawPercentage) <= 41) animationName = 'drawTrace40';
+        else animationName = 'drawTrace42';
+
+        // Settled traces start past the drawing phase (all keyframes finish by 42 %)
+        const delay = mode === 'settled'
+            ? -(0.45 + Math.random() * 0.5) * totalCycleDuration
+            : trace.delay;
+
+        path.style.animationDuration = `${totalCycleDuration}s`;
+        path.style.animationDelay = `${delay}s`;
+        path.style.animationTimingFunction = 'ease-out';
+        path.style.animationIterationCount = 'infinite';
+        path.style.animationFillMode = 'both';
+        path.style.animationName = animationName;
+    });
+
+    // Pads, holes and vias pop in on their own schedule in 'intro' and 'travel' modes
+    const popIn = (el, delay, duration) => {
+        if (mode === 'intro') {
+            el.style.animationDuration = `${duration}s`;
+            el.style.animationDelay = `${delay}s`;
+            el.style.animationTimingFunction = 'ease-out';
+            el.style.animationIterationCount = '1';
+            el.style.animationFillMode = 'forwards';
+            return;
+        }
+        el.style.animation = 'none';
+        el.style.opacity = '1';
+        if (mode === 'travel') {
+            travelAnimate(el, [{ opacity: 0 }, { opacity: 1 }], arrival(Number(el.dataset.x)) + 0.2, 0.12);
+        }
+    };
+
+    // Create component pads
+    componentPads.forEach((pad) => {
+        const g = document.createElementNS(SVG_NS, 'g');
+
+        const rect = document.createElementNS(SVG_NS, 'rect');
+        rect.setAttribute('x', (pad.x - padSize).toString());
+        rect.setAttribute('y', (pad.y - padSize).toString());
+        rect.setAttribute('width', (padSize * 2).toString());
+        rect.setAttribute('height', (padSize * 2).toString());
+        rect.setAttribute('fill', '#091bd9');
+        rect.setAttribute('rx', (padSize * 0.08).toString());
+        rect.classList.add('circuit-pad-react');
+        rect.dataset.x = pad.x;
+        popIn(rect, pad.delay, 0.3);
+
+        const hole = document.createElementNS(SVG_NS, 'rect');
+        hole.setAttribute('x', (pad.x - holeSize).toString());
+        hole.setAttribute('y', (pad.y - holeSize).toString());
+        hole.setAttribute('width', (holeSize * 2).toString());
+        hole.setAttribute('height', (holeSize * 2).toString());
+        hole.setAttribute('fill', '#f5f1f0');
+        hole.setAttribute('rx', (holeSize * 0.1).toString());
+        hole.classList.add('circuit-hole-react');
+        hole.dataset.x = pad.x;
+        popIn(hole, pad.delay + 0.15, 0.25);
+
+        g.appendChild(rect);
+        g.appendChild(hole);
+        board.appendChild(g);
+    });
+
+    // Create via connections — fixed size to match line thickness
+    const viaSize = 3;        // 3px radius
+    const viaStroke = 1.8;    // ~2px stroke, same as lines
+
+    viaConnections.forEach((via) => {
+        const circle = document.createElementNS(SVG_NS, 'circle');
+        circle.setAttribute('cx', via.x.toString());
+        circle.setAttribute('cy', via.y.toString());
+        circle.setAttribute('r', viaSize.toString());
+        circle.setAttribute('fill', 'none');
+        circle.setAttribute('stroke', '#091bd9');
+        circle.setAttribute('stroke-width', viaStroke.toString());
+        circle.classList.add('circuit-via-react');
+        circle.dataset.x = via.x;
+        popIn(circle, via.delay, 0.3);
+
+        board.appendChild(circle);
+    });
+
+    return board;
+}
+
+// Signal pulses that race along the horizontal traces, leading the camera
+// across each board in turn (boards are given in travel order).
+function addSignalPulses(boards, dir) {
+    const pulseLength = 140;
+
+    boards.forEach((board, boardIndex) => {
+        board.querySelectorAll('.circuit-trace-horizontal').forEach((trace, i) => {
+            const pulse = document.createElementNS(SVG_NS, 'path');
+            pulse.setAttribute('d', trace.getAttribute('d'));
+            pulse.classList.add('circuit-pulse');
+            board.appendChild(pulse);
+
+            const length = pulse.getTotalLength();
+            pulse.style.strokeDasharray = `${pulseLength} ${length + pulseLength}`;
+
+            // Dash offset pulseLength hides the pulse before the path start, -length past its end
+            const keyframes = [{ strokeDashoffset: `${pulseLength}` }, { strokeDashoffset: `${-length}` }];
+            if (dir < 0) keyframes.reverse();
+
+            pulse.animate(keyframes, {
+                delay: (boardIndex * 0.42 + i * 0.03) * TRAVEL_DURATION,
+                duration: 0.5 * TRAVEL_DURATION,
+                easing: 'linear',
+                fill: 'both',
+            });
+        });
+    });
+}
+
+function renderCircuit(mode) {
     const svg = document.querySelector('.circuit-svg');
     if (!svg) return;
 
-    // Only initialize once per hero section visit to prevent interruption
-    if (circuitAnimationInitialized && svg.children.length > 0) {
-        return;
-    }
+    circuitSize = getCircuitSize();
+    const { w, h } = circuitSize;
 
-    circuitAnimationInitialized = true;
+    // Set viewBox to match exact viewport pixels → 1 SVG unit = 1 px
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.replaceChildren();
+    createCircuitBoard(svg, w, h, mode);
+}
 
-    // Remove previous resize listener if any
-    if (circuitResizeHandler) {
-        window.removeEventListener('resize', circuitResizeHandler);
-        circuitResizeHandler = null;
-    }
+function setupCircuitBackground() {
+    renderCircuit('intro');
 
-    function render() {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-
-        // Set viewBox to match exact viewport pixels → 1 SVG unit = 1 px
-        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-
-        const { circuitTraces, componentPads, viaConnections } = buildCircuitData(w, h);
-
-        // Pad / hole size in pixels — fixed to match line thickness
-        const padSize = 4;      // 4px half-width → 8px square, matching ~2px line weight
-        const holeSize = 1.8;   // small inner hole
-
-        // Clear existing elements
-        svg.innerHTML = '';
-
-        // Create circuit traces
-        circuitTraces.forEach((trace) => {
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', trace.path);
-            path.setAttribute('stroke', '#091bd9');
-            path.setAttribute('stroke-width', trace.strokeWidth.toString());
-            path.setAttribute('fill', 'none');
-            path.setAttribute('stroke-linecap', 'square');
-            path.setAttribute('stroke-linejoin', 'miter');
-
-            svg.appendChild(path);
-
-            const pathLength = path.getTotalLength();
-            path.style.strokeDasharray = pathLength.toString();
-            path.style.strokeDashoffset = pathLength.toString();
-            path.style.opacity = '0';
-            path.style.setProperty('--path-length', pathLength.toString());
-            path.classList.add('circuit-trace-react');
-
-            const totalCycleDuration = trace.duration + 3;
-            const drawPercentage = (trace.duration / totalCycleDuration) * 100;
-
-            let animationName = 'drawTrace40';
-            if (Math.round(drawPercentage) <= 15) animationName = 'drawTrace14';
-            else if (Math.round(drawPercentage) <= 37) animationName = 'drawTrace36';
-            else if (Math.round(drawPercentage) <= 39) animationName = 'drawTrace38';
-            else if (Math.round(drawPercentage) <= 41) animationName = 'drawTrace40';
-            else animationName = 'drawTrace42';
-
-            path.style.animationDuration = `${totalCycleDuration}s`;
-            path.style.animationDelay = `${trace.delay}s`;
-            path.style.animationTimingFunction = 'ease-out';
-            path.style.animationIterationCount = 'infinite';
-            path.style.animationFillMode = 'both';
-            path.style.animationName = animationName;
-        });
-
-        // Create component pads
-        componentPads.forEach((pad) => {
-            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
-            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rect.setAttribute('x', (pad.x - padSize).toString());
-            rect.setAttribute('y', (pad.y - padSize).toString());
-            rect.setAttribute('width', (padSize * 2).toString());
-            rect.setAttribute('height', (padSize * 2).toString());
-            rect.setAttribute('fill', '#091bd9');
-            rect.setAttribute('rx', (padSize * 0.08).toString());
-            rect.classList.add('circuit-pad-react');
-
-            rect.style.animationDuration = '0.3s';
-            rect.style.animationDelay = `${pad.delay}s`;
-            rect.style.animationTimingFunction = 'ease-out';
-            rect.style.animationIterationCount = '1';
-            rect.style.animationFillMode = 'forwards';
-
-            const hole = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            hole.setAttribute('x', (pad.x - holeSize).toString());
-            hole.setAttribute('y', (pad.y - holeSize).toString());
-            hole.setAttribute('width', (holeSize * 2).toString());
-            hole.setAttribute('height', (holeSize * 2).toString());
-            hole.setAttribute('fill', '#f5f1f0');
-            hole.setAttribute('rx', (holeSize * 0.1).toString());
-            hole.classList.add('circuit-hole-react');
-
-            hole.style.animationDuration = '0.25s';
-            hole.style.animationDelay = `${pad.delay + 0.15}s`;
-            hole.style.animationTimingFunction = 'ease-out';
-            hole.style.animationIterationCount = '1';
-            hole.style.animationFillMode = 'forwards';
-
-            g.appendChild(rect);
-            g.appendChild(hole);
-            svg.appendChild(g);
-        });
-
-        // Create via connections — fixed size to match line thickness
-        const viaSize = 3;        // 3px radius
-        const viaStroke = 1.8;    // ~2px stroke, same as lines
-
-        viaConnections.forEach((via, index) => {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', via.x.toString());
-            circle.setAttribute('cy', via.y.toString());
-            circle.setAttribute('r', viaSize.toString());
-            circle.setAttribute('fill', 'none');
-            circle.setAttribute('stroke', '#091bd9');
-            circle.setAttribute('stroke-width', viaStroke.toString());
-            circle.classList.add('circuit-via-react');
-
-            circle.style.animationDuration = '0.3s';
-            circle.style.animationDelay = `${via.delay}s`;
-            circle.style.animationTimingFunction = 'ease-out';
-            circle.style.animationIterationCount = '1';
-            circle.style.animationFillMode = 'forwards';
-
-            svg.appendChild(circle);
-        });
-    }
-
-    // Initial render
-    render();
-
-    // Debounced resize handler – recalculates positions when viewport changes
+    // Debounced resize handler – recalculates positions when the viewport changes.
+    // Height-only changes from mobile browser toolbars don't affect the 100lvh box.
     let resizeTimeout;
-    circuitResizeHandler = () => {
+    window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            // Reset so render() rebuilds fully
-            circuitAnimationInitialized = false;
-            createCircuitPattern();
+            if (isTravelling) return; // the board is rebuilt when the camera lands
+            const { w, h } = getCircuitSize();
+            if (w !== circuitSize.w || h !== circuitSize.h) {
+                renderCircuit('settled');
+            }
         }, 250);
-    };
-    window.addEventListener('resize', circuitResizeHandler);
+    });
+}
 
-    // Reset initialization flag when leaving hero section
-    if (circuitAnimationTimer) {
-        clearTimeout(circuitAnimationTimer);
+const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const smoothstep = (a, b, t) => {
+    const x = Math.min(Math.max((t - a) / (b - a), 0), 1);
+    return x * x * (3 - 2 * x);
+};
+
+// Page transition: the camera glides along the horizontal traces to the next
+// board, carrying the old page away and bringing the new one in with it.
+function travelToSection(sectionId, dir) {
+    isTravelling = true;
+
+    const svg = document.querySelector('.circuit-svg');
+    const leaving = document.getElementById('sectionPreview');
+    const current = document.getElementById('sectionCurrent');
+    const content = current.querySelector('.section-content');
+    const { w, h } = circuitSize;
+
+    // Park the outgoing page in a fixed layer, frozen at its scroll position
+    const parked = document.createElement('div');
+    parked.className = 'section-content';
+    parked.style.transform = `translateY(${-window.scrollY}px)`;
+    parked.append(...content.childNodes);
+    leaving.replaceChildren(parked);
+
+    currentSection = sectionId;
+    renderSection(currentSection, content);
+    updateNavigation();
+    window.scrollTo(0, 0);
+
+    // Lay the destination board next to the current one, along the direction of travel
+    const sourceBoard = svg.querySelector('.circuit-board');
+    const destinationBoard = createCircuitBoard(svg, w, h, 'travel', dir);
+    destinationBoard.setAttribute('transform', `translate(${dir * w}, 0)`);
+    addSignalPulses([sourceBoard, destinationBoard], dir);
+
+    document.body.classList.add('is-travelling');
+    current.style.transformOrigin = `50% ${h / 2}px`;
+
+    const start = performance.now();
+
+    function frame(now) {
+        const t = Math.min((now - start) / TRAVEL_DURATION, 1);
+        const progress = easeInOutCubic(t);
+        const scale = 1 - CAMERA_PULLBACK * Math.sin(Math.PI * t);
+
+        // Everything is laid out on one wide board; the camera's centre moves by one
+        // board width. Both layers scale around the middle of the viewport.
+        const camera = `translateX(${-scale * dir * progress * w}px) scale(${scale})`;
+        svg.style.transform = camera;
+        leaving.style.transform = camera;
+        leaving.style.opacity = 1 - smoothstep(0.2, 0.7, t);
+        current.style.transform = `translateX(${scale * dir * (1 - progress) * w}px) scale(${scale})`;
+        current.style.opacity = smoothstep(0.3, 0.8, t);
+
+        if (t < 1) {
+            requestAnimationFrame(frame);
+            return;
+        }
+
+        // Landed: the destination board becomes the background, identical but settled
+        svg.style.transform = '';
+        leaving.replaceChildren();
+        leaving.style.transform = '';
+        leaving.style.opacity = '';
+        current.style.transform = '';
+        current.style.opacity = '';
+        current.style.transformOrigin = '';
+        renderCircuit('settled');
+
+        document.body.classList.remove('is-travelling');
+        isTravelling = false;
     }
 
-    circuitAnimationTimer = setTimeout(() => {
-        if (currentSection !== 'hero') {
-            circuitAnimationInitialized = false;
-        }
-    }, 2000);
+    requestAnimationFrame(frame);
 }
 
 // Navigation
-function navigateToSection(sectionId, event) {
-    if (sectionId === currentSection) return;
-
-    // Allow navigation during transition but prevent rapid clicking
-    if (isRevealing) {
-        return;
-    }
-
-    let clickX = 50, clickY = 50;
-    if (event) {
-        const rect = event.target.getBoundingClientRect();
-        clickX = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
-        clickY = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
-    }
-
-    revealCenter = { x: clickX, y: clickY };
-    nextSection = sectionId;
-    isRevealing = true;
-
-    // Get containers
-    const previewContainer = document.getElementById('sectionPreview');
-    const currentContainer = document.getElementById('sectionCurrent');
-
-    // Swap sections instantly (no circular reveal)
-    currentSection = sectionId;
-    nextSection = null;
-    isRevealing = false;
-
-    renderSection(currentSection, currentContainer.querySelector('.section-content'));
-    previewContainer.innerHTML = '';
-
-    // Update navigation
-    updateNavigation();
+function navigateToSection(sectionId) {
+    if (sectionId === currentSection || isTravelling) return;
 
     document
     .querySelector(".hamburger")
@@ -642,17 +749,21 @@ function navigateToSection(sectionId, event) {
     ?.classList.remove("open");
 
     document.body.classList.remove("menu-open");
+    document.body.dataset.page = sectionId;
 
-    // Reset circuit animation flag and remove resize listener when leaving hero
-    if (currentSection !== 'hero') {
-        if (circuitResizeHandler) {
-            window.removeEventListener('resize', circuitResizeHandler);
-            circuitResizeHandler = null;
-        }
-        if (circuitAnimationInitialized) {
-            circuitAnimationInitialized = false;
-        }
+    // Travel right to sections further along the nav, left to earlier ones
+    const from = sections.findIndex(s => s.id === currentSection);
+    const to = sections.findIndex(s => s.id === sectionId);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        currentSection = sectionId;
+        renderSection(currentSection, document.querySelector('#sectionCurrent .section-content'));
+        updateNavigation();
+        window.scrollTo(0, 0);
+        return;
     }
+
+    travelToSection(sectionId, to > from ? 1 : -1);
 }
 
 // Update navigation active state
@@ -707,14 +818,6 @@ function renderSection(sectionId, container) {
 
     // Re-initialize Lucide icons
     lucide.createIcons();
-
-    // Initialize circuit pattern for hero section
-    if (sectionId === 'hero') {
-        // Use requestAnimationFrame to ensure SVG is properly rendered
-        requestAnimationFrame(() => {
-            createCircuitPattern();
-        });
-    }
 }
 
 const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -791,9 +894,6 @@ function createHeroHTML() {
     const t = content[language];
     return `
         <div class="hero-section">
-            <div class="circuit-pattern">
-                <svg class="circuit-svg"></svg>
-            </div>
             <div class="hero-content">
                 <h1 class="hero-title">Ariane Saulnier</h1>
                 <p class="hero-subtitle">${t.hero.subtitle}</p>
@@ -1121,12 +1221,12 @@ function setupEventListeners() {
     document.addEventListener('click', (e) => {
         if (e.target.closest('[data-action="navigate"]')) {
             const target = e.target.closest('[data-action="navigate"]').dataset.target;
-            navigateToSection(target, e);
+            navigateToSection(target);
         }
 
         if (e.target.closest('[data-section]')) {
             const section = e.target.closest('[data-section]').dataset.section;
-            navigateToSection(section, e);
+            navigateToSection(section);
         }
 
         if (e.target.closest('.language-toggle')) {
@@ -1199,11 +1299,11 @@ function init() {
         currentSection = requestedSection;
     }
 
-    // Ensure initial clip-path state is correct
-    const currentContainer = document.getElementById('sectionCurrent');
-    currentContainer.style.clipPath = `circle(150% at 50% 50%)`;
+    document.body.dataset.page = currentSection;
+    setupCircuitBackground();
 
     // Show initial section
+    const currentContainer = document.getElementById('sectionCurrent');
     renderSection(currentSection, currentContainer.querySelector('.section-content'));
 
     // Update navigation

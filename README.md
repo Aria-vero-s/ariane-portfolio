@@ -10,7 +10,7 @@ GitHub: [github.com/aria-vero-s/ariane-portfolio](https://github.com/aria-vero-s
 ## Features
 
 - **Bilingual Support** (EN / FR)  
-- **Dynamic Page Transitions** with SVG circle reveals  
+- **Dynamic Page Transitions**: a camera glides along the circuit traces to the next page  
 - **Lucide Icon Integration**  
 - **Interactive Portfolio Showcase**  
 - **Animated SVG Circuit Board Pattern**  
@@ -29,8 +29,8 @@ The design is modern, with focus on usability and minimalism:
   - Hierarchy: large hero titles (4–9 rem), clear section headings (2.25 rem), body fonts scaled for readability
 - **Interactions & Transitions**  
   - Smooth transitions: hover states on nav, buttons, cards  
-  - SVG circuit animation uses CSS keyframes to draw and fade lines, pads, and vias for dynamic visual interest  
-  - Clip-path circle reveals on navigation add a tactile, immersive feel
+  - SVG circuit animation uses CSS keyframes to draw and fade lines, pads, and vias for dynamic visual interest; it stays fixed as the background of every section  
+  - On navigation, signal pulses race along the traces and the camera follows them to the next board, carrying the old page out and the new one in
 - **Layout & Responsiveness**  
   - Central fixed navigation that adapts: icon-only on mobile, icon + text on wider screens  
   - Responsive grid systems:
@@ -88,7 +88,7 @@ To add new items:
 
 - Update arrays in script.js: portfolioItems, services, content, etc.
 - Add images in images/
-- Optionally tweak circuit animation in createCircuitPattern().
+- Optionally tweak the circuit animation in createCircuitBoard() and the page transition in travelToSection().
 
 ## Contact
 

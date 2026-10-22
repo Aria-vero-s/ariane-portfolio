@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 
+html {
+    /* Keep the page width stable when switching between short and long sections */
+    scrollbar-gutter: stable;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     background-color: var(--color-background);
@@ -223,13 +228,26 @@ body {
 
 .main-container {
     position: relative;
+    z-index: 1;
     min-height: 100vh;
+    /* The incoming section sits off-screen mid-transition; don't let it widen
+       the page (mobile browsers would zoom out to fit it) */
+    overflow-x: hidden;
+    overflow-x: clip;
 }
 
+/* Holds the outgoing section while the camera carries it away */
 .section-preview {
-    position: absolute;
+    position: fixed;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.is-travelling .section-preview,
+.is-travelling .section-current {
+    will-change: transform, opacity;
 }
 
 .section-current {
@@ -255,7 +273,6 @@ body {
     position: relative;
     overflow: hidden;
     padding: var(--space-4);
-    background: var(--color-background);
 }
 
 .hero-content {
@@ -343,12 +360,23 @@ body {
 /*          Circuit Traces Design           */
 /* ---------------------------------------- */
 
+/* Fixed behind every section; lvh keeps it still when mobile toolbars slide */
 .circuit-pattern {
-    position: absolute;
-    inset: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
     overflow: hidden;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+/* Softer behind reading content; full strength on the homepage and mid-flight */
+body:not([data-page="hero"]):not(.is-travelling) .circuit-pattern {
+    opacity: var(--circuit-content-opacity);
 }
 
 .circuit-svg {
@@ -356,7 +384,23 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
+    /* The next board is laid out beyond the viewBox during page transitions */
+    overflow: visible;
+    transform-origin: 50% 50%;
     animation-play-state: running !important;
+}
+
+.is-travelling .circuit-svg {
+    will-change: transform;
+}
+
+/* Signal pulses leading the camera along the traces between pages */
+.circuit-pulse {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 4;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 4px var(--color-primary));
 }
 
 .circuit-trace-react {
@@ -726,8 +770,7 @@ body {
 .contact-section {
     overflow-x: hidden;
     min-height: 100vh;
-    background: var(--color-background);
-    padding: var(--space-6) var(--space-4) 0;
+    padding: var(--nav-offset) var(--space-4) 0;
 }
 
 @media (min-width: 640px) {
@@ -735,7 +778,7 @@ body {
     .portfolio-section,
     .services-section,
     .contact-section {
-        padding: var(--space-6) var(--space-6) 0;
+        padding: var(--nav-offset) var(--space-6) 0;
     }
 }
 
@@ -760,9 +803,9 @@ body {
 }
 
 @media (max-width: 640px) {
-    .section-title {
-        margin-top: 80px;
-        margin-bottom: var(--space-6);
+    :root {
+        /* Clears the hamburger button */
+        --nav-offset: 7rem;
     }
 }
 

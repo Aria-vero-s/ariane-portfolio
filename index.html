@@ -49,12 +49,17 @@
         </div>
     </nav>
 
+    <!-- Circuit board background (stays in place while sections change) -->
+    <div class="circuit-pattern" aria-hidden="true">
+        <svg class="circuit-svg"></svg>
+    </div>
+
     <!-- Main Content Container -->
     <div class="main-container">
-        <!-- Next section (shown underneath during transition) -->
+        <!-- Previous section (carried off-screen during transition) -->
         <div class="section-preview" id="sectionPreview"></div>
         
-        <!-- Current section (shrinks into circle during transition) -->
+        <!-- Current section -->
         <div class="section-current" id="sectionCurrent">
             <div class="section-content"></div>
         </div>
