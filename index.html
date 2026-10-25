@@ -23,11 +23,7 @@
 
             <!-- Navigation links -->
             <div class="nav-content">
-                <button class="nav-button active" data-section="hero">
-                    <span class="nav-text">Home</span>
-                </button>
-
-                <button class="nav-button" data-section="about">
+                <button class="nav-button active" data-section="about">
                     <span class="nav-text">About</span>
                 </button>
 
@@ -49,12 +45,13 @@
         </div>
     </nav>
 
-    <!-- Main Content Container -->
+    <!-- Circuit board background (stays in place while sections change) -->
+    <div class="circuit-pattern" aria-hidden="true">
+        <svg class="circuit-svg"></svg>
+    </div>
+
+    <!-- Main Content Container: a column inside the circuit's inner frame -->
     <div class="main-container">
-        <!-- Next section (shown underneath during transition) -->
-        <div class="section-preview" id="sectionPreview"></div>
-        
-        <!-- Current section (shrinks into circle during transition) -->
         <div class="section-current" id="sectionCurrent">
             <div class="section-content"></div>
         </div>

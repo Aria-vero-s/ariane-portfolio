@@ -6,6 +6,8 @@
     --color-surface: #ffffff;
     --color-text: #000000;
     --color-muted: #666666;
+    --color-border: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    --color-border-subtle: color-mix(in srgb, var(--color-primary) 15%, transparent);
 
     /* Typography */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -14,7 +16,13 @@
     --text-lg: 1.125rem;
     --text-xl: 1.5rem;
     --text-2xl: 2rem;
-    --text-page-title: 4rem;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+
+    --leading-tight: 1.2;
+    --leading-normal: 1.6;
 
     /* Spacing */
     --space-1: 0.25rem;
@@ -23,6 +31,12 @@
     --space-4: 1rem;
     --space-5: 1.5rem;
     --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 5rem;
+
+    /* Content column: as wide as the circuit frame allows, capped for readability */
+    --content-max-width: 72rem;
+    --text-max-width: 65ch;
 
     /* Radius */
     --radius-sm: 6px;
