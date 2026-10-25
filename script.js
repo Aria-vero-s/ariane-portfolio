@@ -1,11 +1,10 @@
 // Application State
-let currentSection = 'hero';
+let currentSection = 'about';
 let isTravelling = false;
 let language = 'en';
 
 // Content Data
 const sections = [
-    { id: 'hero', name: { en: 'Home', fr: 'Accueil' }, icon: 'home' },
     { id: 'about', name: { en: 'About', fr: 'À Propos' }, icon: 'user' },
     { id: 'portfolio', name: { en: 'Portfolio', fr: 'Portfolio' }, icon: 'briefcase' },
     { id: 'contact', name: { en: 'Contact', fr: 'Contact' }, icon: 'message-circle' },
@@ -140,12 +139,6 @@ const portfolioItems = {
 
 const content = {
     en: {
-        hero: {
-            subtitle: 'UI/UX Designer • Web Developer • Creative Thinker',
-            tagline: 'I help freelancers and small businesses grow online with simple, beautiful websites. From small static websites to full builds on Shopify, Wix, WordPress, or Webflow—I handle it all, start to finish, within your budget.',
-            learnMore: 'Learn More',
-            viewPortfolio: 'View Portfolio'
-        },
         about: {
             title: 'Ariane Saulnier',
             profile: 'Currently studying at École 42 in Paris and completing an internship at Air France in IT, I design and contribute to complex digital interfaces in enterprise environments. I have experience in mobile-first design, prototyping, and iterative product workflows within fast-paced teams. Originally from Canada, I am fully bilingual in French and English, and I am developing a career in UI/UX design focused on improving both user experience and product outcomes.',
@@ -233,12 +226,6 @@ const content = {
         }
     },
     fr: {
-        hero: {
-            subtitle: 'UI/UX Designer • Développeuse Web • Conceptrice Créative',
-            tagline: 'J\'aide les freelances et les petites entreprises à se développer en ligne grâce à des sites web simples et élégants. Qu\'il s\'agisse de petits sites statiques ou de créations complètes sur Shopify, Wix, WordPress ou Webflow—je m\'occupe de tout, de A à Z, dans le respect de votre budget.',
-            learnMore: 'En Savoir Plus',
-            viewPortfolio: 'Voir Portfolio'
-        },
         about: {
             title: 'Ariane Saulnier',
             profile: 'Étudiante à l\'École 42 (Maîtrise en Web & IA). Actuellement stagiaire au sein des équipes IT Flight Ops d\'Air France à Paris, où je travaille sur des interfaces métier et en analyse d\'architecture. Mon approche combine UX design, compréhension des besoins utilisateurs et compréhension technique. Je souhaite rejoindre une équipe UX afin de contribuer à des projets structurés autour de la recherche utilisateur, de la conception itérative et de la création d\'expériences numériques accessibles et utiles.',
@@ -327,10 +314,11 @@ const content = {
     }
 };
 
-// Circuit board background – one persistent SVG behind every section
+// Circuit board background – one persistent SVG behind every section,
+// with each section's content shown inside the board's inner frame
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const TRAVEL_DURATION = 1400;   // ms for the camera to glide to the next board
-const CAMERA_PULLBACK = 0.08;   // how far the camera zooms out mid-flight
+const EXIT_SPEED = 0.05;    // page change: trace delays (s) scaled down for the lines flowing out…
+const ENTER_SPEED = 0.14;   // …and for the lines flowing back in
 let circuitSize = { w: 0, h: 0 };
 
 // Circuit Pattern Animation
@@ -339,28 +327,34 @@ let circuitSize = { w: 0, h: 0 };
 // distorting stroke widths.
 
 function buildCircuitData(w, h) {
+    // Narrow screens get a tighter frame so the content column keeps a usable width
+    const compact = w < 900;
+
     // Bump size in pixels – the small zigzag offsets on the traces
-    const b = Math.min(w, h) * 0.03; // ~3 % of the smallest dimension
+    const b = Math.min(w, h) * (compact ? 0.02 : 0.03); // ~3 % of the smallest dimension
 
     // Percentage-based anchor positions (same visual layout as before)
     const x = {
-        outer1: w * 0.05,
-        inner1: w * 0.17,
+        outer1: w * (compact ? 0.03 : 0.05),
+        inner1: w * (compact ? 0.08 : 0.17),
         mid1:   w * 0.30,
         mid2:   w * 0.70,
-        inner2: w * 0.83,
-        outer2: w * 0.95,
+        inner2: w * (compact ? 0.92 : 0.83),
+        outer2: w * (compact ? 0.97 : 0.95),
         off:    w * 0.05,   // overflow beyond edges
     };
     const y = {
-        outer1: h * 0.055,
-        inner1: h * 0.19,
+        outer1: h * (compact ? 0.035 : 0.055),
+        inner1: h * (compact ? 0.11 : 0.19),
         mid1:   h * 0.333,
         mid2:   h * 0.667,
-        inner2: h * 0.81,
-        outer2: h * 0.944,
+        inner2: h * (compact ? 0.89 : 0.81),
         off:    h * 0.055,
     };
+
+    // The clear area inside the inner traces, where section content lives. It is open
+    // at the bottom so pages can scroll freely between the side traces.
+    const frame = { left: x.inner1, top: y.inner1, right: x.inner2, compact };
 
     // Helper – round to 1 decimal
     const r = v => Math.round(v * 10) / 10;
@@ -376,23 +370,13 @@ function buildCircuitData(w, h) {
             delay: 0.5, duration: 3.8, strokeWidth: 1.8
         },
 
-        // ── Bottom frame ────────────────────────────────────────
-        {
-            path: `M${r(-x.off)},${r(y.outer2)} L${r(x.inner1+b)},${r(y.outer2)} L${r(x.inner1+b)},${r(y.outer2-b)} L${r(x.mid1+b)},${r(y.outer2-b)} L${r(x.mid1+b)},${r(y.outer2)} L${r(x.mid2-b)},${r(y.outer2)} L${r(x.mid2-b)},${r(y.outer2-b)} L${r(x.inner2-b)},${r(y.outer2-b)} L${r(x.inner2-b)},${r(y.outer2)} L${r(w+x.off)},${r(y.outer2)}`,
-            delay: 1.2, duration: 4.2, strokeWidth: 2
-        },
-        {
-            path: `M${r(-x.off)},${r(y.inner2)} L${r(x.inner1)},${r(y.inner2)} L${r(x.inner1)},${r(y.inner2+b)} L${r(x.mid1)},${r(y.inner2+b)} L${r(x.mid1)},${r(y.inner2)} L${r(x.mid2)},${r(y.inner2)} L${r(x.mid2)},${r(y.inner2+b)} L${r(x.inner2)},${r(y.inner2+b)} L${r(x.inner2)},${r(y.inner2)} L${r(w+x.off)},${r(y.inner2)}`,
-            delay: 1.8, duration: 3.6, strokeWidth: 1.8
-        },
-
         // ── Left frame ──────────────────────────────────────────
         {
             path: `M${r(x.outer1)},${r(-y.off)} L${r(x.outer1)},${r(y.inner1)} L${r(x.outer1+b)},${r(y.inner1)} L${r(x.outer1+b)},${r(y.mid1)} L${r(x.outer1)},${r(y.mid1)} L${r(x.outer1)},${r(y.mid2)} L${r(x.outer1+b)},${r(y.mid2)} L${r(x.outer1+b)},${r(y.inner2)} L${r(x.outer1)},${r(y.inner2)} L${r(x.outer1)},${r(h+y.off)}`,
             delay: 2.0, duration: 3.5, strokeWidth: 1.9
         },
         {
-            path: `M${r(x.inner1)},${r(-y.off)} L${r(x.inner1)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1+b)} L${r(x.inner1)},${r(y.inner1+b)} L${r(x.inner1)},${r(y.inner2-b)} L${r(x.inner1-b)},${r(y.inner2-b)} L${r(x.inner1-b)},${r(y.inner2+b)} L${r(x.inner1)},${r(y.inner2+b)} L${r(x.inner1)},${r(h+y.off)}`,
+            path: `M${r(x.inner1)},${r(-y.off)} L${r(x.inner1)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1+b)} L${r(x.inner1)},${r(y.inner1+b)} L${r(x.inner1)},${r(h+y.off)}`,
             delay: 2.5, duration: 3.8, strokeWidth: 1.6
         },
 
@@ -402,38 +386,30 @@ function buildCircuitData(w, h) {
             delay: 3.0, duration: 3.5, strokeWidth: 1.9
         },
         {
-            path: `M${r(x.inner2)},${r(-y.off)} L${r(x.inner2)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1+b)} L${r(x.inner2)},${r(y.inner1+b)} L${r(x.inner2)},${r(y.inner2-b)} L${r(x.inner2+b)},${r(y.inner2-b)} L${r(x.inner2+b)},${r(y.inner2+b)} L${r(x.inner2)},${r(y.inner2+b)} L${r(x.inner2)},${r(h+y.off)}`,
+            path: `M${r(x.inner2)},${r(-y.off)} L${r(x.inner2)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1+b)} L${r(x.inner2)},${r(y.inner1+b)} L${r(x.inner2)},${r(h+y.off)}`,
             delay: 3.5, duration: 3.8, strokeWidth: 1.6
         },
 
         // ── Corner connectors ───────────────────────────────────
         { path: `M${r(x.inner1)},${r(y.outer1)} L${r(x.inner1)},${r(y.inner1)}`, delay: 4.0, duration: 1.0, strokeWidth: 1.4 },
         { path: `M${r(x.inner2)},${r(y.outer1)} L${r(x.inner2)},${r(y.inner1)}`, delay: 4.2, duration: 1.0, strokeWidth: 1.4 },
-        { path: `M${r(x.inner1)},${r(y.inner2)} L${r(x.inner1)},${r(y.outer2)}`, delay: 4.4, duration: 1.0, strokeWidth: 1.4 },
-        { path: `M${r(x.inner2)},${r(y.inner2)} L${r(x.inner2)},${r(y.outer2)}`, delay: 4.6, duration: 1.0, strokeWidth: 1.4 },
     ];
 
     // Delays are timed to match when the first trace line reaches each pad
     const componentPads = [
         { x: x.outer1, y: y.outer1, delay: 0.4 },   // top-left:     top trace arrives early
         { x: x.inner1, y: y.outer1, delay: 0.8 },   // top-inner-L:  top trace passes 20%
-        { x: x.outer1, y: y.outer2, delay: 1.6 },   // bot-left:     bottom trace arrives
         { x: x.outer2, y: y.outer1, delay: 3.0 },   // top-right:    right trace starts
         { x: x.inner2, y: y.outer1, delay: 3.2 },   // top-inner-R:  top trace passes 80%
-        { x: x.inner1, y: y.outer2, delay: 2.0 },   // bot-inner-L:  bottom trace passes 20%
-        { x: x.inner2, y: y.outer2, delay: 4.5 },   // bot-inner-R:  bottom trace passes 80%
-        { x: x.outer2, y: y.outer2, delay: 5.4 },   // bot-right:    bottom trace end
     ];
 
     // Delays timed to when the first trace reaches each inner corner
     const viaConnections = [
         { x: x.inner1, y: y.inner1, delay: 1.3 },   // top-left inner
         { x: x.inner2, y: y.inner1, delay: 3.5 },   // top-right inner
-        { x: x.inner1, y: y.inner2, delay: 2.5 },   // bot-left inner
-        { x: x.inner2, y: y.inner2, delay: 4.7 },   // bot-right inner
     ];
 
-    return { circuitTraces, componentPads, viaConnections };
+    return { circuitTraces, componentPads, viaConnections, frame };
 }
 
 function getCircuitSize() {
@@ -444,30 +420,19 @@ function getCircuitSize() {
 // Appends one "board" of traces, pads and vias to the SVG and returns its group.
 //   'intro'   – first page load: traces draw in on their original schedule, then replay forever
 //   'settled' – already drawn: each trace picks up at a random point of its replay cycle
-//   'travel'  – the board the camera is flying to: drawn once, quickly, starting from the
-//               side the camera comes from (dir = 1 → from the left, -1 → from the right)
-function createCircuitBoard(svg, w, h, mode, dir = 1) {
+//   'enter'   – page change: drawn once on the intro schedule, sped up (ENTER_SPEED)
+function createCircuitBoard(svg, w, h, mode) {
     const { circuitTraces, componentPads, viaConnections } = buildCircuitData(w, h);
 
     const board = document.createElementNS(SVG_NS, 'g');
     board.classList.add('circuit-board');
     svg.appendChild(board);
 
-    // Travel mode: fraction of the flight at which an x position comes into view
-    const arrival = x => 0.25 + 0.4 * (dir > 0 ? x / w : 1 - x / w);
-    const travelAnimate = (el, keyframes, start, length) => el.animate(keyframes, {
-        delay: start * TRAVEL_DURATION,
-        duration: length * TRAVEL_DURATION,
-        easing: 'ease-out',
-        fill: 'both',
-    });
-
     // Pad / hole size in pixels — fixed to match line thickness
     const padSize = 4;      // 4px half-width → 8px square, matching ~2px line weight
     const holeSize = 1.8;   // small inner hole
 
     // Create circuit traces
-    let horizontalIndex = 0;
     circuitTraces.forEach((trace) => {
         const path = document.createElementNS(SVG_NS, 'path');
         path.setAttribute('d', trace.path);
@@ -485,25 +450,16 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
         path.style.opacity = '0';
         path.style.setProperty('--path-length', pathLength.toString());
         path.classList.add('circuit-trace-react');
+        path.dataset.delay = trace.delay;
 
-        // Horizontal traces carry the camera (and its signal pulses) between boards
-        const box = path.getBBox();
-        const horizontal = box.width > box.height;
-        if (horizontal) path.classList.add('circuit-trace-horizontal');
-
-        if (mode === 'travel') {
+        if (mode === 'enter') {
             path.style.opacity = '1';
-
-            if (horizontal) {
-                // Draw them from the side the camera comes from
-                const from = dir > 0 ? pathLength : -pathLength;
-                travelAnimate(path, [{ strokeDashoffset: `${from}` }, { strokeDashoffset: '0' }],
-                    0.12 + 0.05 * horizontalIndex++, 0.5);
-            } else {
-                const length = box.height < h / 2 ? 0.15 : 0.3;
-                travelAnimate(path, [{ strokeDashoffset: `${pathLength}` }, { strokeDashoffset: '0' }],
-                    arrival(box.x), length);
-            }
+            path.animate([{ strokeDashoffset: `${pathLength}` }, { strokeDashoffset: '0' }], {
+                delay: trace.delay * ENTER_SPEED * 1000,
+                duration: trace.duration * ENTER_SPEED * 1000,
+                easing: 'ease-out',
+                fill: 'both',
+            });
             return;
         }
 
@@ -530,8 +486,9 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
         path.style.animationName = animationName;
     });
 
-    // Pads, holes and vias pop in on their own schedule in 'intro' and 'travel' modes
+    // Pads, holes and vias pop in as the first trace reaches them
     const popIn = (el, delay, duration) => {
+        el.dataset.delay = delay;
         if (mode === 'intro') {
             el.style.animationDuration = `${duration}s`;
             el.style.animationDelay = `${delay}s`;
@@ -542,8 +499,13 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
         }
         el.style.animation = 'none';
         el.style.opacity = '1';
-        if (mode === 'travel') {
-            travelAnimate(el, [{ opacity: 0 }, { opacity: 1 }], arrival(Number(el.dataset.x)) + 0.2, 0.12);
+        if (mode === 'enter') {
+            el.animate([{ opacity: 0 }, { opacity: 1 }], {
+                delay: delay * ENTER_SPEED * 1000,
+                duration: 150,
+                easing: 'ease-out',
+                fill: 'both',
+            });
         }
     };
 
@@ -559,7 +521,6 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
         rect.setAttribute('fill', '#091bd9');
         rect.setAttribute('rx', (padSize * 0.08).toString());
         rect.classList.add('circuit-pad-react');
-        rect.dataset.x = pad.x;
         popIn(rect, pad.delay, 0.3);
 
         const hole = document.createElementNS(SVG_NS, 'rect');
@@ -570,7 +531,6 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
         hole.setAttribute('fill', '#f5f1f0');
         hole.setAttribute('rx', (holeSize * 0.1).toString());
         hole.classList.add('circuit-hole-react');
-        hole.dataset.x = pad.x;
         popIn(hole, pad.delay + 0.15, 0.25);
 
         g.appendChild(rect);
@@ -591,7 +551,6 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
         circle.setAttribute('stroke', '#091bd9');
         circle.setAttribute('stroke-width', viaStroke.toString());
         circle.classList.add('circuit-via-react');
-        circle.dataset.x = via.x;
         popIn(circle, via.delay, 0.3);
 
         board.appendChild(circle);
@@ -600,33 +559,48 @@ function createCircuitBoard(svg, w, h, mode, dir = 1) {
     return board;
 }
 
-// Signal pulses that race along the horizontal traces, leading the camera
-// across each board in turn (boards are given in travel order).
-function addSignalPulses(boards, dir) {
-    const pulseLength = 140;
+// Lines flow out: each trace erases from its start, chasing the direction it was
+// drawn in, in the same order as the intro (sped up). Resolves once the board is clear.
+function eraseCircuitBoard() {
+    const board = document.querySelector('.circuit-board');
+    if (!board) return Promise.resolve();
 
-    boards.forEach((board, boardIndex) => {
-        board.querySelectorAll('.circuit-trace-horizontal').forEach((trace, i) => {
-            const pulse = document.createElementNS(SVG_NS, 'path');
-            pulse.setAttribute('d', trace.getAttribute('d'));
-            pulse.classList.add('circuit-pulse');
-            board.appendChild(pulse);
+    const animations = [];
+    board.querySelectorAll('[data-delay]').forEach(el => {
+        const delay = Number(el.dataset.delay) * EXIT_SPEED * 1000;
 
-            const length = pulse.getTotalLength();
-            pulse.style.strokeDasharray = `${pulseLength} ${length + pulseLength}`;
-
-            // Dash offset pulseLength hides the pulse before the path start, -length past its end
-            const keyframes = [{ strokeDashoffset: `${pulseLength}` }, { strokeDashoffset: `${-length}` }];
-            if (dir < 0) keyframes.reverse();
-
-            pulse.animate(keyframes, {
-                delay: (boardIndex * 0.42 + i * 0.03) * TRAVEL_DURATION,
-                duration: 0.5 * TRAVEL_DURATION,
-                easing: 'linear',
-                fill: 'both',
-            });
-        });
+        if (el.classList.contains('circuit-trace-react')) {
+            const length = el.style.getPropertyValue('--path-length');
+            // Single keyframe: erase from wherever its replay cycle currently is
+            animations.push(el.animate([{ strokeDashoffset: `${-length}` }], {
+                delay,
+                duration: 300,
+                easing: 'ease-in',
+                fill: 'forwards',
+            }));
+        } else {
+            animations.push(el.animate([{ opacity: 0 }], {
+                delay: delay + 150,
+                duration: 150,
+                fill: 'forwards',
+            }));
+        }
     });
+
+    return Promise.all(animations.map(a => a.finished));
+}
+
+// Lines the content column up inside the board's inner frame (and below the nav)
+function fitContentToFrame(frame) {
+    const gap = frame.compact ? 16 : 32;
+    const navBottom = document.querySelector('.nav-container').getBoundingClientRect().bottom;
+
+    const root = document.documentElement.style;
+    root.setProperty('--frame-top', `${frame.top}px`);
+    root.setProperty('--frame-gap', `${gap}px`);
+    root.setProperty('--content-top', `${Math.max(frame.top, navBottom) + gap}px`);
+    root.setProperty('--frame-left', `${frame.left + gap}px`);
+    root.setProperty('--frame-width', `${frame.right - frame.left - gap * 2}px`);
 }
 
 function renderCircuit(mode) {
@@ -640,18 +614,18 @@ function renderCircuit(mode) {
     svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
     svg.replaceChildren();
     createCircuitBoard(svg, w, h, mode);
+    fitContentToFrame(buildCircuitData(w, h).frame);
 }
 
 function setupCircuitBackground() {
     renderCircuit('intro');
 
-    // Debounced resize handler – recalculates positions when the viewport changes.
-    // Height-only changes from mobile browser toolbars don't affect the 100lvh box.
+    // Debounced resize handler – recalculates positions when the viewport changes
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            if (isTravelling) return; // the board is rebuilt when the camera lands
+            if (isTravelling) return; // the board is rebuilt when the page change ends
             const { w, h } = getCircuitSize();
             if (w !== circuitSize.w || h !== circuitSize.h) {
                 renderCircuit('settled');
@@ -660,80 +634,42 @@ function setupCircuitBackground() {
     });
 }
 
-const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-const smoothstep = (a, b, t) => {
-    const x = Math.min(Math.max((t - a) / (b - a), 0), 1);
-    return x * x * (3 - 2 * x);
-};
-
-// Page transition: the camera glides along the horizontal traces to the next
-// board, carrying the old page away and bringing the new one in with it.
-function travelToSection(sectionId, dir) {
+// Page transition in the circuit's own style: the lines flow out of the board,
+// the new section is swapped in, then the lines draw back in and the content
+// fades in as the frame closes.
+async function changeSection(sectionId) {
     isTravelling = true;
 
-    const svg = document.querySelector('.circuit-svg');
-    const leaving = document.getElementById('sectionPreview');
-    const current = document.getElementById('sectionCurrent');
-    const content = current.querySelector('.section-content');
-    const { w, h } = circuitSize;
+    const container = document.querySelector('.main-container');
+    const content = container.querySelector('.section-content');
 
-    // Park the outgoing page in a fixed layer, frozen at its scroll position
-    const parked = document.createElement('div');
-    parked.className = 'section-content';
-    parked.style.transform = `translateY(${-window.scrollY}px)`;
-    parked.append(...content.childNodes);
-    leaving.replaceChildren(parked);
+    const contentOut = container.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: 200,
+        easing: 'ease-in',
+        fill: 'forwards',
+    });
+    await Promise.all([contentOut.finished, eraseCircuitBoard()]);
 
     currentSection = sectionId;
     renderSection(currentSection, content);
     updateNavigation();
     window.scrollTo(0, 0);
 
-    // Lay the destination board next to the current one, along the direction of travel
-    const sourceBoard = svg.querySelector('.circuit-board');
-    const destinationBoard = createCircuitBoard(svg, w, h, 'travel', dir);
-    destinationBoard.setAttribute('transform', `translate(${dir * w}, 0)`);
-    addSignalPulses([sourceBoard, destinationBoard], dir);
+    renderCircuit('enter');
+    contentOut.cancel();
+    const contentIn = container.animate([{ opacity: 0 }, { opacity: 1 }], {
+        delay: 450,
+        duration: 350,
+        easing: 'ease-out',
+        fill: 'backwards',
+    });
 
-    document.body.classList.add('is-travelling');
-    current.style.transformOrigin = `50% ${h / 2}px`;
+    // Wait for the last trace to finish drawing, then let the board replay as usual
+    const board = document.querySelector('.circuit-board');
+    await Promise.all([contentIn.finished, ...board.getAnimations({ subtree: true }).map(a => a.finished)]);
+    renderCircuit('settled');
 
-    const start = performance.now();
-
-    function frame(now) {
-        const t = Math.min((now - start) / TRAVEL_DURATION, 1);
-        const progress = easeInOutCubic(t);
-        const scale = 1 - CAMERA_PULLBACK * Math.sin(Math.PI * t);
-
-        // Everything is laid out on one wide board; the camera's centre moves by one
-        // board width. Both layers scale around the middle of the viewport.
-        const camera = `translateX(${-scale * dir * progress * w}px) scale(${scale})`;
-        svg.style.transform = camera;
-        leaving.style.transform = camera;
-        leaving.style.opacity = 1 - smoothstep(0.2, 0.7, t);
-        current.style.transform = `translateX(${scale * dir * (1 - progress) * w}px) scale(${scale})`;
-        current.style.opacity = smoothstep(0.3, 0.8, t);
-
-        if (t < 1) {
-            requestAnimationFrame(frame);
-            return;
-        }
-
-        // Landed: the destination board becomes the background, identical but settled
-        svg.style.transform = '';
-        leaving.replaceChildren();
-        leaving.style.transform = '';
-        leaving.style.opacity = '';
-        current.style.transform = '';
-        current.style.opacity = '';
-        current.style.transformOrigin = '';
-        renderCircuit('settled');
-
-        document.body.classList.remove('is-travelling');
-        isTravelling = false;
-    }
-
-    requestAnimationFrame(frame);
+    isTravelling = false;
 }
 
 // Navigation
@@ -749,11 +685,6 @@ function navigateToSection(sectionId) {
     ?.classList.remove("open");
 
     document.body.classList.remove("menu-open");
-    document.body.dataset.page = sectionId;
-
-    // Travel right to sections further along the nav, left to earlier ones
-    const from = sections.findIndex(s => s.id === currentSection);
-    const to = sections.findIndex(s => s.id === sectionId);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         currentSection = sectionId;
@@ -763,7 +694,7 @@ function navigateToSection(sectionId) {
         return;
     }
 
-    travelToSection(sectionId, to > from ? 1 : -1);
+    changeSection(sectionId);
 }
 
 // Update navigation active state
@@ -802,9 +733,6 @@ function renderSection(sectionId, container) {
     const t = content[language];
 
     switch (sectionId) {
-        case 'hero':
-            container.innerHTML = createHeroHTML();
-            break;
         case 'about':
             container.innerHTML = createAboutHTML();
             break;
@@ -890,22 +818,6 @@ function createKineticText(text) {
 }
 
 // Create HTML for each section
-function createHeroHTML() {
-    const t = content[language];
-    return `
-        <div class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Ariane Saulnier</h1>
-                <p class="hero-subtitle">${t.hero.subtitle}</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" data-action="navigate" data-target="about">${t.hero.learnMore}</button>
-                    <button class="btn btn-outline" data-action="navigate" data-target="portfolio">${t.hero.viewPortfolio}</button>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
 function createAboutHTML() {
     const t = content[language];
 
@@ -1299,7 +1211,6 @@ function init() {
         currentSection = requestedSection;
     }
 
-    document.body.dataset.page = currentSection;
     setupCircuitBackground();
 
     // Show initial section

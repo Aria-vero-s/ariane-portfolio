@@ -10,7 +10,7 @@ GitHub: [github.com/aria-vero-s/ariane-portfolio](https://github.com/aria-vero-s
 ## Features
 
 - **Bilingual Support** (EN / FR)  
-- **Dynamic Page Transitions**: a camera glides along the circuit traces to the next page  
+- **Dynamic Page Transitions**: the circuit lines flow out and redraw around the next page  
 - **Lucide Icon Integration**  
 - **Interactive Portfolio Showcase**  
 - **Animated SVG Circuit Board Pattern**  
@@ -26,11 +26,12 @@ The design is modern, with focus on usability and minimalism:
   - Light neutrals: `#f5f1f0` (background) & borders with subtle transparency around blue  
 - **Typography**  
   - System font stack (`-apple-system`, `Segoe UI`, `Roboto`, ...) for optimal legibility and performance  
-  - Hierarchy: large hero titles (4–9 rem), clear section headings (2.25 rem), body fonts scaled for readability
+  - Hierarchy: section titles (2 rem), sub-section titles (1.5 rem), body text (1 rem), all from the tokens in `variables.css`
 - **Interactions & Transitions**  
   - Smooth transitions: hover states on nav, buttons, cards  
   - SVG circuit animation uses CSS keyframes to draw and fade lines, pads, and vias for dynamic visual interest; it stays fixed as the background of every section  
-  - On navigation, signal pulses race along the traces and the camera follows them to the next board, carrying the old page out and the new one in
+  - Each page sits in a column between the circuit's side traces; the frame is open at the bottom so the page scrolls normally, and content slides out of view under the top traces
+  - On navigation, the lines flow out of the board and redraw on the intro schedule (sped up), with the new page fading in as the frame closes
 - **Layout & Responsiveness**  
   - Central fixed navigation that adapts: icon-only on mobile, icon + text on wider screens  
   - Responsive grid systems:
@@ -88,7 +89,7 @@ To add new items:
 
 - Update arrays in script.js: portfolioItems, services, content, etc.
 - Add images in images/
-- Optionally tweak the circuit animation in createCircuitBoard() and the page transition in travelToSection().
+- Optionally tweak the circuit animation in createCircuitBoard() and the page transition in changeSection().
 
 ## Contact
 
