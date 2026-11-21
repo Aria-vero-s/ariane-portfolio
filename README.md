@@ -10,11 +10,10 @@ GitHub: [github.com/aria-vero-s/ariane-portfolio](https://github.com/aria-vero-s
 ## Features
 
 - **Bilingual Support** (EN / FR)  
-- **Dynamic Page Transitions**: the circuit lines flow out and redraw around the next page  
+- **Guide Line**: one continuous stroke of ink, drawn down the page by scrolling  
+- **Stacked Project Cards**: one project at a time, each card sliding over the last  
 - **Lucide Icon Integration**  
 - **Interactive Portfolio Showcase**  
-- **Animated SVG Circuit Board Pattern**  
-- **Skill Progress Bars**  
 - **Fully Responsive Design**
 
 ## Style & Design
@@ -29,18 +28,21 @@ The design is modern, with focus on usability and minimalism:
   - Hierarchy: section titles (2 rem), sub-section titles (1.5 rem), body text (1 rem), all from the tokens in `variables.css`
 - **Interactions & Transitions**  
   - Smooth transitions: hover states on nav, buttons, cards  
-  - SVG circuit animation uses CSS keyframes to draw and fade lines, pads, and vias for dynamic visual interest; it stays fixed as the background of every section  
-  - Each page sits in a column between the circuit's side traces; the frame is open at the bottom so the page scrolls normally, and content slides out of view under the top traces
-  - On navigation, the lines flow out of the board and redraw on the intro schedule (sped up), with the new page fading in as the frame closes
+  - The page is a single scroll (Bio → Portfolio → Contact) led by one stroke of ink, drawn in SVG behind the content by `line.js`. It winds down beside the bio, from side to side behind the project cards, passes under the email address and runs off the bottom of the page
+  - Landing: the statement appears first, then the nav. The line is not drawn until the reader scrolls, and at the top of the page it is back at its starting point, out of sight
+  - At the end the line reaches water: once it has run off the bottom of the page, its blue rises to fill the contact section, and where the line meets the surface it swells out into it. The contact text is only ever shown under water, in the background colour, once the surface has risen over it
+  - Rule: the line is never straight. It follows free-flowing curves, is smoothed like a stabilised pen, and is made to meander until no stretch of it runs straight; no corners, no loops
+  - Its thickness follows pressure, like a flat brush held at an angle; it is made of three bundles of bristles that drift apart now and then, and ends in a tapered tip
+  - Scrolling draws the line while the page holds still; when the tip reaches the bottom of the screen the page moves down to make room, then the line carries on. The page sits in a fixed stage and `line.js` turns the scroll position into how much is drawn and how far down the page is. At rest it leans on and now and then makes a small move towards what comes next
+  - The bio is there as soon as the page opens, its words rising into place; other content marked `.r` is revealed as the tip passes it
+  - Project cards stop near the top of the screen; each new one slides up over the last, which shrinks and dims a little behind it
+  - With `prefers-reduced-motion` the content is simply there and the line follows the scroll without animation
 - **Layout & Responsiveness**  
-  - Central fixed navigation that adapts: icon-only on mobile, icon + text on wider screens  
+  - Central fixed navigation that scrolls to each section and follows the scroll; a slide-in menu on mobile  
+  - Content sits in one column; the bio keeps to the left of it and the cards to the middle, leaving room for the line  
   - Responsive grid systems:
-    - Portfolio: 1‑column (mobile), 2‑plus‑1 layout (tablet), 3+2 layout (desktop)
-    - Service and contact sections with adaptive grid or column arrangements
-- **Components & UI Patterns**  
-  - Buttons: `.btn-primary` (solid) and `.btn-outline` (bordered), programmable size classes  
-  - Cards and containers with soft rounded corners, consistent border styling  
-  - A unified card design for skills, projects, services, and contact form enhances cohesion
+- **Components**
+  - The line is the only decoration; everything else is type, cards and space
 
 ## Built With
 
@@ -48,14 +50,15 @@ The design is modern, with focus on usability and minimalism:
 - **CSS3**
 - **JavaScript (Vanilla)**
 - **Lucide Icons** (via CDN)
-- **SVG animations** for decorative circuit patterns
+- **SVG** for the line
 
 ## Project Structure
 
 ```plaintext
 ├── index.html              # Main HTML file
 ├── styles.css              # Custom styles
-├── script.js               # Application logic and transitions
+├── script.js               # Content, rendering and navigation
+├── line.js                 # The line: its path, scroll mapping and motion
 ├── images/                 # Project and section images
 ├── favicon.ico             # Site icon
 └── README.md               # This file
@@ -87,9 +90,9 @@ The site supports English and French. Toggle switches language dynamically witho
 
 To add new items:
 
-- Update arrays in script.js: portfolioItems, services, content, etc.
+- Update portfolioItems and content in script.js.
 - Add images in images/
-- Optionally tweak the circuit animation in createCircuitBoard() and the page transition in changeSection().
+- Mark new elements with the `r` class to have the line reveal them; the route it takes is laid out in `build()` in line.js.
 
 ## Contact
 

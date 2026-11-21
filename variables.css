@@ -12,10 +12,12 @@
     /* Typography */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
+    --text-sm: 0.8125rem;
     --text-base: 1rem;
     --text-lg: 1.125rem;
     --text-xl: 1.5rem;
     --text-2xl: 2rem;
+    --text-statement: clamp(1.625rem, 3vw, 2.75rem);
 
     --font-weight-regular: 400;
     --font-weight-medium: 500;
@@ -34,9 +36,12 @@
     --space-7: 3rem;
     --space-8: 5rem;
 
-    /* Content column: as wide as the circuit frame allows, capped for readability */
-    --content-max-width: 72rem;
+    /* Content column, with a margin either side */
+    --content-max-width: 64rem;
     --text-max-width: 65ch;
+    --gutter: clamp(1.5rem, 9vw, 9rem);
+    --section-gap: clamp(6rem, 20vh, 13rem);
+    --stack-top: clamp(5.5rem, 14vh, 8.5rem);   /* where the project cards stick, below the nav */
 
     /* Radius */
     --radius-sm: 6px;
@@ -45,4 +50,5 @@
 
     /* Effects */
     --transition: .3s ease-in-out;
+    --reveal: .9s cubic-bezier(.16, 1, .3, 1);
 }

@@ -23,7 +23,7 @@
 
             <!-- Navigation links -->
             <div class="nav-content">
-                <button class="nav-button active" data-section="about">
+                <button class="nav-button" data-section="about">
                     <span class="nav-text">About</span>
                 </button>
 
@@ -45,18 +45,19 @@
         </div>
     </nav>
 
-    <!-- Circuit board background (stays in place while sections change) -->
-    <div class="circuit-pattern" aria-hidden="true">
-        <svg class="circuit-svg"></svg>
+    <!-- The page: bio, portfolio and contact (filled in by script.js), with the line
+         drawn behind it. It sits in a fixed stage and line.js moves it: scrolling draws
+         the line, and the page follows when the line reaches the bottom of the screen.
+         The scroll space below gives the scrollbar its length. -->
+    <div class="stage">
+        <main class="page" id="page">
+            <svg class="guide-line" aria-hidden="true"><path class="water"></path><path class="mouth"></path><g class="ink"></g><path class="tip"></path></svg>
+            <div id="content"></div>
+        </main>
     </div>
+    <div class="scroll-space" aria-hidden="true"></div>
 
-    <!-- Main Content Container: a column inside the circuit's inner frame -->
-    <div class="main-container">
-        <div class="section-current" id="sectionCurrent">
-            <div class="section-content"></div>
-        </div>
-    </div>
-
+    <script src="line.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

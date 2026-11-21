@@ -1,6 +1,5 @@
 // Application State
-let currentSection = 'about';
-let isTravelling = false;
+let currentSection = null;   // the section on screen
 let language = 'en';
 
 // Content Data
@@ -139,584 +138,125 @@ const portfolioItems = {
 
 const content = {
     en: {
-        about: {
-            title: 'Ariane Saulnier',
-            profile: 'Currently studying at École 42 in Paris and completing an internship at Air France in IT, I design and contribute to complex digital interfaces in enterprise environments. I have experience in mobile-first design, prototyping, and iterative product workflows within fast-paced teams. Originally from Canada, I am fully bilingual in French and English, and I am developing a career in UI/UX design focused on improving both user experience and product outcomes.',
-            skillsTitle: 'Skills',
-            skillCategories: [
-                {
-                    name: 'UX/UI Design',
-                    items: 'Wireframes, User Flow, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
-                    practice: 'Applied in: Air France, BeautifulCalf Productions, personal portfolio, 42 / Code Institute projects',
-                },
-                {
-                    name: 'Tools & Technologies',
-                    items: 'Figma, Wordpress, Git, GitHub, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C and C++',
-                    practice: 'Applied in: client websites, academic projects, visual and multimedia creation',
-                },
-                {
-                    name: 'Soft Skills & Methods',
-                    items: 'Needs analysis, user listening, teamwork, continuous improvement, agile methodology',
-                    practice: 'Applied in: Air France, Service Canada, music teaching, web projects',
-                }
-            ],
-            educationTitle: 'Education',
-            educationItems: [
-                { school: 'École 42', location: 'Paris, France', degree: 'Certificat d\'Architecte en Technologie Numérique', dates: '05/2024 – Present' },
-                { school: 'Code Institute London', location: 'United Kingdom', degree: 'Diploma in Software Development (E-commerce Applications)', dates: '02/2022 – 02/2023' },
-                { school: 'Université de Moncton', location: 'Canada', degree: "Bachelor's Degree in Music Education", dates: '09/2017 – 05/2020' },
-                { school: "Université d'Ottawa", location: 'Canada', degree: "Bachelor's Degree in Music Performance", dates: '09/2013 – 05/2017' }
-            ],
-            experienceTitle: 'Professional Experience',
-            experienceItems: [
-                {
-                    title: 'IT Intern – Flight Ops',
-                    company: 'Air France, CDG Île-de-France',
-                    description: 'Collaboration and participation in internal tool migration projects, interface mockup design, and observation of business needs within IT Flight Ops.',
-                    location: 'France',
-                    dates: '2026 – Present'
-                },
-                {
-                    title: 'Web Developer & Designer',
-                    company: 'BeautifulCalf Productions (Canadian company)',
-                    description: 'Design and development of websites using Webflow, Wix, WordPress, and Shopify for various clients.',
-                    location: 'Remote',
-                    dates: '2024 – Present'
-                },
-                {
-                    title: 'Teacher – Public schools & Music education',
-                    company: 'Teaching Artist – Sistema NB, schools in Canada and the United Kingdom',
-                    description: 'Experience in pedagogy, communication, and group management in multicultural environments.',
-                    location: 'Canada & United Kingdom',
-                    dates: '2017 – 2023'
-                },
-                {
-                    title: 'Citizen Services Officer',
-                    company: 'Service Canada, Government of Canada',
-                    description: 'Handling nationwide calls, problem resolution, and secure database data entry.',
-                    location: 'Canada',
-                    dates: '2018 – 2019'
-                }
-            ],
-            languagesTitle: 'Languages & Interests',
-            languagesSubtitle: 'Languages',
-            interestsSubtitle: 'Interests',
-            languages: ['Bilingual French–English', 'Beginner Italian (A2)'],
-            interests: ['Adobe Creative Suite', 'Music (guitar, clarinet, piano)', 'DaVinci Resolve (youtube.com/@ariane.saulnier)', 'Graphic Design (behance.net/arianesaulnier)', 'Chess (3 years)']
-        },
-        portfolio: {
-            title: 'Portfolio',
-            intro: 'UX Design thinking with front-end development skills — a hybrid approach to building digital products.',
-            featuredTitle: 'Featured Projects',
-            otherTitle: 'Other Technical Projects',
-            viewProject: 'View Project',
-            viewCaseStudy: 'View Case Study',
+        bio: {
+            statement: 'I\'m Ariane, a UI/UX designer and web developer based in Paris. I design and build interfaces for complex tools, currently at Air France while studying at École 42. Originally from Canada, I was a musician and a teacher before I became a designer.',
         },
         contact: {
-            title: 'Get In Touch',
-            subtitle: 'Whether it\'s a website, a tool, or a small project, I\'d love to help. I enjoy turning ideas into reality and solving problems with design, code, and creativity, both for individuals and for teams.',
-            github: 'GitHub',
-            linkedin: 'LinkedIn',
-            formTitle: 'Send a Message',
-            nameLabel: 'Name',
-            emailLabel: 'Email',
-            messageLabel: 'Message',
-            messagePlaceholder: 'Tell me about your project...',
-            sendButton: 'Send Message'
-        }
+            links: [
+                { name: 'GitHub', url: 'https://github.com/aria-vero-s' },
+                { name: 'LinkedIn', url: 'https://linkedin.com/in/ariane-saulnier' },
+                { name: 'Behance', url: 'https://behance.net/arianesaulnier' },
+            ],
+        },
     },
     fr: {
-        about: {
-            title: 'Ariane Saulnier',
-            profile: 'Étudiante à l\'École 42 (Maîtrise en Web & IA). Actuellement stagiaire au sein des équipes IT Flight Ops d\'Air France à Paris, où je travaille sur des interfaces métier et en analyse d\'architecture. Mon approche combine UX design, compréhension des besoins utilisateurs et compréhension technique. Je souhaite rejoindre une équipe UX afin de contribuer à des projets structurés autour de la recherche utilisateur, de la conception itérative et de la création d\'expériences numériques accessibles et utiles.',
-            skillsTitle: 'Compétences',
-            skillCategories: [
-                {
-                    name: 'UX/UI',
-                    items: 'Wireframes, User Flow, mockups, user stories, prototyping, mobile design, user testing, design systems, interfaces',
-                    practice: 'Mise en pratique : Air France, projets 42, BeautifulCalf Productions, portfolio, freelance',
-                },
-                {
-                    name: 'Outils & Technologies',
-                    items: 'Figma, Wordpress, Git, GitHub, Jira, Confluence, HTML/CSS, JavaScript, React, Python, C et C++',
-                    practice: 'Mise en pratique : sites web clients, projets académiques, création visuelle et multimédia',
-                },
-                {
-                    name: 'Soft Skills & Méthode',
-                    items: 'Organisation, Communication, Travail en Équipe, Amélioration Continue et Méthode Agile',
-                    practice: 'Mise en pratique : Air France, Service Canada, enseignement musical, projets web',
-                }
-            ],
-            educationTitle: 'Formation',
-            educationItems: [
-                { school: 'École 42', location: 'Paris, France', degree: 'Certificat d\'Architecte en Technologie Numérique', dates: '05/2024 – Présent' },
-                { school: 'Code Institute London', location: 'Royaume-Uni', degree: 'Diplôme en Développement logiciel (E-commerce Applications)', dates: '02/2022 – 02/2023' },
-                { school: 'Université de Moncton', location: 'Canada', degree: 'Baccalauréat en Éducation musicale', dates: '09/2017 – 05/2020' },
-                { school: "Université d'Ottawa", location: 'Canada', degree: 'Baccalauréat en Interprétation musicale', dates: '09/2013 – 05/2017' }
-            ],
-            experienceTitle: 'Expérience professionnelle',
-            experienceItems: [
-                {
-                    title: 'Stagiaire IT Flight Ops',
-                    company: 'Air France, CDG Île-de-France',
-                    description: 'Collaboration et participation à des projets de migration d\'outils internes, conception de maquettes d\'interfaces et observation des besoins métiers au sein de IT Flight Ops.',
-                    location: 'France',
-                    dates: '2026 – Présent'
-                },
-                {
-                    title: 'Web Developer & Designer',
-                    company: 'BeautifulCalf Productions, compagnie canadienne',
-                    description: 'Conception de sites web sur Webflow, Wix, Wordpress et Shopify pour différents besoins clients.',
-                    location: 'Télétravail',
-                    dates: '2024 – Présent'
-                },
-                {
-                    title: 'Enseignante – école publique & enseignement musical',
-                    company: '\'Teaching Artist\' Sistema NB, écoles au Canada et au Royaume-Uni',
-                    description: 'Expérience en pédagogie, communication et gestion de groupe dans des contextes multiculturels.',
-                    location: 'Canada & Royaume-Uni',
-                    dates: '2017 – 2023'
-                },
-                {
-                    title: 'Agent de services aux citoyens',
-                    company: 'Service Canada, Gouvernement du Canada',
-                    description: 'Gestion d\'appels à l\'échelle nationale, résolution de problèmes et saisie de données en bases sécurisées.',
-                    location: 'Canada',
-                    dates: '2018 – 2019'
-                }
-            ],
-            languagesTitle: 'Langues et intérêts',
-            languagesSubtitle: 'Langues',
-            interestsSubtitle: 'Intérêts',
-            languages: ['Bilingue français-anglais', 'Italien débutant (A2)'],
-            interests: ['Adobe Creative Suite', 'Musique (guitare, clarinette, piano)', 'DaVinci Resolve (youtube.com/@ariane.saulnier)', 'Graphisme (behance.net/arianesaulnier)', 'Échecs (depuis 3 ans)']
-        },
-        portfolio: {
-            title: 'Portfolio',
-            intro: 'Pensée UX Design avec des compétences en développement front-end — une approche hybride pour construire des produits numériques.',
-            featuredTitle: 'Projets Sélectionnés',
-            otherTitle: 'Autres Projets Techniques',
-            viewProject: 'Voir le Projet',
-            viewCaseStudy: 'Voir l\'Étude de Cas',
+        bio: {
+            statement: 'Je suis Ariane, designer UI/UX et développeuse web à Paris. Je conçois et développe des interfaces pour des outils complexes, en ce moment chez Air France, en parallèle de mes études à l\'École 42. Originaire du Canada, j\'ai été musicienne et enseignante avant de devenir designer.',
         },
         contact: {
-            title: 'Contactez-Moi',
-            subtitle: 'Que ce soit un site web, un outil ou un petit projet, je serais ravie de vous aider. J\'aime transformer les idées en réalité et résoudre des problèmes grâce au design, au code et à la créativité, pour les particuliers comme pour les équipes.',
-            github: 'GitHub',
-            linkedin: 'LinkedIn',
-            formTitle: 'Envoyer un Message',
-            nameLabel: 'Nom',
-            emailLabel: 'Email',
-            messageLabel: 'Message',
-            messagePlaceholder: 'Parlez-moi de votre projet...',
-            sendButton: 'Envoyer le Message'
-        }
-    }
+            links: [
+                { name: 'GitHub', url: 'https://github.com/aria-vero-s' },
+                { name: 'LinkedIn', url: 'https://linkedin.com/in/ariane-saulnier' },
+                { name: 'Behance', url: 'https://behance.net/arianesaulnier' },
+            ],
+        },
+    },
 };
 
-// Circuit board background – one persistent SVG behind every section,
-// with each section's content shown inside the board's inner frame
-const SVG_NS = 'http://www.w3.org/2000/svg';
-const EXIT_SPEED = 0.05;    // page change: trace delays (s) scaled down for the lines flowing out…
-const ENTER_SPEED = 0.14;   // …and for the lines flowing back in
-let circuitSize = { w: 0, h: 0 };
+const EMAIL = 'ariane.saulnier@gmail.com';
 
-// Circuit Pattern Animation
-// Builds the circuit paths using real pixel coordinates so the pattern
-// stretches to fill any viewport aspect-ratio without cropping or
-// distorting stroke widths.
+// ---------------------------------------------------------------------------
+// The page: bio, portfolio and contact in one scroll, led by the line (line.js)
+// ---------------------------------------------------------------------------
 
-function buildCircuitData(w, h) {
-    // Narrow screens get a tighter frame so the content column keeps a usable width
-    const compact = w < 900;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Bump size in pixels – the small zigzag offsets on the traces
-    const b = Math.min(w, h) * (compact ? 0.02 : 0.03); // ~3 % of the smallest dimension
-
-    // Percentage-based anchor positions (same visual layout as before)
-    const x = {
-        outer1: w * (compact ? 0.03 : 0.05),
-        inner1: w * (compact ? 0.08 : 0.17),
-        mid1:   w * 0.30,
-        mid2:   w * 0.70,
-        inner2: w * (compact ? 0.92 : 0.83),
-        outer2: w * (compact ? 0.97 : 0.95),
-        off:    w * 0.05,   // overflow beyond edges
-    };
-    const y = {
-        outer1: h * (compact ? 0.035 : 0.055),
-        inner1: h * (compact ? 0.11 : 0.19),
-        mid1:   h * 0.333,
-        mid2:   h * 0.667,
-        inner2: h * (compact ? 0.89 : 0.81),
-        off:    h * 0.055,
-    };
-
-    // The clear area inside the inner traces, where section content lives. It is open
-    // at the bottom so pages can scroll freely between the side traces.
-    const frame = { left: x.inner1, top: y.inner1, right: x.inner2, compact };
-
-    // Helper – round to 1 decimal
-    const r = v => Math.round(v * 10) / 10;
-
-    const circuitTraces = [
-        // ── Top frame ───────────────────────────────────────────
-        {
-            path: `M${r(-x.off)},${r(y.outer1)} L${r(x.inner1)},${r(y.outer1)} L${r(x.inner1)},${r(y.outer1+b)} L${r(x.mid1)},${r(y.outer1+b)} L${r(x.mid1)},${r(y.outer1)} L${r(x.mid2)},${r(y.outer1)} L${r(x.mid2)},${r(y.outer1+b)} L${r(x.inner2)},${r(y.outer1+b)} L${r(x.inner2)},${r(y.outer1)} L${r(w+x.off)},${r(y.outer1)}`,
-            delay: 0, duration: 4.0, strokeWidth: 2
-        },
-        {
-            path: `M${r(-x.off)},${r(y.inner1)} L${r(x.inner1-b)},${r(y.inner1)} L${r(x.inner1-b)},${r(y.inner1-b)} L${r(x.inner1+b)},${r(y.inner1-b)} L${r(x.inner1+b)},${r(y.inner1)} L${r(x.inner2-b)},${r(y.inner1)} L${r(x.inner2-b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1)} L${r(w+x.off)},${r(y.inner1)}`,
-            delay: 0.5, duration: 3.8, strokeWidth: 1.8
-        },
-
-        // ── Left frame ──────────────────────────────────────────
-        {
-            path: `M${r(x.outer1)},${r(-y.off)} L${r(x.outer1)},${r(y.inner1)} L${r(x.outer1+b)},${r(y.inner1)} L${r(x.outer1+b)},${r(y.mid1)} L${r(x.outer1)},${r(y.mid1)} L${r(x.outer1)},${r(y.mid2)} L${r(x.outer1+b)},${r(y.mid2)} L${r(x.outer1+b)},${r(y.inner2)} L${r(x.outer1)},${r(y.inner2)} L${r(x.outer1)},${r(h+y.off)}`,
-            delay: 2.0, duration: 3.5, strokeWidth: 1.9
-        },
-        {
-            path: `M${r(x.inner1)},${r(-y.off)} L${r(x.inner1)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1-b)} L${r(x.inner1-b)},${r(y.inner1+b)} L${r(x.inner1)},${r(y.inner1+b)} L${r(x.inner1)},${r(h+y.off)}`,
-            delay: 2.5, duration: 3.8, strokeWidth: 1.6
-        },
-
-        // ── Right frame ─────────────────────────────────────────
-        {
-            path: `M${r(x.outer2)},${r(-y.off)} L${r(x.outer2)},${r(y.inner1)} L${r(x.outer2-b)},${r(y.inner1)} L${r(x.outer2-b)},${r(y.mid1)} L${r(x.outer2)},${r(y.mid1)} L${r(x.outer2)},${r(y.mid2)} L${r(x.outer2-b)},${r(y.mid2)} L${r(x.outer2-b)},${r(y.inner2)} L${r(x.outer2)},${r(y.inner2)} L${r(x.outer2)},${r(h+y.off)}`,
-            delay: 3.0, duration: 3.5, strokeWidth: 1.9
-        },
-        {
-            path: `M${r(x.inner2)},${r(-y.off)} L${r(x.inner2)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1-b)} L${r(x.inner2+b)},${r(y.inner1+b)} L${r(x.inner2)},${r(y.inner1+b)} L${r(x.inner2)},${r(h+y.off)}`,
-            delay: 3.5, duration: 3.8, strokeWidth: 1.6
-        },
-
-        // ── Corner connectors ───────────────────────────────────
-        { path: `M${r(x.inner1)},${r(y.outer1)} L${r(x.inner1)},${r(y.inner1)}`, delay: 4.0, duration: 1.0, strokeWidth: 1.4 },
-        { path: `M${r(x.inner2)},${r(y.outer1)} L${r(x.inner2)},${r(y.inner1)}`, delay: 4.2, duration: 1.0, strokeWidth: 1.4 },
-    ];
-
-    // Delays are timed to match when the first trace line reaches each pad
-    const componentPads = [
-        { x: x.outer1, y: y.outer1, delay: 0.4 },   // top-left:     top trace arrives early
-        { x: x.inner1, y: y.outer1, delay: 0.8 },   // top-inner-L:  top trace passes 20%
-        { x: x.outer2, y: y.outer1, delay: 3.0 },   // top-right:    right trace starts
-        { x: x.inner2, y: y.outer1, delay: 3.2 },   // top-inner-R:  top trace passes 80%
-    ];
-
-    // Delays timed to when the first trace reaches each inner corner
-    const viaConnections = [
-        { x: x.inner1, y: y.inner1, delay: 1.3 },   // top-left inner
-        { x: x.inner2, y: y.inner1, delay: 3.5 },   // top-right inner
-    ];
-
-    return { circuitTraces, componentPads, viaConnections, frame };
+function renderPage() {
+    document.getElementById('content').innerHTML =
+        createAboutHTML() + createPortfolioHTML() + createContactHTML();
+    window.lucide?.createIcons();
 }
 
-function getCircuitSize() {
-    const box = document.querySelector('.circuit-pattern').getBoundingClientRect();
-    return { w: Math.round(box.width), h: Math.round(box.height) };
+// Scrolling to a section: the page glides there and the line runs ahead of it
+let glide = null;
+
+function stopGlide() {
+    if (glide) cancelAnimationFrame(glide);
+    glide = null;
 }
 
-// Appends one "board" of traces, pads and vias to the SVG and returns its group.
-//   'intro'   – first page load: traces draw in on their original schedule, then replay forever
-//   'settled' – already drawn: each trace picks up at a random point of its replay cycle
-//   'enter'   – page change: drawn once on the intro schedule, sped up (ENTER_SPEED)
-function createCircuitBoard(svg, w, h, mode) {
-    const { circuitTraces, componentPads, viaConnections } = buildCircuitData(w, h);
+function scrollToY(y, instant) {
+    stopGlide();
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const to = Math.min(Math.max(0, y), Math.max(0, max));
+    const from = window.scrollY;
+    const distance = to - from;
 
-    const board = document.createElementNS(SVG_NS, 'g');
-    board.classList.add('circuit-board');
-    svg.appendChild(board);
-
-    // Pad / hole size in pixels — fixed to match line thickness
-    const padSize = 4;      // 4px half-width → 8px square, matching ~2px line weight
-    const holeSize = 1.8;   // small inner hole
-
-    // Create circuit traces
-    circuitTraces.forEach((trace) => {
-        const path = document.createElementNS(SVG_NS, 'path');
-        path.setAttribute('d', trace.path);
-        path.setAttribute('stroke', '#091bd9');
-        path.setAttribute('stroke-width', trace.strokeWidth.toString());
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke-linecap', 'square');
-        path.setAttribute('stroke-linejoin', 'miter');
-
-        board.appendChild(path);
-
-        const pathLength = path.getTotalLength();
-        path.style.strokeDasharray = pathLength.toString();
-        path.style.strokeDashoffset = pathLength.toString();
-        path.style.opacity = '0';
-        path.style.setProperty('--path-length', pathLength.toString());
-        path.classList.add('circuit-trace-react');
-        path.dataset.delay = trace.delay;
-
-        if (mode === 'enter') {
-            path.style.opacity = '1';
-            path.animate([{ strokeDashoffset: `${pathLength}` }, { strokeDashoffset: '0' }], {
-                delay: trace.delay * ENTER_SPEED * 1000,
-                duration: trace.duration * ENTER_SPEED * 1000,
-                easing: 'ease-out',
-                fill: 'both',
-            });
-            return;
-        }
-
-        const totalCycleDuration = trace.duration + 3;
-        const drawPercentage = (trace.duration / totalCycleDuration) * 100;
-
-        let animationName = 'drawTrace40';
-        if (Math.round(drawPercentage) <= 15) animationName = 'drawTrace14';
-        else if (Math.round(drawPercentage) <= 37) animationName = 'drawTrace36';
-        else if (Math.round(drawPercentage) <= 39) animationName = 'drawTrace38';
-        else if (Math.round(drawPercentage) <= 41) animationName = 'drawTrace40';
-        else animationName = 'drawTrace42';
-
-        // Settled traces start past the drawing phase (all keyframes finish by 42 %)
-        const delay = mode === 'settled'
-            ? -(0.45 + Math.random() * 0.5) * totalCycleDuration
-            : trace.delay;
-
-        path.style.animationDuration = `${totalCycleDuration}s`;
-        path.style.animationDelay = `${delay}s`;
-        path.style.animationTimingFunction = 'ease-out';
-        path.style.animationIterationCount = 'infinite';
-        path.style.animationFillMode = 'both';
-        path.style.animationName = animationName;
-    });
-
-    // Pads, holes and vias pop in as the first trace reaches them
-    const popIn = (el, delay, duration) => {
-        el.dataset.delay = delay;
-        if (mode === 'intro') {
-            el.style.animationDuration = `${duration}s`;
-            el.style.animationDelay = `${delay}s`;
-            el.style.animationTimingFunction = 'ease-out';
-            el.style.animationIterationCount = '1';
-            el.style.animationFillMode = 'forwards';
-            return;
-        }
-        el.style.animation = 'none';
-        el.style.opacity = '1';
-        if (mode === 'enter') {
-            el.animate([{ opacity: 0 }, { opacity: 1 }], {
-                delay: delay * ENTER_SPEED * 1000,
-                duration: 150,
-                easing: 'ease-out',
-                fill: 'both',
-            });
-        }
-    };
-
-    // Create component pads
-    componentPads.forEach((pad) => {
-        const g = document.createElementNS(SVG_NS, 'g');
-
-        const rect = document.createElementNS(SVG_NS, 'rect');
-        rect.setAttribute('x', (pad.x - padSize).toString());
-        rect.setAttribute('y', (pad.y - padSize).toString());
-        rect.setAttribute('width', (padSize * 2).toString());
-        rect.setAttribute('height', (padSize * 2).toString());
-        rect.setAttribute('fill', '#091bd9');
-        rect.setAttribute('rx', (padSize * 0.08).toString());
-        rect.classList.add('circuit-pad-react');
-        popIn(rect, pad.delay, 0.3);
-
-        const hole = document.createElementNS(SVG_NS, 'rect');
-        hole.setAttribute('x', (pad.x - holeSize).toString());
-        hole.setAttribute('y', (pad.y - holeSize).toString());
-        hole.setAttribute('width', (holeSize * 2).toString());
-        hole.setAttribute('height', (holeSize * 2).toString());
-        hole.setAttribute('fill', '#f5f1f0');
-        hole.setAttribute('rx', (holeSize * 0.1).toString());
-        hole.classList.add('circuit-hole-react');
-        popIn(hole, pad.delay + 0.15, 0.25);
-
-        g.appendChild(rect);
-        g.appendChild(hole);
-        board.appendChild(g);
-    });
-
-    // Create via connections — fixed size to match line thickness
-    const viaSize = 3;        // 3px radius
-    const viaStroke = 1.8;    // ~2px stroke, same as lines
-
-    viaConnections.forEach((via) => {
-        const circle = document.createElementNS(SVG_NS, 'circle');
-        circle.setAttribute('cx', via.x.toString());
-        circle.setAttribute('cy', via.y.toString());
-        circle.setAttribute('r', viaSize.toString());
-        circle.setAttribute('fill', 'none');
-        circle.setAttribute('stroke', '#091bd9');
-        circle.setAttribute('stroke-width', viaStroke.toString());
-        circle.classList.add('circuit-via-react');
-        popIn(circle, via.delay, 0.3);
-
-        board.appendChild(circle);
-    });
-
-    return board;
-}
-
-// Lines flow out: each trace erases from its start, chasing the direction it was
-// drawn in, in the same order as the intro (sped up). Resolves once the board is clear.
-function eraseCircuitBoard() {
-    const board = document.querySelector('.circuit-board');
-    if (!board) return Promise.resolve();
-
-    const animations = [];
-    board.querySelectorAll('[data-delay]').forEach(el => {
-        const delay = Number(el.dataset.delay) * EXIT_SPEED * 1000;
-
-        if (el.classList.contains('circuit-trace-react')) {
-            const length = el.style.getPropertyValue('--path-length');
-            // Single keyframe: erase from wherever its replay cycle currently is
-            animations.push(el.animate([{ strokeDashoffset: `${-length}` }], {
-                delay,
-                duration: 300,
-                easing: 'ease-in',
-                fill: 'forwards',
-            }));
-        } else {
-            animations.push(el.animate([{ opacity: 0 }], {
-                delay: delay + 150,
-                duration: 150,
-                fill: 'forwards',
-            }));
-        }
-    });
-
-    return Promise.all(animations.map(a => a.finished));
-}
-
-// Lines the content column up inside the board's inner frame (and below the nav)
-function fitContentToFrame(frame) {
-    const gap = frame.compact ? 16 : 32;
-    const navBottom = document.querySelector('.nav-container').getBoundingClientRect().bottom;
-
-    const root = document.documentElement.style;
-    root.setProperty('--frame-top', `${frame.top}px`);
-    root.setProperty('--frame-gap', `${gap}px`);
-    root.setProperty('--content-top', `${Math.max(frame.top, navBottom) + gap}px`);
-    root.setProperty('--frame-left', `${frame.left + gap}px`);
-    root.setProperty('--frame-width', `${frame.right - frame.left - gap * 2}px`);
-}
-
-function renderCircuit(mode) {
-    const svg = document.querySelector('.circuit-svg');
-    if (!svg) return;
-
-    circuitSize = getCircuitSize();
-    const { w, h } = circuitSize;
-
-    // Set viewBox to match exact viewport pixels → 1 SVG unit = 1 px
-    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    svg.replaceChildren();
-    createCircuitBoard(svg, w, h, mode);
-    fitContentToFrame(buildCircuitData(w, h).frame);
-}
-
-function setupCircuitBackground() {
-    renderCircuit('intro');
-
-    // Debounced resize handler – recalculates positions when the viewport changes
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            if (isTravelling) return; // the board is rebuilt when the page change ends
-            const { w, h } = getCircuitSize();
-            if (w !== circuitSize.w || h !== circuitSize.h) {
-                renderCircuit('settled');
-            }
-        }, 250);
-    });
-}
-
-// Page transition in the circuit's own style: the lines flow out of the board,
-// the new section is swapped in, then the lines draw back in and the content
-// fades in as the frame closes.
-async function changeSection(sectionId) {
-    isTravelling = true;
-
-    const container = document.querySelector('.main-container');
-    const content = container.querySelector('.section-content');
-
-    const contentOut = container.animate([{ opacity: 1 }, { opacity: 0 }], {
-        duration: 200,
-        easing: 'ease-in',
-        fill: 'forwards',
-    });
-    await Promise.all([contentOut.finished, eraseCircuitBoard()]);
-
-    currentSection = sectionId;
-    renderSection(currentSection, content);
-    updateNavigation();
-    window.scrollTo(0, 0);
-
-    renderCircuit('enter');
-    contentOut.cancel();
-    const contentIn = container.animate([{ opacity: 0 }, { opacity: 1 }], {
-        delay: 450,
-        duration: 350,
-        easing: 'ease-out',
-        fill: 'backwards',
-    });
-
-    // Wait for the last trace to finish drawing, then let the board replay as usual
-    const board = document.querySelector('.circuit-board');
-    await Promise.all([contentIn.finished, ...board.getAnimations({ subtree: true }).map(a => a.finished)]);
-    renderCircuit('settled');
-
-    isTravelling = false;
-}
-
-// Navigation
-function navigateToSection(sectionId) {
-    if (sectionId === currentSection || isTravelling) return;
-
-    document
-    .querySelector(".hamburger")
-    ?.classList.remove("active");
-
-    document
-    .querySelector(".nav-content")
-    ?.classList.remove("open");
-
-    document.body.classList.remove("menu-open");
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        currentSection = sectionId;
-        renderSection(currentSection, document.querySelector('#sectionCurrent .section-content'));
-        updateNavigation();
-        window.scrollTo(0, 0);
+    if (instant || reducedMotion || Math.abs(distance) < 2) {
+        window.scrollTo(0, to);
         return;
     }
 
-    changeSection(sectionId);
+    const duration = Math.min(2400, Math.max(1000, 700 + Math.abs(distance) * 0.3));
+    const t0 = performance.now();
+    const step = (now) => {
+        const u = Math.min(1, (now - t0) / duration);
+        const eased = u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+        window.scrollTo(0, from + distance * eased);
+        glide = u < 1 ? requestAnimationFrame(step) : null;
+    };
+    glide = requestAnimationFrame(step);
 }
 
-// Update navigation active state
-function updateNavigation() {
-    const navButtons = document.querySelectorAll('.nav-button[data-section]');
-    navButtons.forEach(button => {
-        if (button.dataset.section === currentSection) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-    });
+// A section is in place when its label sits just below the nav (the bio is the top of
+// the page). The line decides how far the page is down for each scroll position, so it
+// is asked which scroll position that is.
+function sectionScrollY(sectionId) {
+    const label = document.querySelector(`#${sectionId} .eyebrow`);
+    if (!label || sectionId === sections[0].id) return 0;
+    // The last section is the end of the scroll, where the water has risen over it
+    if (sectionId === sections[sections.length - 1].id) return document.documentElement.scrollHeight;
+    const page = document.getElementById('page').getBoundingClientRect();
+    const navBottom = document.querySelector('.nav-container').getBoundingClientRect().bottom;
+    return window.GuideLine.scrollFor(label.getBoundingClientRect().top - page.top - navBottom - 48);
+}
 
-    // Update navigation text
+// Navigation
+function navigateToSection(sectionId, instant) {
+    document.querySelector('.hamburger')?.classList.remove('active');
+    document.querySelector('.nav-content')?.classList.remove('open');
+    document.body.classList.remove('menu-open');
+
+    scrollToY(sectionScrollY(sectionId), instant);
+}
+
+// The nav follows the page: the section under the middle of the screen is the active one
+function trackSection(camera) {
+    const line = camera + window.innerHeight * 0.5;
+    const atBottom = camera >= window.GuideLine.lowest() - 4;
+
+    let active = sections[0].id;
     sections.forEach(section => {
-        const button = document.querySelector(`[data-section="${section.id}"]`);
-        if (button) {
-            const textSpan = button.querySelector('.nav-text');
-            if (textSpan) {
-                textSpan.innerHTML = createKineticText(section.name[language]);
-            }
-        }
+        const el = document.getElementById(section.id);
+        if (el && el.offsetTop <= line) active = section.id;
+    });
+    if (atBottom) active = sections[sections.length - 1].id;
+
+    if (active === currentSection) return;
+    currentSection = active;
+    document.querySelectorAll('.nav-button[data-section]').forEach(button => {
+        button.classList.toggle('active', button.dataset.section === currentSection);
+    });
+}
+
+// Update navigation labels
+function updateNavigation() {
+    sections.forEach(section => {
+        const button = document.querySelector(`.nav-button[data-section="${section.id}"]`);
+        if (!button) return;
+        button.classList.toggle('active', section.id === currentSection);
+        const textSpan = button.querySelector('.nav-text');
+        if (textSpan) textSpan.innerHTML = createKineticText(section.name[language]);
     });
 
     // Update language button
@@ -726,26 +266,6 @@ function updateNavigation() {
             language === 'en' ? 'FR' : 'EN'
         );
     }
-}
-
-// Render section content
-function renderSection(sectionId, container) {
-    const t = content[language];
-
-    switch (sectionId) {
-        case 'about':
-            container.innerHTML = createAboutHTML();
-            break;
-        case 'portfolio':
-            container.innerHTML = createPortfolioHTML();
-            break;
-        case 'contact':
-            container.innerHTML = createContactHTML();
-            break;
-    }
-
-    // Re-initialize Lucide icons
-    lucide.createIcons();
 }
 
 const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -817,99 +337,32 @@ function createKineticText(text) {
         .join("");
 }
 
-// Create HTML for each section
+// Create HTML for each section. Elements marked "r" are revealed by the line
+// as it passes them.
+const sectionName = (id) => sections.find(section => section.id === id).name[language];
+
+// Bio: a few sentences, there as soon as the page opens. Each word rises into place in turn.
 function createAboutHTML() {
-    const t = content[language];
+    const t = content[language].bio;
 
-    const skillCategoriesHTML = t.about.skillCategories.map(cat => `
-        <div class="skill-category">
-            <div class="skill-category-name">${cat.name}</div>
-            <ul class="skill-category-list">
-                ${cat.items.split(', ').map(item => `<li>${item}</li>`).join('')}
-            </ul>
-            <p class="skill-category-practice">${cat.practice}</p>
-        </div>
-    `).join('');
-
-    const educationHTML = t.about.educationItems.map(item => `
-        <div class="cv-item">
-            <div class="cv-item-header">
-                <span class="cv-item-title">${item.school}</span>
-                <span class="cv-dates">${item.dates}</span>
-            </div>
-            <p class="cv-item-meta">${item.location}</p>
-            <p class="cv-item-description">${item.degree}</p>
-        </div>
-    `).join('');
-
-    const experienceHTML = t.about.experienceItems.map(item => `
-        <div class="cv-item">
-            <div class="cv-item-header">
-                <span class="cv-item-title">${item.title}</span>
-                <span class="cv-dates">${item.dates}</span>
-            </div>
-            <p class="cv-item-meta">${item.company}</p>
-            <p class="cv-item-description">${item.description}</p>
-            <p class="cv-item-location">${item.location}</p>
-        </div>
-    `).join('');
+    const words = t.statement.split(' ')
+        .map((word, i) => `<span class="mask"><span style="--i: ${i}">${word}</span></span>`)
+        .join(' ');
 
     return `
-        <div class="about-section">
+        <section class="section about-section" id="about">
             <div class="container">
-                <h2 class="section-title">${t.about.title}</h2>
-                <div class="about-card">
-                    <div class="about-profile">
-                        <img src="images/profile-pic.jpg" alt="Ariane Saulnier" class="profile-pic">
-                        <p class="about-description">${t.about.profile}</p>
-                    </div>
-
-                    <div class="about-section-item">
-                        <h3 class="about-section-title">${t.about.skillsTitle}</h3>
-                        <div class="skill-categories">
-                            ${skillCategoriesHTML}
-                        </div>
-                    </div>
-
-                    <div class="about-section-item">
-                        <h3 class="about-section-title">${t.about.experienceTitle}</h3>
-                        <div class="cv-items">
-                            ${experienceHTML}
-                        </div>
-                    </div>
-
-                    <div class="about-section-item">
-                        <h3 class="about-section-title">${t.about.educationTitle}</h3>
-                        <div class="cv-items">
-                            ${educationHTML}
-                        </div>
-                    </div>
-
-                    <div class="about-section-item">
-                        <h3 class="about-section-title">${t.about.languagesTitle}</h3>
-                        <div class="languages-interests-grid">
-                            <div>
-                                <div class="skill-category-name">${t.about.languagesSubtitle}</div>
-                                <ul class="skill-category-list">
-                                    ${t.about.languages.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div>
-                                <div class="skill-category-name">${t.about.interestsSubtitle}</div>
-                                <ul class="skill-category-list">
-                                    ${t.about.interests.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bio">
+                    <h1 class="bio-statement words r" data-cue="start">${words}</h1>
                 </div>
             </div>
-        </div>
+        </section>
     `;
 }
 
+// Portfolio: one project at a time. Each is a card that stays put while the next one
+// slides up over it, so the cards end up one behind the other (see stackCards).
 function createPortfolioHTML() {
-    const t = content[language];
     const items = portfolioItems[language];
 
     const getProjectLink = (item) => {
@@ -922,199 +375,89 @@ function createPortfolioHTML() {
         return `projects/${item.slug}.html`;
     };
 
-    const tagsHTML = (tags) => tags.map(tag =>
-        `<span class="project-tag">${tag}</span>`
-    ).join('');
-
-    const featuredProjectHTML = (item, index) => {
-        const link = getProjectLink(item);
-
-        return `
-        <article class="project-showcase ${index % 2 !== 0 ? 'reverse' : ''}">
-            
-            <div class="project-image">
-                ${
-                    item.image
-                    ? `<img src="${item.image}" alt="${item.title}">`
-                    : `<div class="project-placeholder">
-                        <i data-lucide="${item.icon}"></i>
-                      </div>`
-                }
-            </div>
-
-            <div class="project-content">
-
-                <span class="project-category">
-                    ${item.category}
-                </span>
-
-                <h3>${item.title}</h3>
-
-                <p>
-                    ${item.description}
-                </p>
-
-                <div class="project-tags">
-                    ${tagsHTML(item.tags)}
+    const workHTML = (item, i) => `
+        <a href="${getProjectLink(item)}" class="work" style="--n: ${i}">
+            <div class="work-card">
+                <div class="work-image">
+                    ${item.image
+                        ? `<img src="${item.image}" alt="">`
+                        : `<i data-lucide="${item.icon}"></i>`}
                 </div>
-
-                <a href="${link}" class="project-link">
-                    ${item.slug === 'book-club' || item.slug === 'bigwatts'
-                    ? t.portfolio.viewCaseStudy
-                    : t.portfolio.viewProject}
-                    <i data-lucide="arrow-right"></i>
-                </a>
-
-            </div>
-
-        </article>
-        `;
-    };
-
-
-    const technicalProjectHTML = (item) => {
-        const link = getProjectLink(item);
-
-        return `
-        <article class="technical-project">
-
-            <div class="technical-icon">
-                <i data-lucide="${item.icon}"></i>
-            </div>
-
-            <div>
-                <h4>${item.title}</h4>
-                <p>${item.description}</p>
-
-                <div class="project-tags">
-                    ${tagsHTML(item.tags)}
+                <div class="work-caption">
+                    <h3 class="work-title">${item.title}</h3>
+                    <p class="work-category">${item.category}</p>
                 </div>
             </div>
-
-            <a href="${link}">
-                ${t.portfolio.viewProject}
-            </a>
-
-        </article>
-        `;
-    };
-
-
-    const featured = items.filter(item => item.featured);
-    const technical = items.filter(item => !item.featured);
-
+        </a>
+    `;
 
     return `
-    <div class="portfolio-section">
-
-        <div class="container">
-
-            <header class="portfolio-header">
-
-                <h2 class="section-title">
-                    ${t.portfolio.featuredTitle}
-                </h2>
-
-
-
-            </header>
-
-
-            <section class="featured-projects">
-
-
-                ${featured.map((item,index)=> 
-                    featuredProjectHTML(item,index)
-                ).join('')}
-
-
-            </section>
-
-
-
-            <section class="technical-projects">
-
-
-                <div class="technical-grid">
-
-                    ${technical.map(item =>
-                        technicalProjectHTML(item)
-                    ).join('')}
-
+        <section class="section portfolio-section" id="portfolio">
+            <div class="container">
+                <p class="eyebrow r">${sectionName('portfolio')}</p>
+                <div class="works">
+                    ${items.map(workHTML).join('')}
                 </div>
-
-
-            </section>
-
-
-        </div>
-
-    </div>
+            </div>
+        </section>
     `;
 }
 
+// The cards pile up: each stops at its place near the top of the screen and stays there
+// while the page moves on, until the last one has arrived. A card that is being covered
+// steps back: it shrinks and dims a little as the next one slides over it.
+function stackCards(camera) {
+    const works = document.querySelector('.works');
+    if (!works) return;
+    const end = works.offsetTop + works.offsetHeight;
+
+    const cards = [...works.querySelectorAll('.work')].map(el => {
+        const stop = parseFloat(getComputedStyle(el).scrollMarginTop);
+        const held = Math.min(Math.max(0, stop - (el.offsetTop - camera)), end - el.offsetTop - el.offsetHeight);
+        return { el, held, top: el.offsetTop + held, height: el.offsetHeight };
+    });
+
+    cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        const covered = next && !reducedMotion
+            ? Math.min(1, Math.max(0, 1 - (next.top - card.top) / card.height))
+            : 0;
+        card.el.style.transform = `translate3d(0, ${card.held.toFixed(1)}px, 0)`;
+        const inner = card.el.firstElementChild;
+        inner.style.transform = `scale(${1 - 0.05 * covered})`;
+        inner.style.filter = covered ? `brightness(${1 - 0.08 * covered})` : '';
+    });
+}
+
+// Contact: the address, and where else to find me. It is under water: line.js shows
+// each piece once the water has risen over it.
 function createContactHTML() {
-    const t = content[language];
+    const t = content[language].contact;
 
     return `
-        <div class="contact-section">
+        <section class="section contact-section" id="contact">
             <div class="container">
-                <h2 class="section-title">${t.contact.title}</h2>
-                <p class="contact-subtitle">${t.contact.subtitle}</p>
-                
-                <div class="contact-buttons">
-                    <a href="mailto:ariane.saulnier@gmail.com" class="btn btn-primary contact-btn">
-                        <i data-lucide="mail"></i>
-                        <span>ariane.saulnier@gmail.com</span>
-                    </a>
-                    <a href="https://github.com/aria-vero-s" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-btn">
-                        <i data-lucide="github"></i>
-                        <span>${t.contact.github}</span>
-                    </a>
-                    <a href="https://linkedin.com/in/ariane-saulnier" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-btn">
-                        <i data-lucide="linkedin"></i>
-                        <span>${t.contact.linkedin}</span>
-                    </a>
-                </div>
-
-                <div class="contact-form-container">
-                    <h3 class="form-title">${t.contact.formTitle}</h3>
-                    <form class="contact-form" action="https://formspree.io/f/mdkkpqwy" method="POST">
-                        <div class="form-row">
-                            <div class="form-field">
-                                <label for="name">${t.contact.nameLabel}</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-field">
-                                <label for="email">${t.contact.emailLabel}</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <label for="message">${t.contact.messageLabel}</label>
-                            <textarea id="message" name="message" rows="5" placeholder="${t.contact.messagePlaceholder}" required></textarea>
-                        </div>
-
-                        <div class="form-submit">
-                            <button type="submit" class="btn btn-primary">${t.contact.sendButton}</button>
-                        </div>
-                    </form>
-                </div>
+                <p class="eyebrow">${sectionName('contact')}</p>
+                <a href="mailto:${EMAIL}" class="contact-email">${EMAIL}</a>
+                <ul class="contact-links">
+                    ${t.links.map(link => `
+                        <li><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.name}</a></li>
+                    `).join('')}
+                </ul>
             </div>
-        </div>
+        </section>
     `;
 }
 
 // Toggle language
 function toggleLanguage() {
     language = language === 'en' ? 'fr' : 'en';
+    document.documentElement.lang = language;
 
-    // Update current section content
-    const currentContainer = document.getElementById('sectionCurrent').querySelector('.section-content');
-    renderSection(currentSection, currentContainer);
-
-    // Update navigation
+    renderPage();
     updateNavigation();
+    window.GuideLine.rebuild();
+    stackCards(window.GuideLine.camera());
 }
 
 // Event listeners
@@ -1131,13 +474,8 @@ function setupEventListeners() {
     }
 
     document.addEventListener('click', (e) => {
-        if (e.target.closest('[data-action="navigate"]')) {
-            const target = e.target.closest('[data-action="navigate"]').dataset.target;
-            navigateToSection(target);
-        }
-
-        if (e.target.closest('[data-section]')) {
-            const section = e.target.closest('[data-section]').dataset.section;
+        if (e.target.closest('.nav-button[data-section]')) {
+            const section = e.target.closest('.nav-button[data-section]').dataset.section;
             navigateToSection(section);
         }
 
@@ -1147,81 +485,45 @@ function setupEventListeners() {
     });
 
     document.addEventListener('mouseenter', (e) => {
-        const navText = e.target.closest('.nav-button .nav-text');
+        const navText = e.target.closest?.('.nav-button .nav-text');
 
         if (navText) {
             scrambleNavText(navText);
         }
     }, true);
 
-    // document.addEventListener('submit', (e) => {
-    //     if (e.target.matches('.contact-form')) {
-    //         e.preventDefault();
-    //         console.log('Form submitted');
-    //     }
-    // });
+    // The reader takes over from a glide as soon as they scroll themselves
+    ['wheel', 'touchstart', 'keydown'].forEach(type => {
+        window.addEventListener(type, stopGlide, { passive: true });
+    });
 
-    document.addEventListener('submit', async (e) => {
-        if (!e.target.matches('.contact-form')) return;
-        e.preventDefault();
-      
-        const form = e.target;
-        const data = new FormData(form);
-      
-        try {
-          const res = await fetch(form.action, {
-            method: form.method,
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-      
-          if (!res.ok) throw new Error('Network error');
-      
-          // Replace the form with your custom message:
-          form.innerHTML = `
-            <div class="thank-you">
-              <h3>Thanks for reaching out!</h3>
-              <p>I’ve received your message and will get back to you soon.</p>
-              <p>Best regards,</p>
-              <p>Ariane</p>
-              <hr>
-              <h3>Merci pour votre message !</h3>
-            <p>J’ai bien reçu votre message et je vous répondrai bientôt.</p>
-            <p>Cordialement,</p>
-            <p>Ariane</p>
-            </div>`;
-        } catch (err) {
-          form.insertAdjacentHTML('beforeend', `
-            <p class="error">Oops—something went wrong. Please try again.</p>
-          `);
-          console.error(err);
-        }
-      });      
 }
 
 // Initialize application
 function init() {
-    // Setup event listeners
     setupEventListeners();
 
-    // Check if a specific section was requested via URL param (e.g. ?section=portfolio)
-    const params = new URLSearchParams(window.location.search);
-    const requestedSection = params.get('section');
-    if (requestedSection && sections.some(s => s.id === requestedSection)) {
-        currentSection = requestedSection;
-    }
-
-    setupCircuitBackground();
-
-    // Show initial section
-    const currentContainer = document.getElementById('sectionCurrent');
-    renderSection(currentSection, currentContainer.querySelector('.section-content'));
-
-    // Update navigation
+    renderPage();
     updateNavigation();
 
-    // Initialize Lucide icons
-    lucide.createIcons();
+    // The line moves the page; the nav and the cards follow it
+    window.GuideLine.onMove = (camera) => {
+        trackSection(camera);
+        stackCards(camera);
+    };
+    window.GuideLine.init(document.getElementById('page'));
+
+    // A specific section can be requested via URL param (e.g. ?section=portfolio)
+    const requestedSection = new URLSearchParams(window.location.search).get('section');
+    if (requestedSection && sections.some(s => s.id === requestedSection)) {
+        navigateToSection(requestedSection, true);
+    }
+
+    // Opening part-way down the page: no landing sequence
+    if (window.scrollY > 8) document.documentElement.classList.add('skip-landing');
+    window.GuideLine.settle();
+    trackSection(window.GuideLine.camera());
+    stackCards(window.GuideLine.camera());
 }
 
 // Start the application
