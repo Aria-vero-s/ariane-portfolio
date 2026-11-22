@@ -28,12 +28,11 @@ The design is modern, with focus on usability and minimalism:
   - Hierarchy: section titles (2 rem), sub-section titles (1.5 rem), body text (1 rem), all from the tokens in `variables.css`
 - **Interactions & Transitions**  
   - Smooth transitions: hover states on nav, buttons, cards  
-  - The home page is a row of full-screen scenes (bio, one per project, contact), built by `home.js` and styled in `home.css`. Each scene holds still while the reader scrolls through it, then the next one slides up over it like a card, and the covered one steps back
-  - One bold, even line in big sweeps and loops runs through all of them (see the references in `inspirations/`): each scene has its stretch, which leaves the bottom of the screen where the next comes in at the top. It passes over the project pictures and clear of the words
-  - Scrolling draws the line while the scene holds still; the next scene only starts to arrive once the line has reached the bottom of the screen. At the top of the page nothing is drawn
+  - The home page is one long strip laid out sideways (bio, each project, contact), built by `home.js` and styled in `home.css`. Scrolling (or a sideways swipe, or the arrow keys) travels along it: slowly past each stop, far and fast across the open stretches between them
+  - One even line, in long smooth sweeps, runs ahead of the reader the whole way: under one stop, over the next, swinging the full height of the screen in between. It runs further ahead the faster the reader goes. At the very start nothing is drawn
   - Landing: the statement appears first, its words rising into place, then the nav
   - Rule: the line is never straight. Wherever a stretch would run straight, `home.js` makes it sway until it does not (`neverStraight`; check with `straightest()` in the console)
-  - The last scene is the water the line has been heading for: blue, with a moving surface, the contact text in the background colour and the line in it too
+  - The journey ends at the water: a blue stop with a moving shore, the contact text in the background colour; the line runs into it
   - With `prefers-reduced-motion` the content is simply there and the line is fully drawn
 - **Layout & Responsiveness**  
   - Central fixed navigation that scrolls to each section and follows the scroll; a slide-in menu on mobile  
@@ -90,7 +89,7 @@ To add new items:
 
 - Update portfolioItems and content in home.js.
 - Add images in images/
-- Mark new elements with the `rv` class to have them rise in when their scene arrives; the routes the line takes are in `ROUTES` in home.js.
+- the path the line takes is laid out in `waypoints()` in home.js.
 
 ## Contact
 
@@ -111,3 +110,13 @@ Ariane Saulnier
 UI/UX Designer & Web Developer
 Based in Paris (originally Canada)
 Student at École 42, Code Institute alumna
+
+## Versions (branches)
+
+`main` is the live site (arianesaulnier.com) and is not to be changed until a version is chosen. Three takes on the home page, each led by one line, are kept on their own branches:
+
+- `guide-line`: one vertical page; a bold line in big sweeps and loops drawn by the scroll; stacked project cards; water rising at the end
+- `poster-scenes`: full-screen scenes that stack like cards, the line crossing each one over the pictures
+- `horizontal-line`: a sideways journey; a thinner, smoother line that runs ahead of the reader
+
+Standing rules for the line: it is only ever a line, it is never straight, nothing is drawn at the very start, the bio statement is visible first and then the nav, and the site ends in blue "water" with the contact text on it. The reference images (`inspirations/`) are kept out of the repository.

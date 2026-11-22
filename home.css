@@ -1,62 +1,51 @@
-/* The home page: full-screen scenes that pile up like cards, with one bold line drawn
-   across each of them (see home.js). Shared pieces (nav, tokens) are in styles.css. */
+/* The home page: one long strip laid out sideways, travelled by scrolling, with one
+   line running ahead of the reader (see home.js). Shared pieces (nav, tokens) are in
+   styles.css. */
 
 :root {
-    --tint: color-mix(in srgb, var(--color-primary) 9%, var(--color-background));
-    --edge: clamp(1.5rem, 7vw, 7rem);          /* margin either side of a scene */
-    --card-radius: clamp(18px, 2.4vw, 32px);
-    --display: clamp(2.5rem, 5.4vw, 5.25rem);  /* project titles */
+    --edge: clamp(1.5rem, 7vw, 7rem);      /* margin either side of a stop */
+    --between: 115vw;                      /* the open stretch between two stops */
+    --display: clamp(2.25rem, 4.6vw, 4.5rem);
 }
 
 /* ------------------------------- */
-/*              Scenes             */
+/*              Journey            */
 /* ------------------------------- */
 
-/* A scene is as tall as: one screen, plus the time it holds while its line is drawn
-   (--dwell), plus one screen during which the next scene slides up over it. The next
-   scene starts one screen early, which is what makes it slide over. */
-.scene {
-    position: relative;
-    height: calc(200svh + var(--dwell) * 1svh);
-}
-
-.scene + .scene {
-    margin-top: -100svh;
-}
-
-.scene:last-child {
-    height: calc(100svh + var(--dwell) * 1svh);
-}
-
-.pin {
+/* #journey is as tall as the scroll is long (set by home.js); the stage stays on screen */
+#stage {
     position: sticky;
     top: 0;
     height: 100svh;
-    overflow: clip;
-    background: var(--color-background);
-    /* A covered scene steps back a little behind the one sliding over it */
-    transform-origin: 50% 0;
-    transform: scale(calc(1 - .05 * var(--covered, 0)));
-    filter: brightness(calc(1 - .16 * var(--covered, 0)));
+    overflow: hidden;
+    touch-action: pan-y;
 }
 
-/* Every scene after the first arrives as a card */
-.scene + .scene .pin {
-    border-radius: var(--card-radius) var(--card-radius) 0 0;
-    box-shadow: 0 -18px 60px rgb(0 0 0 / .16);
+#strip {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
 }
 
-.scene-project:nth-of-type(odd) .pin {
-    background: var(--tint);
+/* A stop takes the whole screen; the next is a long way to the right */
+.stop {
+    position: absolute;
+    top: 0;
+    left: calc(var(--i) * (100vw + var(--between)));
+    width: 100vw;
+    height: 100%;
+    z-index: 2;
 }
 
-/* The line: above the pictures, below the words */
+/* The line stays where the screen is (home.js draws the part of it in view),
+   behind the stops */
 .line {
     position: absolute;
     inset: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
-    z-index: 2;
+    z-index: 1;
+    overflow: visible;
     pointer-events: none;
 }
 
@@ -65,11 +54,10 @@
     stroke: var(--color-primary);
     stroke-linecap: round;
     stroke-linejoin: round;
-    visibility: hidden;
 }
 
 /* The landing: the statement first, then the nav. The line waits for the first scroll.
-   (Skipped when the page opens part-way down.) */
+   (Skipped when the page opens part-way along.) */
 .motion:not(.skip-landing) .nav-container {
     animation: nav-in .9s cubic-bezier(.16, 1, .3, 1) 1.5s both;
 }
@@ -80,42 +68,24 @@
     }
 }
 
-/* Things that rise into place when their scene arrives */
-.motion .rv {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity var(--reveal), transform var(--reveal);
-}
-
-.motion .in .rv {
-    opacity: 1;
-    transform: none;
-}
-
-.motion .in .rv:nth-child(2) { transition-delay: .08s; }
-.motion .in .rv:nth-child(3) { transition-delay: .16s; }
-.motion .in .rv:nth-child(4) { transition-delay: .24s; }
-.motion .in .rv:nth-child(5) { transition-delay: .32s; }
-
 /* --------------------------- */
 /*              Bio            */
 /* --------------------------- */
 
-.scene-bio .pin {
+.stop-bio {
     display: flex;
     align-items: center;
     padding: 0 var(--edge);
 }
 
 .bio-statement {
-    position: relative;
-    z-index: 3;
-    max-width: min(17em, 56vw);
-    font-size: clamp(1.7rem, 3.3vw, 3.25rem);
+    max-width: 19em;
+    font-size: clamp(1.6rem, 3vw, 3rem);
     font-weight: var(--font-weight-medium);
     line-height: 1.22;
     letter-spacing: -.025em;
     text-wrap: pretty;
+    transform: translateY(-4svh);
 }
 
 /* Its words rise from behind a mask, one after another, as the page opens */
@@ -145,108 +115,124 @@
 /*              Projects           */
 /* ------------------------------- */
 
-/* A poster: the picture on one side, the words on the other, swapping sides each time */
-.poster {
+/* The picture on one side, the words on the other, with room above and below for the
+   line to pass */
+.project {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     align-items: center;
     gap: clamp(2rem, 5vw, 5rem);
     height: 100%;
-    padding: clamp(6rem, 14vh, 8rem) var(--edge) clamp(2rem, 7vh, 5rem);
+    padding: 21svh var(--edge);
     color: inherit;
     text-decoration: none;
 }
 
-.flip .poster {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+.flip .project {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
 }
 
-.flip .poster-media {
+.flip .project-media {
     order: 2;
 }
 
-.poster-media {
-    position: relative;
-    z-index: 1;
+/* As a stop goes by, its picture and its words drift at different speeds, and they
+   come into focus as it arrives */
+.project-text,
+.contact {
+    transition: opacity .7s ease;
+}
+
+.motion .project-media {
+    transform: translate3d(calc(var(--off, 0) * -5vw), 0, 0);
+}
+
+.motion .project-text {
+    transform: translate3d(calc(var(--off, 0) * 9vw), 0, 0);
+}
+
+.motion .stop:not(.here) .project-text,
+.motion .stop:not(.here) .contact {
+    opacity: 0;
+}
+
+.project-media {
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--color-surface);
     box-shadow: 0 30px 70px -30px rgb(0 0 0 / .35);
 }
 
-.poster-media img {
+.project-media img {
     display: block;
     width: 100%;
-    max-height: 64svh;
+    max-height: 56svh;
     object-fit: cover;
     object-position: top;
     transition: transform .8s cubic-bezier(.16, 1, .3, 1);
 }
 
-.poster:hover .poster-media img {
+.project:hover .project-media img {
     transform: scale(1.03);
 }
 
-.poster-icon {
+.project-icon {
     display: grid;
     place-items: center;
     aspect-ratio: 16 / 9;
+    max-height: 56svh;
+    width: 100%;
     background: var(--color-primary);
     color: var(--color-background);
 }
 
-.poster-icon svg {
-    width: 22%;
+.project-icon svg {
+    width: 20%;
     height: auto;
     stroke-width: 1.25;
 }
 
-.poster-text {
-    position: relative;
-    z-index: 3;
-}
-
-.poster-count {
+.project-count {
     font-size: var(--text-sm);
     letter-spacing: .2em;
     color: var(--color-primary);
     margin-bottom: var(--space-5);
 }
 
-.poster-title {
+.project-title {
     font-size: var(--display);
     font-weight: var(--font-weight-semibold);
-    line-height: .98;
+    line-height: 1;
     letter-spacing: -.04em;
     text-wrap: balance;
     margin-bottom: var(--space-5);
 }
 
-.poster-category {
+.project-category {
     font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
     margin-bottom: var(--space-3);
 }
 
-.poster-description {
+.project-description {
     max-width: 34ch;
     color: var(--color-muted);
     line-height: var(--leading-normal);
     margin-bottom: var(--space-6);
 }
 
-.poster-cta {
+.project-cta {
     display: inline-flex;
     gap: .6em;
     font-weight: var(--font-weight-medium);
     color: var(--color-primary);
 }
 
-.poster-arrow {
+.project-arrow {
     transition: transform var(--transition);
 }
 
-.poster:hover .poster-arrow {
+.project:hover .project-arrow {
     transform: translateX(6px);
 }
 
@@ -254,52 +240,40 @@
 /*              Contact            */
 /* ------------------------------- */
 
-/* The last card is the water the line has been heading for: blue, with a moving
-   surface, the words in the colour of the paper */
-.scene-contact .pin {
-    overflow: visible;
+/* The end of the journey is the water the line has been heading for: blue, with a
+   moving shore, the words in the colour of the paper. The line runs into it. */
+.stop-contact {
     display: flex;
     align-items: center;
-    padding: 0 var(--edge);
+    padding: 0 var(--edge) 0 calc(var(--edge) + 6vw);
     background: var(--color-primary);
     color: var(--color-background);
-    border-radius: 0;
-    box-shadow: none;
 }
 
-.scene-contact .line path {
-    stroke: var(--color-background);
-}
-
-.wave {
+.shore {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: calc(100% - 1px);
-    height: clamp(28px, 5vw, 60px);
+    top: 0;
+    bottom: 0;
+    right: calc(100% - 1px);
+    width: clamp(28px, 4vw, 60px);
     overflow: hidden;
 }
 
-.wave svg {
+.shore svg {
     display: block;
-    width: 200%;
-    height: 100%;
+    width: 100%;
+    height: 200%;
     fill: var(--color-primary);
 }
 
-.motion .wave svg {
-    animation: wave 9s linear infinite;
+.motion .shore svg {
+    animation: shore 9s linear infinite;
 }
 
-@keyframes wave {
+@keyframes shore {
     to {
-        transform: translateX(-37.5%);
+        transform: translateY(-37.5%);
     }
-}
-
-.contact {
-    position: relative;
-    z-index: 3;
 }
 
 .contact-label {
@@ -312,7 +286,7 @@
 
 .contact-email {
     display: inline-block;
-    font-size: clamp(1.35rem, 5.2vw, 5rem);
+    font-size: clamp(1.3rem, 5vw, 4.75rem);
     font-weight: var(--font-weight-semibold);
     line-height: 1.05;
     letter-spacing: -.04em;
@@ -338,7 +312,7 @@
 
 .contact-email,
 .contact-links a {
-    transition: opacity var(--transition), transform var(--reveal);
+    transition: opacity var(--transition);
 }
 
 .contact-email:hover,
@@ -350,58 +324,49 @@
 /*              Upright            */
 /* ------------------------------- */
 
-/* Phones held upright: picture above, words below; the bio sits high so the line has
-   the bottom of the screen */
+/* Phones held upright: picture above, words below, and less to read */
 @media (max-aspect-ratio: 9 / 10) {
-    .scene-bio .pin {
+    :root {
+        --between: 130vw;
+    }
+
+    .stop-bio {
         align-items: flex-start;
-        padding-top: clamp(5.5rem, 13svh, 8rem);
+        padding-top: 21svh;
     }
 
     .bio-statement {
-        max-width: none;
-        font-size: clamp(1.35rem, 5.6vw, 2.6rem);
+        font-size: clamp(1.2rem, 5.2vw, 2.4rem);
+        transform: none;
     }
 
-    .poster,
-    .flip .poster {
+    .project,
+    .flip .project {
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto 1fr;
-        align-items: start;
-        gap: var(--space-6);
-        padding: clamp(5.5rem, 12svh, 7rem) clamp(1.75rem, 9vw, 5rem) var(--space-8);
+        align-content: center;
+        gap: var(--space-5);
+        padding: 20svh clamp(1.75rem, 9vw, 5rem);
     }
 
-    .flip .poster-media {
+    .flip .project-media {
         order: 0;
     }
 
-    .poster-media img {
-        max-height: 30svh;
+    .project-media img,
+    .project-icon {
+        max-height: 26svh;
     }
 
-    .poster-count,
-    .poster-title {
+    .project-count,
+    .project-title {
         margin-bottom: var(--space-3);
     }
 
-    .poster-text {
-        max-width: 78%;
+    .project-description {
+        display: none;
     }
 
-    /* The line comes down the other side on every second card */
-    .flip .poster-text {
-        margin-left: auto;
-    }
-
-    .poster-description {
+    .project-category {
         margin-bottom: var(--space-5);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .pin {
-        transform: none;
-        filter: none;
     }
 }

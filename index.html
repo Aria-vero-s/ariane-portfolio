@@ -46,8 +46,13 @@
         </div>
     </nav>
 
-    <!-- The scenes (bio, one per project, contact), filled in by home.js -->
-    <main id="scenes"></main>
+    <!-- The journey: its height is the scroll; the stage stays on screen and the strip
+         (bio, projects, contact and the line, filled in by home.js) slides sideways in it -->
+    <main id="journey">
+        <div id="stage">
+            <div id="strip"></div>
+        </div>
+    </main>
 
     <script src="home.js"></script>
 </body>
