@@ -283,6 +283,14 @@ body {
     fill: var(--color-primary);
 }
 
+.guide-line .ink,
+.guide-line .tip {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 /* The landing: the statement first, then the nav. The line waits for the first scroll.
    (Skipped when the page opens part-way down.) */
 .motion:not(.skip-landing) .nav-container {

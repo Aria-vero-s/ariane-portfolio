@@ -1,16 +1,11 @@
 // The line: one continuous stroke of ink that the reader draws down the page by
 // scrolling, and follows.
 //
-// - One gesture. build() threads a single flowing curve through the open space
-//   around the content, then smooths it the way a stabilised pen does: all curves,
-//   no corners, no loops.
-// - RULE: never a straight line. The curve is made to meander the whole way, and
-//   build() measures it and bends it further until no stretch of it runs straight
-//   (see meander and flattest).
-// - Ink, not a hairline. The stroke is a filled shape whose width follows the
-//   pressure on the brush: broad across its edge, thin along it, pressing harder
-//   and lighter as it goes. It is made of three bundles of bristles that drift
-//   apart now and then, and it ends in a tapered tip.
+// - One gesture. build() threads a single curve through the page in big, confident
+//   sweeps, with a loop here and there, passing behind the content.
+// - RULE: never a straight line. build() measures the curve and, only where a
+//   stretch would run straight, makes it sway until none does (see meander and bows).
+// - One even weight, like a marker, with round ends. It is a stroked path.
 // - Scroll is the hand. Nothing is drawn until the reader scrolls: at the top the
 //   stroke is at its starting point and cannot be seen. Scrolling draws the line
 //   while the page holds still; only when the tip reaches the bottom of the screen
@@ -39,7 +34,6 @@
     const CHUNK = 480;        // drawn ink is kept in pieces this long, so only the tip is redrawn
     const TIP = 110;          // length of the tapered tip…
     const TIP_MAX = 260;      // …which stretches when the brush moves fast
-    const NIB = -0.7;         // angle the brush is held at (the stroke is thinnest along it)
 
     // The rule: over any stretch this long, the line must bow away from the straight
     // path between its ends by at least this much
@@ -127,7 +121,7 @@
     // Makes the line meander: every point is pushed to one side and then the other in a
     // slow wave, whose reach and length both drift, so that it swings even where the
     // curve it follows would have run straight
-    function meander(pts, reach, length) {
+    function meander(pts, reach, length, weight) {
         const drift = wander(21);
         const swell = wander(34);
         let arc = 0;
@@ -141,16 +135,16 @@
                 arc += step;
                 phase += (step / length) * (1 + 0.3 * drift(arc / (length * 2.3)));
             }
-            const push = reach * (0.8 + 0.3 * swell(arc / (length * 1.7))) * Math.sin(phase * Math.PI * 2);
+            const push = weight[i] * reach * (0.8 + 0.3 * swell(arc / (length * 1.7))) * Math.sin(phase * Math.PI * 2);
             return [p[0] - ((b[1] - a[1]) / d) * push, p[1] + ((b[0] - a[0]) / d) * push];
         });
     }
 
-    // How straight the straightest stretch of the line is: the smallest bow, in px, of
-    // any STRETCH-long run of it away from the straight path between its ends
-    function flattest(pts) {
+    // How straight the line is around each point: the smallest bow, in px, of any
+    // STRETCH-long run through it away from the straight path between that run's ends
+    function bows(pts) {
         const span = Math.round(STRETCH / STEP);
-        let least = Infinity;
+        const out = new Float32Array(pts.length).fill(Infinity);
         for (let i = 0; i + span < pts.length; i += 4) {
             const [ax, ay] = pts[i];
             const [bx, by] = pts[i + span];
@@ -159,9 +153,14 @@
             for (let k = i + 1; k < i + span; k++) {
                 bow = Math.max(bow, Math.abs((pts[k][0] - ax) * (by - ay) - (pts[k][1] - ay) * (bx - ax)) / d);
             }
-            least = Math.min(least, bow);
+            for (let k = i; k <= i + span; k++) if (bow < out[k]) out[k] = bow;
         }
-        return least;
+        return out;
+    }
+
+    // …and of its straightest stretch
+    function flattest(pts) {
+        return bows(pts).reduce((least, bow) => Math.min(least, bow), Infinity);
     }
 
     // ---------------------------------------------------------------------------
@@ -197,16 +196,6 @@
     let lean = 0;
     let tipLength = TIP;
     let drawnAt = -1;
-
-    // The three bundles of bristles: where each sits across the stroke, and how wide it is
-    const bristles = [0, 1, 2].map(j => {
-        const sway = wander(11 + j * 7);
-        const swell = wander(53 + j * 13);
-        return {
-            offset: s => (j - 1) * 0.56 + 0.24 * sway(s / 90),
-            half: s => 0.4 + 0.13 * swell(s / 140),
-        };
-    });
 
     // ---------------------------------------------------------------------------
     // The line, laid out from the content
@@ -250,6 +239,13 @@
 
         const way = [];
         const to = (x, y) => way.push([x, y]);
+        // A loop: round a circle from angle `from`, a quarter turn at a time
+        const loop = (cx, cy, r, from, turn, quarters) => {
+            for (let k = 0; k <= quarters; k++) {
+                const a = from + turn * k * Math.PI / 2;
+                to(cx + r * Math.cos(a), cy + r * Math.sin(a));
+            }
+        };
 
         // ── Bio: in from the top, winding down beside the text, then away underneath it ──
         const bio = box($('.bio'));
@@ -257,13 +253,12 @@
         const room = W - bio.r;
         if (room > 280) {
             const x = k => bio.r + room * k;
-            to(x(0.8), -80);
-            to(x(0.36), lerp(0, bio.b, 0.24));
-            to(x(0.74), lerp(0, bio.b, 0.5));
-            to(x(0.3), lerp(0, bio.b, 0.78));
-            to(x(0.42), Math.min(bio.b + H * 0.06, H * 0.86));
-            to(bio.l + bio.w * 0.62, Math.min(bio.b + H * 0.1, H * 0.93));
-            to(bio.l + bio.w * 0.12, Math.min(bio.b + H * 0.19, about.b - 10));
+            const r = Math.min(room * 0.17, H * 0.14);
+            to(x(0.62), -80);
+            to(x(0.92), H * 0.2);
+            loop(x(0.5), H * 0.5, r, 0, 1, 4);
+            to(bio.l + bio.w * 0.85, Math.min(bio.b + H * 0.15, H * 0.93));
+            to(bio.l + bio.w * 0.1, Math.min(bio.b + H * 0.2, about.b - 10));
         } else {
             // No room beside the text: a wave across the top, then down the edge
             const top = Math.max(bio.t, 120);
@@ -282,7 +277,9 @@
         for (let k = 0; k < waves; k++) {
             const side = k % 2 ? -1 : 1;
             const x = W / 2 + side * (W / 2 - margin);
-            to(x + jitter(margin * 0.35), works.t + ((k + 0.5) * works.h) / waves + jitter(H * 0.04));
+            const y = works.t + ((k + 0.5) * works.h) / waves;
+            if (works.l > 200 && k % 3 === 1) loop(x, y, Math.min(works.l * 0.3, 90), -Math.PI / 2, side, 6);
+            else to(x + jitter(margin * 0.35), y + jitter(H * 0.04));
         }
 
         // ── Contact: in from the side, a wave under the address, and off the bottom of the page ──
@@ -301,15 +298,24 @@
 
         // Curve → even spacing → stabilised → made to meander → stabilised again.
         // Then the rule is checked: while any stretch still runs straight, it meanders more.
-        const base = resample(relax(resample(curve(way), STEP), 12, 3), STEP);
-        const length = clamp(W * 0.34, 220, 460);
-        let reach = clamp(W * 0.024, 11, 34);
-        let pts;
-        for (let attempt = 0; attempt < 4; attempt++) {
-            pts = resample(relax(meander(base, reach, length), 6, 2), STEP);
-            if (flattest(pts) >= BOW) break;
-            reach *= 1.15;
+        const base = resample(relax(resample(curve(way), STEP), 8, 2), STEP);
+        // The sweeps are left as they are, except where a stretch runs straight: there,
+        // and only there, the line is made to sway, until the rule holds everywhere.
+        const length = clamp(W * 0.3, 220, 420);
+        const sway = meander(base, 1, length, new Float32Array(base.length).fill(1))
+            .map((p, i) => [p[0] - base[i][0], p[1] - base[i][1]]);
+        const amount = new Float32Array(base.length);
+        let pts = base;
+        for (let attempt = 0; attempt < 12; attempt++) {
+            const bow = bows(pts);
+            if (bow.every(b => b >= BOW + 1)) break;
+            const need = relax(Array.from(bow, b => [clamp((BOW * 2.4 - b) / (BOW * 1.4)), 0]), 30, 2);
+            pts = base.map((p, i) => {
+                amount[i] += 6 * need[i][0];
+                return [p[0] + sway[i][0] * amount[i], p[1] + sway[i][1] * amount[i]];
+            });
         }
+        pts = resample(pts, STEP);
 
         const n = pts.length;
         const s = { n, x: new Float32Array(n), y: new Float32Array(n), len: new Float32Array(n), nx: new Float32Array(n), ny: new Float32Array(n), hw: new Float32Array(n) };
@@ -320,29 +326,17 @@
         }
         s.L = s.len[n - 1];
 
-        // Thickness follows pressure: a flat brush held at an angle is broad across its
-        // edge and thin along it; on top of that the hand presses harder and lighter as
-        // it goes, and the stroke lands softly
-        const widest = clamp(W * 0.013, 8, 19);
-        const pressure = wander(3);
-        const raw = new Float32Array(n);
+        // One even weight all the way, like a marker
+        const weight = clamp(W * 0.01, 7, 15);
         for (let i = 0; i < n; i++) {
             const a = Math.max(0, i - 2);
             const b = Math.min(n - 1, i + 2);
-            const dx = s.x[b] - s.x[a];
-            const dy = s.y[b] - s.y[a];
-            const d = Math.hypot(dx, dy) || 1;
-            s.nx[i] = -dy / d;
-            s.ny[i] = dx / d;
-            const across = Math.abs(Math.sin(Math.atan2(dy, dx) - NIB));
-            raw[i] = (0.22 + 0.78 * Math.pow(across, 1.15)) * (0.8 + 0.34 * pressure(s.len[i] / 380));
+            const d = Math.hypot(s.x[b] - s.x[a], s.y[b] - s.y[a]) || 1;
+            s.nx[i] = -(s.y[b] - s.y[a]) / d;
+            s.ny[i] = (s.x[b] - s.x[a]) / d;
+            s.hw[i] = weight / 2;
         }
-        for (let i = 0; i < n; i++) {
-            let sum = 0;
-            let count = 0;
-            for (let k = Math.max(0, i - 8); k <= Math.min(n - 1, i + 8); k++) { sum += raw[k]; count++; }
-            s.hw[i] = (widest / 2) * (sum / count) * Math.pow(clamp(s.len[i] / 160), 0.6);
-        }
+        ink.style.strokeWidth = tipEl.style.strokeWidth = weight;
         S = s;
 
         // The drawn ink, piece by piece (only the pieces behind the tip are shown)
@@ -387,31 +381,15 @@
         return lo;
     }
 
-    // The shape of the ink between two points: one closed outline per bundle of bristles.
-    // With `tipAt`, the stroke tapers to a point at that distance along it.
+    // The line between two points, to be stroked. With `tipAt`, it ends at exactly that
+    // distance along it.
     function outline(i0, i1, tipAt) {
         const f = v => v.toFixed(1);
-        const tapered = tipAt !== Infinity;
-        let end = null;
-        if (tapered && i1 < S.n - 1) {
-            const k = clamp((tipAt - S.len[i1]) / (S.len[i1 + 1] - S.len[i1]));
-            end = [lerp(S.x[i1], S.x[i1 + 1], k), lerp(S.y[i1], S.y[i1 + 1], k)];
-        }
-
         let d = '';
-        for (const bristle of bristles) {
-            let there = '';
-            let back = '';
-            for (let i = i0; i <= i1; i++) {
-                const arc = S.len[i];
-                const taper = tapered ? Math.pow(clamp((tipAt - arc) / tipLength), 0.6) : 1;
-                const hw = S.hw[i] * taper;
-                const centre = hw * bristle.offset(arc);
-                const half = hw * bristle.half(arc);
-                there += `${i === i0 ? 'M' : 'L'}${f(S.x[i] + S.nx[i] * (centre + half))} ${f(S.y[i] + S.ny[i] * (centre + half))}`;
-                back = `L${f(S.x[i] + S.nx[i] * (centre - half))} ${f(S.y[i] + S.ny[i] * (centre - half))}${back}`;
-            }
-            d += `${there}${end ? `L${f(end[0])} ${f(end[1])}` : ''}${back}Z`;
+        for (let i = i0; i <= i1; i++) d += `${i === i0 ? 'M' : 'L'}${f(S.x[i])} ${f(S.y[i])}`;
+        if (tipAt !== Infinity && i1 < S.n - 1) {
+            const k = clamp((tipAt - S.len[i1]) / (S.len[i1 + 1] - S.len[i1]));
+            d += `L${f(lerp(S.x[i1], S.x[i1 + 1], k))} ${f(lerp(S.y[i1], S.y[i1 + 1], k))}`;
         }
         return d;
     }

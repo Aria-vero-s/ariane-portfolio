@@ -31,8 +31,8 @@ The design is modern, with focus on usability and minimalism:
   - The page is a single scroll (Bio → Portfolio → Contact) led by one stroke of ink, drawn in SVG behind the content by `line.js`. It winds down beside the bio, from side to side behind the project cards, passes under the email address and runs off the bottom of the page
   - Landing: the statement appears first, then the nav. The line is not drawn until the reader scrolls, and at the top of the page it is back at its starting point, out of sight
   - At the end the line reaches water: once it has run off the bottom of the page, its blue rises to fill the contact section, and where the line meets the surface it swells out into it. The contact text is only ever shown under water, in the background colour, once the surface has risen over it
-  - Rule: the line is never straight. It follows free-flowing curves, is smoothed like a stabilised pen, and is made to meander until no stretch of it runs straight; no corners, no loops
-  - Its thickness follows pressure, like a flat brush held at an angle; it is made of three bundles of bristles that drift apart now and then, and ends in a tapered tip
+  - Rule: the line is never straight. It runs in big sweeps with a loop here and there, and only where a stretch would run straight is it made to sway until none does
+  - It has one even, bold weight with round ends, like a marker (see the references in `inspirations/`)
   - Scrolling draws the line while the page holds still; when the tip reaches the bottom of the screen the page moves down to make room, then the line carries on. The page sits in a fixed stage and `line.js` turns the scroll position into how much is drawn and how far down the page is. At rest it leans on and now and then makes a small move towards what comes next
   - The bio is there as soon as the page opens, its words rising into place; other content marked `.r` is revealed as the tip passes it
   - Project cards stop near the top of the screen; each new one slides up over the last, which shrinks and dims a little behind it
