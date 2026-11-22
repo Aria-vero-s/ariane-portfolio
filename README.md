@@ -28,15 +28,13 @@ The design is modern, with focus on usability and minimalism:
   - Hierarchy: section titles (2 rem), sub-section titles (1.5 rem), body text (1 rem), all from the tokens in `variables.css`
 - **Interactions & Transitions**  
   - Smooth transitions: hover states on nav, buttons, cards  
-  - The page is a single scroll (Bio → Portfolio → Contact) led by one stroke of ink, drawn in SVG behind the content by `line.js`. It winds down beside the bio, from side to side behind the project cards, passes under the email address and runs off the bottom of the page
-  - Landing: the statement appears first, then the nav. The line is not drawn until the reader scrolls, and at the top of the page it is back at its starting point, out of sight
-  - At the end the line reaches water: once it has run off the bottom of the page, its blue rises to fill the contact section, and where the line meets the surface it swells out into it. The contact text is only ever shown under water, in the background colour, once the surface has risen over it
-  - Rule: the line is never straight. It runs in big sweeps with a loop here and there, and only where a stretch would run straight is it made to sway until none does
-  - It has one even, bold weight with round ends, like a marker (see the references in `inspirations/`)
-  - Scrolling draws the line while the page holds still; when the tip reaches the bottom of the screen the page moves down to make room, then the line carries on. The page sits in a fixed stage and `line.js` turns the scroll position into how much is drawn and how far down the page is. At rest it leans on and now and then makes a small move towards what comes next
-  - The bio is there as soon as the page opens, its words rising into place; other content marked `.r` is revealed as the tip passes it
-  - Project cards stop near the top of the screen; each new one slides up over the last, which shrinks and dims a little behind it
-  - With `prefers-reduced-motion` the content is simply there and the line follows the scroll without animation
+  - The home page is a row of full-screen scenes (bio, one per project, contact), built by `home.js` and styled in `home.css`. Each scene holds still while the reader scrolls through it, then the next one slides up over it like a card, and the covered one steps back
+  - One bold, even line in big sweeps and loops runs through all of them (see the references in `inspirations/`): each scene has its stretch, which leaves the bottom of the screen where the next comes in at the top. It passes over the project pictures and clear of the words
+  - Scrolling draws the line while the scene holds still; the next scene only starts to arrive once the line has reached the bottom of the screen. At the top of the page nothing is drawn
+  - Landing: the statement appears first, its words rising into place, then the nav
+  - Rule: the line is never straight. Wherever a stretch would run straight, `home.js` makes it sway until it does not (`neverStraight`; check with `straightest()` in the console)
+  - The last scene is the water the line has been heading for: blue, with a moving surface, the contact text in the background colour and the line in it too
+  - With `prefers-reduced-motion` the content is simply there and the line is fully drawn
 - **Layout & Responsiveness**  
   - Central fixed navigation that scrolls to each section and follows the scroll; a slide-in menu on mobile  
   - Content sits in one column; the bio keeps to the left of it and the cards to the middle, leaving room for the line  
@@ -56,9 +54,9 @@ The design is modern, with focus on usability and minimalism:
 
 ```plaintext
 ├── index.html              # Main HTML file
-├── styles.css              # Custom styles
-├── script.js               # Content, rendering and navigation
-├── line.js                 # The line: its path, scroll mapping and motion
+├── styles.css              # Shared styles (nav, tokens), also used by the project pages
+├── home.css                # The home page: scenes, posters, contact
+├── home.js                 # Content, scenes, the line, scrolling and navigation
 ├── images/                 # Project and section images
 ├── favicon.ico             # Site icon
 └── README.md               # This file
@@ -90,9 +88,9 @@ The site supports English and French. Toggle switches language dynamically witho
 
 To add new items:
 
-- Update portfolioItems and content in script.js.
+- Update portfolioItems and content in home.js.
 - Add images in images/
-- Mark new elements with the `r` class to have the line reveal them; the route it takes is laid out in `build()` in line.js.
+- Mark new elements with the `rv` class to have them rise in when their scene arrives; the routes the line takes are in `ROUTES` in home.js.
 
 ## Contact
 

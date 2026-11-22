@@ -6,6 +6,7 @@
     <title>Ariane Saulnier - UI/UX Designer & Web Developer</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="home.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
@@ -45,19 +46,9 @@
         </div>
     </nav>
 
-    <!-- The page: bio, portfolio and contact (filled in by script.js), with the line
-         drawn behind it. It sits in a fixed stage and line.js moves it: scrolling draws
-         the line, and the page follows when the line reaches the bottom of the screen.
-         The scroll space below gives the scrollbar its length. -->
-    <div class="stage">
-        <main class="page" id="page">
-            <svg class="guide-line" aria-hidden="true"><path class="water"></path><path class="mouth"></path><g class="ink"></g><path class="tip"></path></svg>
-            <div id="content"></div>
-        </main>
-    </div>
-    <div class="scroll-space" aria-hidden="true"></div>
+    <!-- The scenes (bio, one per project, contact), filled in by home.js -->
+    <main id="scenes"></main>
 
-    <script src="line.js"></script>
-    <script src="script.js"></script>
+    <script src="home.js"></script>
 </body>
 </html>
